@@ -1,0 +1,3782 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0f0f11">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="轮回试炼 · 高维枢纽">
+<meta name="application-name" content="轮回试炼 · 高维枢纽">
+<meta name="description" content="对抗深度侵蚀，于虚无中铸造神性。一款将现实生活转化为游戏化体验的高维试炼系统。">
+<meta name="keywords" content="gothic, RPG, gamification, productivity, life game">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=dark%20gothic%20game%20icon%20with%20golden%20rune%20and%20mysterious%20eye%20in%20dark%20purple%20background&image_size=square" sizes="180x180">
+<link rel="apple-touch-icon" href="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=dark%20gothic%20game%20icon%20with%20golden%20rune%20and%20mysterious%20eye%20in%20dark%20purple%20background&image_size=square_hd" sizes="192x192">
+<link rel="icon" type="image/png" href="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=dark%20gothic%20game%20icon%20with%20golden%20rune%20and%20mysterious%20eye%20in%20dark%20purple%20background&image_size=square" sizes="192x192">
+<link rel="icon" type="image/png" href="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=dark%20gothic%20game%20icon%20with%20golden%20rune%20and%20mysterious%20eye%20in%20dark%20purple%20background&image_size=square_hd" sizes="512x512">
+<link rel="shortcut icon" href="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=dark%20gothic%20game%20icon%20with%20golden%20rune%20and%20mysterious%20eye%20in%20dark%20purple%20background&image_size=square">
+<title>轮回试炼 · 高维枢纽</title>
+<style>
+:root{--bg:#0a0a10;--card:#12121a;--gold:#d4af37;--red:#8b0000;--purple:#2a085c;--text:#e8e8e8;--sub:#8888a0;--border:#2a2a3a;--glow:0 0 20px rgba(212,175,55,0.4);--soul:#9b59b6}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Courier New',monospace;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);-webkit-tap-highlight-color:transparent}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 20% 80%,rgba(42,8,92,0.15) 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(139,0,0,0.1) 0%,transparent 50%),radial-gradient(ellipse at 50% 50%,rgba(212,175,55,0.05) 0%,transparent 70%);pointer-events:none;z-index:0}
+.loading{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999;cursor:pointer;transition:opacity 0.5s;-webkit-transition:opacity 0.5s;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+.loading h1{font-size:3rem;color:var(--gold);text-shadow:var(--glow);margin-bottom:1rem;animation:pulse 1.5s infinite;-webkit-animation:pulse 1.5s infinite}
+.loading p{color:var(--sub);font-size:1rem}
+.loading .hint{font-size:0.8rem;color:var(--gold);margin-top:2rem;opacity:0.7;animation:fade 2s infinite;-webkit-animation:fade 2s infinite}
+.container{max-width:800px;margin:0 auto;position:relative;z-index:1;padding:1rem;padding-bottom:calc(1rem + env(safe-area-inset-bottom));opacity:0;transition:opacity 0.5s;-webkit-transition:opacity 0.5s}
+.container.visible{opacity:1}
+header{text-align:center;margin-bottom:2rem}
+h1{font-size:2rem;color:var(--gold);text-shadow:var(--glow);letter-spacing:0.1em;text-transform:uppercase}
+.subtitle{color:var(--sub);font-style:italic}
+.soul-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:2rem;box-shadow:0 0 30px rgba(0,0,0,0.5);position:relative;overflow:hidden}
+.soul-section::before{content:'';position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;border-radius:12px;background:linear-gradient(45deg,transparent 30%,rgba(155,89,182,0.2) 50%,transparent 70%);pointer-events:none}
+.soul-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.soul-label{font-size:0.85rem;color:var(--sub);text-transform:uppercase;letter-spacing:0.05em}
+.soul-value{font-size:2rem;font-weight:bold;color:var(--soul);text-shadow:0 0 15px rgba(155,89,182,0.5)}
+.soul-icon{font-size:1.8rem;animation:soulGlow 2s infinite;-webkit-animation:soulGlow 2s infinite}
+.soul-shop{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+.shop-title{font-size:0.9rem;color:var(--soul);margin-bottom:0.75rem;text-transform:uppercase;letter-spacing:0.05em;display:flex;justify-content:space-between;align-items:center}
+.shop-items{display:flex;flex-wrap:wrap;gap:0.75rem}
+.shop-item{background:rgba(155,89,182,0.1);border:1px solid rgba(155,89,182,0.3);border-radius:8px;padding:0.75rem;cursor:pointer;transition:all 0.2s;-webkit-transition:all 0.2s;min-width:120px;text-align:center;position:relative}
+.shop-item:hover{background:rgba(155,89,182,0.2);border-color:var(--soul);box-shadow:0 0 15px rgba(155,89,182,0.3)}
+.shop-item.disabled{opacity:0.4;cursor:not-allowed}
+.shop-item.disabled:hover{background:rgba(155,89,182,0.1);border-color:rgba(155,89,182,0.3);box-shadow:none}
+.shop-item-name{font-size:0.85rem;color:var(--text);margin-bottom:0.25rem}
+.shop-item-price{font-size:0.75rem;color:var(--soul);display:flex;align-items:center;justify-content:center;gap:0.25rem}
+.shop-item-reward{font-size:0.7rem;color:var(--gold);margin-top:0.25rem}
+.shop-item-rare{font-size:0.65rem;padding:0.1rem 0.3rem;border-radius:3px;margin-top:0.25rem;display:inline-block}
+.shop-item-rare.N{background:rgba(100,100,100,0.3);color:#aaa}
+.shop-item-rare.R{background:rgba(30,144,255,0.3);color:#1e90ff}
+.shop-item-rare.SR{background:rgba(148,0,211,0.3);color:#9400d3}
+.shop-item-rare.SSR{background:rgba(255,215,0,0.3);color:#ffd700}
+.shop-item .delete-btn{position:absolute;top:2px;right:2px;width:20px;height:20px;background:var(--red);color:#fff;border:none;border-radius:50%;cursor:pointer;font-size:10px;opacity:0;transition:opacity 0.2s;-webkit-transition:opacity 0.2s}
+.shop-item .edit-btn{position:absolute;top:2px;right:24px;width:20px;height:20px;background:var(--soul);color:#fff;border:none;border-radius:50%;cursor:pointer;font-size:10px;opacity:0;transition:opacity 0.2s;-webkit-transition:opacity 0.2s}
+.shop-item:hover .delete-btn,.shop-item:hover .edit-btn{opacity:1}
+.radar-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:2rem;box-shadow:0 0 30px rgba(0,0,0,0.5),inset 0 0 20px rgba(212,175,55,0.05);position:relative}
+.radar-section::before{content:'';position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;border-radius:12px;background:linear-gradient(45deg,transparent 30%,rgba(212,175,55,0.1) 50%,transparent 70%);pointer-events:none}
+.radar-container{display:flex;justify-content:center;min-height:220px}
+#radar{max-width:100%;height:auto}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:2rem}
+.stat-card{background:linear-gradient(135deg,rgba(20,10,30,0.95),rgba(10,5,20,0.98));border:2px solid rgba(212,175,55,0.2);border-radius:12px;padding:1.25rem;position:relative;overflow:hidden;transition:all 0.3s;-webkit-transition:all 0.3s;box-shadow:0 4px 20px rgba(0,0,0,0.5)}
+.stat-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(212,175,55,0.05) 0%,transparent 50%);opacity:0;transition:opacity 0.3s;-webkit-transition:opacity 0.3s}
+.stat-card:hover::before{opacity:1}
+.stat-card:hover{border-color:rgba(212,175,55,0.6);box-shadow:0 0 30px rgba(212,175,55,0.2),inset 0 0 30px rgba(212,175,55,0.05);transform:translateY(-4px);-webkit-transform:translateY(-4px)}
+.stat-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem}
+.stat-icon{font-size:2rem;text-shadow:0 0 10px rgba(255,255,255,0.3)}
+.stat-level{font-size:0.85rem;color:#ffd700;padding:0.25rem 0.5rem;background:linear-gradient(135deg,rgba(212,175,55,0.2),rgba(212,175,55,0.1));border-radius:4px;border:1px solid rgba(212,175,55,0.4);text-shadow:0 0 5px rgba(212,175,55,0.5)}
+.stat-label{font-size:0.9rem;color:#ccc;text-transform:uppercase;letter-spacing:0.08em;font-weight:bold;margin-bottom:0.5rem}
+.stat-value{font-size:2rem;font-weight:bold;color:#fff;margin-bottom:0.5rem;text-shadow:0 0 10px rgba(255,255,255,0.2)}
+.exp-bar{height:8px;background:#0a0a15;border-radius:4px;overflow:hidden;margin-bottom:0.5rem;border:1px solid rgba(212,175,55,0.2)}
+.exp-fill{height:100%;border-radius:4px;transition:width 0.5s;-webkit-transition:width 0.5s;position:relative}
+.exp-fill::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);animation:shimmer 2s infinite;-webkit-animation:shimmer 2s infinite}
+.exp-text{font-size:0.8rem;color:#888;text-align:center}
+
+.stat-card:hover .stat-tooltip{opacity:1;visibility:visible;transform:translateX(-50%) translateY(-10px);-webkit-transform:translateX(-50%) translateY(-10px)}
+.stat-tooltip{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,rgba(30,20,50,0.98),rgba(20,10,40,0.98));border:2px solid rgba(212,175,55,0.4);border-radius:10px;padding:1rem;min-width:280px;max-width:320px;z-index:100;opacity:0;visibility:hidden;transition:all 0.3s;-webkit-transition:all 0.3s;margin-bottom:10px;box-shadow:0 10px 40px rgba(0,0,0,0.6)}
+.stat-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:8px solid transparent;border-top-color:rgba(212,175,55,0.4)}
+.stat-tooltip-title{font-size:0.9rem;font-weight:bold;color:#ffd700;margin-bottom:0.75rem;text-align:center;text-transform:uppercase;letter-spacing:0.1em}
+.stat-tooltip-section{margin-bottom:0.75rem}
+.stat-tooltip-label{font-size:0.75rem;color:#888;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.25rem;display:block}
+.stat-tooltip-content{font-size:0.85rem;color:#fff;line-height:1.5}
+.stat-tooltip-effect{background:rgba(212,175,55,0.1);border-left:3px solid #ffd700;padding:0.5rem;margin-top:0.5rem}
+.stat-tooltip-effect .stat-tooltip-content{color:#ffd700}
+
+.stat-card.highlight{animation:attrHighlight 1.5s ease-out}
+@keyframes attrHighlight{
+  0%{transform:scale(1);box-shadow:0 0 0 rgba(212,175,55,0)}
+  20%{transform:scale(1.05);box-shadow:0 0 40px rgba(212,175,55,0.6)}
+  40%{transform:scale(1);box-shadow:0 0 20px rgba(212,175,55,0.4)}
+  60%{transform:scale(1.03);box-shadow:0 0 30px rgba(212,175,55,0.5)}
+  80%{transform:scale(1);box-shadow:0 0 15px rgba(212,175,55,0.3)}
+  100%{transform:scale(1);box-shadow:0 0 0 rgba(212,175,55,0)}
+}
+
+.sanity-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:2rem;box-shadow:0 0 30px rgba(0,0,0,0.5)}
+.sanity-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.sanity-label{font-size:0.85rem;color:var(--sub);text-transform:uppercase;letter-spacing:0.05em}
+.sanity-value{font-size:1.5rem;font-weight:bold;color:#8b0000}
+.sanity-bar{height:8px;background:#1a1a26;border-radius:4px;overflow:hidden;margin-top:1rem;border:1px solid var(--border)}
+.sanity-fill{height:100%;border-radius:4px;transition:width 0.5s;-webkit-transition:width 0.5s;position:relative;background:linear-gradient(90deg,#8b5cf6,#6366f1)}
+.sanity-text{font-size:0.75rem;color:var(--sub);text-align:center;margin-top:0.5rem}
+.health-bar{height:8px;background:#1a1a26;border-radius:4px;overflow:hidden;margin-top:1rem;border:1px solid var(--border)}
+.health-fill{height:100%;border-radius:4px;transition:width 0.5s;-webkit-transition:width 0.5s;position:relative;background:linear-gradient(90deg,#22c55e,#10b981)}
+.health-fill.low{animation:bloodFlash 0.5s;-webkit-animation:bloodFlash 0.5s}
+.health-text{font-size:0.75rem;color:var(--sub);text-align:center;margin-top:0.5rem}
+.section-title{font-size:1.25rem;color:var(--gold);margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;text-transform:uppercase;letter-spacing:0.1em}
+.dungeons{display:flex;flex-direction:column;gap:1rem}
+.dungeon-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;position:relative;overflow:hidden;cursor:pointer;transition:all 0.3s;-webkit-transition:all 0.3s}
+.dungeon-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.05),transparent);transition:left 0.5s;-webkit-transition:left 0.5s;pointer-events:none}
+.dungeon-card:hover::before{left:100%}
+.dungeon-card:hover{border-color:var(--gold);box-shadow:var(--glow);transform:translateX(4px);-webkit-transform:translateX(4px)}
+.dungeon-card.completed{opacity:0.6;border-color:var(--border);filter:grayscale(0.5);-webkit-filter:grayscale(0.5)}
+.dungeon-card.completed:hover{transform:none;-webkit-transform:none;box-shadow:none}
+
+.dungeon-section-header{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;padding:0.75rem 1rem;background:linear-gradient(135deg,rgba(20,10,30,0.9),rgba(10,5,20,0.9));border-radius:8px;border:1px solid rgba(212,175,55,0.3)}
+.dungeon-section-header .section-icon{font-size:1.25rem}
+.dungeon-section-header span:nth-child(2){font-weight:bold;color:#ffd700;text-transform:uppercase;letter-spacing:0.05em}
+.dungeon-section-header .section-count{margin-left:auto;font-size:0.85rem;color:#888;background:rgba(212,175,55,0.1);padding:0.25rem 0.5rem;border-radius:4px}
+.dungeon-section-header.optional{border-color:rgba(100,150,255,0.3)}
+.dungeon-section-header.optional span:nth-child(2){color:#87ceeb}
+
+.golden-explosion{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1000;background:rgba(0,0,0,0.5)}
+.golden-particle{position:absolute;width:var(--size);height:var(--size);background:linear-gradient(135deg,#ffd700,#ffaa00);border-radius:50%;box-shadow:0 0 10px #ffd700,0 0 20px #ffaa00;animation:goldenExplode var(--duration) ease-out var(--delay) forwards}
+@keyframes goldenExplode{0%{opacity:1;transform:translate(-50%,-50%) scale(1);margin-left:0;margin-top:0}100%{opacity:0;transform:translate(-50%,-50%) scale(0);margin-left:var(--distance);margin-top:0}}
+
+.dungeon-card.core-contract{border:2px solid #ffd700;background:linear-gradient(135deg,rgba(30,20,10,0.95),rgba(20,15,5,0.98))}
+.dungeon-card.core-contract::before{background:linear-gradient(90deg,transparent,rgba(212,175,55,0.15),transparent)}
+.dungeon-card.core-contract:hover{border-color:#ffaa00;box-shadow:0 0 30px rgba(212,175,55,0.4)}
+
+.core-contract-badge{display:inline-block;margin-left:0.5rem;font-size:0.75rem;padding:0.15rem 0.5rem;background:linear-gradient(135deg,rgba(255,165,0,0.8),rgba(212,175,55,0.6));color:#000;border-radius:4px;font-weight:bold;animation:pulseBadge 2s infinite}
+@keyframes pulseBadge{0%,100%{opacity:1;box-shadow:0 0 5px rgba(255,165,0,0.5)}50%{opacity:0.7;box-shadow:0 0 15px rgba(255,165,0,0.8)}}
+
+.dungeon-card.optional{border:1px solid rgba(100,150,255,0.3);background:linear-gradient(135deg,rgba(10,20,40,0.9),rgba(5,15,30,0.95))}
+.dungeon-card.optional:hover{border-color:#6495ed;box-shadow:0 0 20px rgba(100,150,255,0.2)}
+
+.optional-hint{font-size:0.75rem;color:#6495ed;margin:0.5rem 0;padding:0.3rem 0.5rem;background:rgba(100,150,255,0.1);border-radius:4px;border-left:2px solid #6495ed}
+
+.aberrations-section{background:rgba(45,10,10,0.6);border:1px solid rgba(139,0,0,0.5);border-radius:12px;padding:1.5rem;margin-bottom:2rem;box-shadow:0 0 30px rgba(139,0,0,0.2)}
+.aberrations{display:flex;flex-direction:column;gap:1rem}
+.aberrations-section .section-title span:first-child{color:#ff4444}
+.aberrations-section .section-title span:last-child{color:#ff6b6b}
+.aberrations-section .btn.add{background:linear-gradient(135deg,#8b0000,#b22222);border-color:#ff4444}
+.aberrations-section .btn.add:hover{background:linear-gradient(135deg,#a50000,#cc0000);box-shadow:0 0 20px rgba(255,68,68,0.5)}
+.aberration-card{background:linear-gradient(135deg,rgba(45,10,10,0.8),rgba(20,5,5,0.9));border:1px solid rgba(139,0,0,0.6);border-radius:12px;padding:1.25rem;position:relative;overflow:hidden;transition:all 0.3s}
+.aberration-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,68,68,0.1),transparent);transition:left 0.5s;pointer-events:none}
+.aberration-card:hover::before{left:100%}
+.aberration-card:hover{border-color:#ff4444;box-shadow:0 0 20px rgba(255,68,68,0.3);transform:translateX(4px)}
+.aberration-card.eroded{opacity:0.5;border-color:#330000;filter:grayscale(0.7)}
+.aberration-card .warning-badge{position:absolute;top:0.5rem;right:0.5rem;background:rgba(255,68,68,0.9);color:#fff;font-size:0.7rem;padding:0.25rem 0.5rem;border-radius:4px;font-weight:bold}
+.aberration-card-header{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem}
+.aberration-card-icon{font-size:1.5rem}
+.aberration-card-name{font-size:1.1rem;color:#ffcccc;font-weight:bold}
+.aberration-card-desc{font-size:0.875rem;color:var(--sub);margin-bottom:0.75rem}
+.aberration-card-cost{display:flex;gap:1rem;margin-bottom:1rem}
+.aberration-cost-item{display:flex;align-items:center;gap:0.25rem;font-size:0.85rem}
+.aberration-cost-item.health{color:#ff6b6b}
+.aberration-cost-item.sanity{color:#9b59b6}
+.aberration-card-actions{display:flex;gap:0.5rem}
+.aberration-btn-erode{padding:0.5rem 1.5rem;background:linear-gradient(135deg,#8b0000,#b22222);border:1px solid #ff4444;color:#fff;border-radius:6px;font-size:0.9rem;cursor:pointer;transition:all 0.2s}
+.aberration-btn-erode:hover{background:linear-gradient(135deg,#a50000,#cc0000);box-shadow:0 0 15px rgba(255,68,68,0.5);transform:scale(1.02)}
+.aberration-btn-erode:active{transform:scale(0.98)}
+.aberration-btn-edit{padding:0.4rem 0.8rem;background:rgba(139,0,0,0.3);border:1px solid rgba(255,68,68,0.5);color:#ffcccc;border-radius:4px;font-size:0.8rem;cursor:pointer;transition:all 0.2s}
+.aberration-btn-edit:hover{background:rgba(139,0,0,0.5)}
+.aberration-btn-delete{padding:0.4rem 0.8rem;background:rgba(100,0,0,0.3);border:1px solid rgba(255,0,0,0.5);color:#ff6b6b;border-radius:4px;font-size:0.8rem;cursor:pointer;transition:all 0.2s}
+.aberration-btn-delete:hover{background:rgba(100,0,0,0.5)}
+
+.erosion-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);display:flex;justify-content:center;align-items:center;z-index:5000;opacity:0;transition:opacity 0.3s;pointer-events:none}
+.erosion-modal.show{opacity:1;pointer-events:auto;animation:erosionShake 0.5s ease-in-out}
+@keyframes erosionShake{0%,100%{transform:translateX(0)}10%,30%,50%,70%,90%{transform:translateX(-5px)}20%,40%,60%,80%{transform:translateX(5px)}}
+.erosion-content{background:linear-gradient(135deg,rgba(80,0,0,0.95),rgba(45,10,10,0.95));border:2px solid #ff0000;border-radius:16px;padding:3rem;text-align:center;max-width:400px;width:90%;box-shadow:0 0 60px rgba(255,0,0,0.5),inset 0 0 40px rgba(0,0,0,0.5);animation:erosionPulse 0.3s ease-out}
+@keyframes erosionPulse{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}
+.erosion-content::before{content:'';position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;background:linear-gradient(45deg,#ff0000,#ff6600,#ff0000);border-radius:18px;z-index:-1;animation:erosionGlow 1s ease-in-out infinite}
+@keyframes erosionGlow{0%,100%{opacity:0.5}50%{opacity:1}}
+.erosion-icon{font-size:4rem;margin-bottom:1rem;animation:iconFloat 2s ease-in-out infinite}
+@keyframes iconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.erosion-title{font-size:1.8rem;font-weight:bold;color:#ff0000;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;text-shadow:0 0 20px rgba(255,0,0,0.8)}
+.erosion-message{font-size:1.2rem;color:#ffcccc;margin-bottom:2rem}
+.erosion-close{display:inline-block;padding:0.75rem 2.5rem;background:linear-gradient(135deg,#8b0000,#b22222);border:1px solid #ff4444;color:#fff;border-radius:8px;font-size:1rem;cursor:pointer;transition:all 0.2s;text-transform:uppercase}
+.erosion-close:hover{background:linear-gradient(135deg,#a50000,#cc0000);box-shadow:0 0 20px rgba(255,68,68,0.5)}
+
+.shop-item.sealed{opacity:0.4;pointer-events:none}
+.seal-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);display:flex;flex-direction:column;justify-content:center;align-items:center;border-radius:12px;z-index:10}
+.seal-icon{font-size:4rem;margin-bottom:1rem;animation:sealPulse 2s ease-in-out infinite}
+@keyframes sealPulse{0%,100%{transform:scale(1);opacity:0.5}50%{transform:scale(1.2);opacity:1}}
+.seal-text{font-size:1.3rem;color:#ff4444;font-weight:bold;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem}
+.seal-hint{font-size:0.85rem;color:#888;text-align:center;max-width:80%}
+.hallucination-badge{display:inline-block;margin-left:0.75rem;padding:0.25rem 0.5rem;background:rgba(139,0,0,0.8);border:1px solid rgba(255,68,68,0.5);border-radius:4px;font-size:0.75rem;color:#ff6b6b;animation:hallucinationFlicker 1.5s ease-in-out infinite}
+@keyframes hallucinationFlicker{0%,100%{opacity:1}50%{opacity:0.6}}
+.summon-btn.sealed{background:linear-gradient(135deg,#330000,#550000)!important;border-color:#660000!important;color:#666!important}
+.summon-btn.sealed:hover{transform:none!important;box-shadow:none!important}
+
+.rank-badge{background:linear-gradient(135deg,rgba(30,20,50,0.9),rgba(20,10,40,0.95));border:2px solid rgba(212,175,55,0.3);border-radius:12px;padding:1rem;display:flex;align-items:center;gap:1rem;cursor:pointer;transition:all 0.3s;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.rank-badge:hover{border-color:rgba(212,175,55,0.6);box-shadow:0 0 30px rgba(212,175,55,0.2);transform:translateY(-2px)}
+.rank-badge.can-breakthrough{border-color:#ffd700;animation:rankGlow 2s ease-in-out infinite}
+@keyframes rankGlow{0%,100%{box-shadow:0 0 20px rgba(212,175,55,0.3)}50%{box-shadow:0 0 40px rgba(212,175,55,0.6)}}
+.rank-badge::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(212,175,55,0.1),transparent);transition:left 0.5s;pointer-events:none}
+.rank-badge:hover::before{left:100%}
+.rank-icon{font-size:2.5rem;width:60px;height:60px;display:flex;justify-content:center;align-items:center;border-radius:50%;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3)}
+.rank-info{flex:1}
+.rank-title{font-size:1.1rem;font-weight:bold;color:#ffd700;margin-bottom:0.5rem}
+.rank-progress-bar{height:6px;background:rgba(50,50,50,0.8);border-radius:3px;overflow:hidden;margin-bottom:0.25rem}
+.rank-progress-fill{height:100%;background:linear-gradient(90deg,#d4af37,#ffd700);transition:width 0.5s ease-out}
+.rank-progress-text{font-size:0.8rem;color:var(--sub)}
+.rank-breakthrough{position:absolute;top:0.5rem;right:0.5rem;padding:0.25rem 0.75rem;background:linear-gradient(135deg,#ffd700,#ff8c00);border-radius:4px;font-size:0.8rem;font-weight:bold;color:#000;animation:breakthroughPulse 1.5s ease-in-out infinite}
+@keyframes breakthroughPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.rank-cooldown{position:absolute;bottom:0.5rem;right:0.5rem;padding:0.25rem 0.5rem;background:rgba(139,0,0,0.9);border:1px solid #ff4444;border-radius:4px;font-size:0.75rem;font-weight:bold;color:#ff6666}
+
+.rank-tree{display:flex;flex-direction:column;gap:0.75rem;max-height:400px;overflow-y:auto}
+.rank-tree-item{display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border-radius:8px;transition:all 0.2s}
+.rank-tree-item.current{background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3)}
+.rank-tree-item.unlocked{background:rgba(100,100,150,0.2);border:1px solid rgba(100,100,150,0.3)}
+.rank-tree-item.locked{background:rgba(30,30,30,0.5);border:1px solid rgba(50,50,50,0.5);opacity:0.6}
+.rank-tree-icon{font-size:1.5rem}
+.rank-tree-info{flex:1}
+.rank-tree-name{font-size:1rem;font-weight:bold}
+.rank-tree-exp{font-size:0.75rem;color:var(--sub)}
+.rank-tree-privilege{font-size:0.7rem;color:#888;margin-top:0.25rem}
+.rank-tree-arrow{color:#666;font-size:1.2rem}
+
+.breakthrough-content{background:linear-gradient(135deg,rgba(30,20,50,0.98),rgba(20,10,40,0.98))!important;border:2px solid #ffd700!important;box-shadow:0 0 60px rgba(212,175,55,0.3)!important}
+.breakthrough-header{text-align:center;margin-bottom:1.5rem}
+.breakthrough-icon{font-size:4rem;margin-bottom:0.5rem;animation:iconFloat 2s ease-in-out infinite}
+@keyframes iconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.breakthrough-title{font-size:1.8rem;font-weight:bold;color:#ffd700;text-transform:uppercase;letter-spacing:0.2em}
+.breakthrough-info{display:flex;justify-content:center;align-items:center;gap:1.5rem;margin-bottom:1.5rem}
+.breakthrough-current{font-size:0.9rem;color:#888}
+.breakthrough-arrow{font-size:1.5rem;color:#ffd700}
+.breakthrough-next{font-size:1.1rem;color:#ffd700;font-weight:bold}
+.breakthrough-trial{background:rgba(139,0,0,0.2);border:1px solid rgba(139,0,0,0.5);border-radius:8px;padding:1rem;margin-bottom:1rem}
+.trial-title{font-size:0.85rem;color:#ff6b6b;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem}
+.trial-content{font-size:1rem;color:#fff}
+.breakthrough-privilege{background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3);border-radius:8px;padding:1rem;margin-bottom:1.5rem}
+.privilege-title{font-size:0.85rem;color:#ffd700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem}
+.privilege-content{font-size:1rem;color:#fff}
+.breakthrough-checkbox{margin-bottom:1.5rem;text-align:center}
+.breakthrough-checkbox input{width:18px;height:18px;margin-right:0.5rem}
+.breakthrough-checkbox label{color:#fff;font-size:0.9rem}
+.breakthrough-btn{width:100%;padding:0.875rem;background:linear-gradient(135deg,#ffd700,#ff8c00);border:none;color:#000;border-radius:8px;font-size:1.1rem;font-weight:bold;cursor:pointer;transition:all 0.2s;text-transform:uppercase;letter-spacing:0.1em}
+.breakthrough-btn:hover{transform:scale(1.02);box-shadow:0 0 30px rgba(212,175,55,0.6)}
+.breakthrough-btn:disabled{background:#555;color:#888;cursor:not-allowed;transform:none}
+
+.failure-content{background:linear-gradient(135deg,rgba(50,10,20,0.98),rgba(30,5,15,0.98))!important;border:2px solid #8b0000!important;box-shadow:0 0 60px rgba(139,0,0,0.4)!important}
+.failure-header{text-align:center;margin-bottom:1.5rem}
+.failure-icon{font-size:4rem;margin-bottom:0.5rem;animation:failureShake 0.5s ease-in-out}
+@keyframes failureShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+.failure-title{font-size:1.8rem;font-weight:bold;color:#ff4444;text-transform:uppercase;letter-spacing:0.2em}
+.failure-message{font-size:1rem;color:#ffaaaa;text-align:center;margin-bottom:1.5rem;padding:1rem;background:rgba(139,0,0,0.2);border-radius:8px}
+.failure-penalties{display:flex;flex-direction:column;gap:0.75rem;margin-bottom:1.5rem}
+.failure-penalty-item{display:flex;justify-content:space-between;align-items:center;padding:0.75rem;background:rgba(139,0,0,0.1);border-radius:6px;border-left:3px solid #ff4444}
+.failure-penalty-label{color:#aaa;font-size:0.9rem}
+.failure-penalty-value{color:#ff6666;font-weight:bold;font-size:1rem}
+.failure-stats{display:flex;justify-content:center;gap:2rem;margin-bottom:1.5rem}
+.failure-stat-item{text-align:center}
+.failure-stat-item .stat-label{display:block;font-size:0.8rem;color:#888;margin-bottom:0.25rem}
+.failure-stat-item .stat-value{font-size:1.2rem;font-weight:bold;color:#fff}
+.failure-stat-item .stat-value.cooldown{color:#ff8800}
+.failure-btn{width:100%;padding:0.875rem;background:linear-gradient(135deg,#8b0000,#aa0000);border:none;color:#fff;border-radius:8px;font-size:1rem;font-weight:bold;cursor:pointer;transition:all 0.2s}
+.failure-btn:hover{transform:scale(1.02);box-shadow:0 0 20px rgba(139,0,0,0.6)}
+
+.dungeon-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem}
+.dungeon-name{font-size:1.1rem;font-weight:bold;color:var(--text);display:flex;align-items:center;gap:0.5rem}
+.dungeon-lv{font-size:0.8rem;color:var(--gold);background:rgba(212,175,55,0.1);padding:0.15rem 0.4rem;border-radius:4px;border:1px solid rgba(212,175,55,0.3)}
+.difficulty{display:flex;gap:0.25rem;margin-top:0.5rem}
+.star{font-size:0.8rem;color:var(--border)}
+.star.active{color:var(--gold);text-shadow:0 0 8px var(--gold)}
+.rewards{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.75rem}
+.reward{padding:0.25rem 0.5rem;border-radius:4px;font-size:0.75rem;font-weight:bold;background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3);color:var(--gold);display:flex;align-items:center;gap:0.25rem}
+.reward.neg{background:rgba(139,0,0,0.1);border-color:rgba(139,0,0,0.3);color:#dc143c}
+.reward.sanity{background:rgba(42,8,92,0.2);border-color:rgba(42,8,92,0.5);color:#8b5cf6}
+.reward.soul{background:rgba(155,89,182,0.2);border-color:rgba(155,89,182,0.5);color:#9b59b6}
+.btn{padding:0.5rem 1.25rem;border-radius:6px;font-size:0.9rem;font-weight:bold;cursor:pointer;transition:all 0.2s;-webkit-transition:all 0.2s;text-transform:uppercase;letter-spacing:0.05em}
+.btn.challenge{background:transparent;border:1px solid var(--gold);color:var(--gold)}
+.btn.challenge:hover{background:var(--gold);color:var(--bg);box-shadow:var(--glow)}
+.btn.completed{background:rgba(212,175,55,0.2);border:1px solid rgba(212,175,55,0.5);color:var(--gold);cursor:not-allowed}
+.btn.recovery{background:transparent;border:1px solid #8b5cf6;color:#8b5cf6}
+.btn.recovery:hover{background:#8b5cf6;color:#fff;box-shadow:0 0 20px rgba(139,92,246,0.4)}
+.btn.edit{background:transparent;border:1px solid var(--soul);color:var(--soul);padding:0.3rem 0.6rem;font-size:0.75rem}
+.btn.edit:hover{background:var(--soul);color:#fff}
+.btn.delete{background:transparent;border:1px solid var(--red);color:var(--red);padding:0.3rem 0.6rem;font-size:0.75rem}
+.btn.delete:hover{background:var(--red);color:#fff}
+.btn.add{background:transparent;border:1px dashed var(--gold);color:var(--gold);padding:0.5rem 1rem;font-size:0.85rem}
+.btn.add:hover{background:rgba(212,175,55,0.1);border-style:solid}
+.feedback{position:fixed;top:20px;right:20px;background:var(--card);border:1px solid var(--gold);color:var(--gold);padding:0.75rem 1.25rem;border-radius:8px;font-weight:bold;transform:translateX(120%);-webkit-transform:translateX(120%);transition:transform 0.3s;-webkit-transition:transform 0.3s;z-index:1000;box-shadow:var(--glow);text-transform:uppercase;letter-spacing:0.05em}
+.feedback.show{transform:translateX(0);-webkit-transform:translateX(0)}
+.feedback.neg{border-color:var(--red);color:var(--red);box-shadow:0 0 20px rgba(139,0,0,0.4)}
+.level-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(10,10,16,0.95);display:none;justify-content:center;align-items:center;z-index:2000;animation:fadeIn 0.5s;-webkit-animation:fadeIn 0.5s}
+.level-modal.show{display:flex}
+.modal-content{background:var(--card);border:2px solid var(--gold);border-radius:12px;padding:2rem;max-width:500px;width:90%;box-shadow:0 0 50px rgba(212,175,55,0.3);position:relative;max-height:80vh;overflow-y:auto}
+.modal-content::before{content:'';position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;border-radius:12px;background:linear-gradient(45deg,transparent 30%,rgba(212,175,55,0.2) 50%,transparent 70%);pointer-events:none}
+.modal-title{font-size:1.5rem;color:var(--gold);margin-bottom:1.5rem;text-align:center;text-transform:uppercase;letter-spacing:0.1em}
+.modal-close{position:absolute;top:1rem;right:1rem;width:30px;height:30px;background:none;border:1px solid var(--border);color:var(--sub);border-radius:50%;cursor:pointer;transition:all 0.2s;-webkit-transition:all 0.2s;font-size:1rem}
+.modal-close:hover{border-color:var(--red);color:var(--red)}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:0.85rem;color:var(--sub);margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.05em}
+.form-group input,.form-group select{width:100%;padding:0.75rem;background:#1a1a26;border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:inherit;font-size:0.9rem;transition:all 0.2s;-webkit-transition:all 0.2s}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 10px rgba(212,175,55,0.2)}
+.form-group input::placeholder{color:var(--sub)}
+.form-actions{display:flex;gap:1rem;justify-content:flex-end;margin-top:1.5rem}
+.form-actions .btn{flex:1}
+.attr-list{max-height:200px;overflow-y:auto;margin-bottom:1rem}
+.attr-item{display:flex;justify-content:space-between;align-items:center;padding:0.5rem;background:rgba(255,255,255,0.02);border-radius:6px;margin-bottom:0.5rem}
+.attr-item:hover{background:rgba(255,255,255,0.05)}
+.attr-item input{width:auto;margin-right:0.5rem}
+.attr-item-name{font-size:0.85rem;color:var(--text)}
+.attr-item-value{font-size:0.8rem;color:var(--gold)}
+.level-content{text-align:center;animation:scaleIn 0.5s;-webkit-animation:scaleIn 0.5s;position:relative}
+.level-title{font-size:3rem;color:var(--gold);text-shadow:0 0 30px var(--gold),0 0 60px var(--gold);margin-bottom:1rem;animation:pulse 1s infinite;-webkit-animation:pulse 1s infinite}
+.level-attr{font-size:1.5rem;color:var(--text);margin-bottom:0.5rem}
+.level-lv{font-size:2rem;color:var(--gold);font-weight:bold}
+.level-btn{margin-top:2rem;padding:0.75rem 2rem;background:transparent;border:1px solid var(--gold);color:var(--gold);border-radius:6px;font-size:1rem;font-weight:bold;cursor:pointer;transition:all 0.2s;-webkit-transition:all 0.2s}
+.level-btn:hover{background:var(--gold);color:var(--bg);box-shadow:var(--glow)}
+.particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999}
+.fly-num{position:fixed;font-weight:bold;font-size:1.2rem;pointer-events:none;z-index:1001;animation:flyTop 1s ease-out forwards;-webkit-animation:flyTop 1s ease-out forwards}
+.fly-num.pos{color:var(--gold);text-shadow:var(--glow)}
+.fly-num.neg{color:var(--red);text-shadow:0 0 20px rgba(139,0,0,0.4)}
+.fly-num.soul{color:var(--soul);text-shadow:0 0 20px rgba(155,89,182,0.5)}
+.footer{text-align:center;padding:1.5rem 0;color:var(--sub);font-size:0.875rem}
+.footer-actions{display:flex;justify-content:center;gap:0.75rem;margin-top:1rem;flex-wrap:wrap}
+.footer-actions .btn{font-size:0.85rem;padding:0.5rem 1rem}
+.footer-actions .btn.export{background:linear-gradient(135deg,#1e90ff,#0066cc);border-color:#1e90ff}
+.footer-actions .btn.export:hover{box-shadow:0 0 20px rgba(30,144,255,0.4)}
+.footer-actions .btn.import{background:linear-gradient(135deg,#22c55e,#16a34a);border-color:#22c55e}
+.footer-actions .btn.import:hover{box-shadow:0 0 20px rgba(34,197,94,0.4)}
+.footer-actions .btn.copy{background:linear-gradient(135deg,#f59e0b,#d97706);border-color:#f59e0b}
+.footer-actions .btn.copy:hover{box-shadow:0 0 20px rgba(245,158,11,0.4)}
+.reset{background:transparent;border:1px solid var(--border);padding:0.5rem 1rem;border-radius:6px;color:var(--sub);font-size:0.875rem;cursor:pointer;transition:all 0.2s;-webkit-transition:all 0.2s}
+.reset:hover{border-color:var(--red);color:var(--red)}
+.last-update{font-size:0.8rem;color:var(--sub);margin-top:0.5rem}
+.sanity-warning{position:fixed;top:100px;left:50%;transform:translateX(-50%);-webkit-transform:translateX(-50%);background:rgba(139,0,0,0.9);color:#fff;padding:0.75rem 1.5rem;border-radius:8px;font-size:0.9rem;z-index:1002;opacity:0;transition:opacity 0.3s;-webkit-transition:opacity 0.3s;pointer-events:none}
+.sanity-warning.show{opacity:1}
+.mental-filter{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:500;opacity:0;transition:opacity 0.5s;-webkit-transition:opacity 0.5s}
+.mental-filter.active{opacity:1}
+.mental-filter::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at center,transparent 40%,rgba(139,0,0,0.2) 70%,rgba(0,0,0,0.5) 100%)}
+.glitch{position:absolute;top:0;left:0;width:100%;height:100%;animation:glitch 3s infinite;-webkit-animation:glitch 3s infinite}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;opacity:0.8}
+.glitch::before{color:#ff0000;animation:glitch-anim-1 0.2s infinite;-webkit-animation:glitch-anim-1 0.2s infinite}
+.glitch::after{color:#00ffff;animation:glitch-anim-2 0.2s infinite;-webkit-animation:glitch-anim-2 0.2s infinite}
+.color-picker{display:flex;gap:0.5rem;flex-wrap:wrap}
+.color-option{width:30px;height:30px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all 0.2s;-webkit-transition:all 0.2s}
+.color-option:hover{transform:scale(1.2);-webkit-transform:scale(1.2)}
+.color-option.selected{border-color:#fff;box-shadow:0 0 10px rgba(255,255,255,0.5)}
+.attr-reward-item{display:flex;justify-content:space-between;align-items:center;padding:0.5rem;background:rgba(255,255,255,0.02);border-radius:6px;margin-bottom:0.5rem}
+.attr-reward-item input[type="number"]{width:60px;padding:0.25rem;background:#1a1a26;border:1px solid var(--border);border-radius:4px;color:var(--text);font-size:0.8rem}
+.attr-reward-item input[type="number"]:focus{outline:none;border-color:var(--gold)}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scaleIn{from{transform:scale(0.5);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.8;transform:scale(1.05)}}
+@keyframes flyTop{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-200px) scale(0.5)}}
+@keyframes explode{0%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) scale(0)}}
+@keyframes ash{0%{opacity:0.8;transform:translateY(0) rotate(0deg)}100%{opacity:0;transform:translateY(-100px) rotate(180deg)}}
+@keyframes wave{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+@keyframes bloodFlash{0%,100%{opacity:1}50%{opacity:0.5;box-shadow:0 0 20px rgba(139,0,0,0.6)}}
+@keyframes glitch-anim-1{0%{clip-path:inset(10% 0 60% 0);transform:translate(-2px)}20%{clip-path:inset(80% 0 10% 0);transform:translate(2px)}40%{clip-path:inset(40% 0 50% 0);transform:translate(-2px)}60%{clip-path:inset(20% 0 70% 0);transform:translate(2px)}80%{clip-path:inset(60% 0 30% 0);transform:translate(-2px)}100%{clip-path:inset(90% 0 5% 0);transform:translate(2px)}}
+@keyframes glitch-anim-2{0%{clip-path:inset(60% 0 10% 0);transform:translate(2px)}20%{clip-path:inset(10% 0 80% 0);transform:translate(-2px)}40%{clip-path:inset(50% 0 40% 0);transform:translate(2px)}60%{clip-path:inset(70% 0 20% 0);transform:translate(-2px)}80%{clip-path:inset(30% 0 60% 0);transform:translate(2px)}100%{clip-path:inset(5% 0 90% 0);transform:translate(-2px)}}
+@keyframes fade{0%,100%{opacity:0.3}50%{opacity:0.8}}
+@keyframes soulGlow{0%,100%{filter:drop-shadow(0 0 5px rgba(155,89,182,0.5))}50%{filter:drop-shadow(0 0 15px rgba(155,89,182,0.8))}}
+@keyframes cardFlip{0%{transform:rotateY(0deg) scale(0.8);opacity:0}50%{transform:rotateY(90deg) scale(1.1);opacity:0.8}100%{transform:rotateY(0deg) scale(1);opacity:1}}
+@keyframes lightBeam{0%{transform:scaleY(0);opacity:0}50%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0.3}}
+@keyframes arrayRotate{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes cardFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes shadowPulse{0%,100%{opacity:0.3}50%{opacity:0.8}}
+@keyframes scrollFly{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--sx),var(--sy)) scale(0)}}
+.summon-scroll{position:fixed;top:20px;right:20px;display:flex;align-items:center;gap:0.5rem;background:var(--card);border:1px solid var(--gold);border-radius:8px;padding:0.5rem 1rem;z-index:1000;box-shadow:var(--glow)}
+.summon-scroll-icon{font-size:1.5rem;animation:soulGlow 2s infinite}
+.summon-scroll-count{font-size:1.2rem;font-weight:bold;color:var(--gold)}
+.summon-btn{background:linear-gradient(135deg,var(--gold),#b8860b);border:none;color:var(--bg);padding:0.5rem 1rem;border-radius:6px;font-weight:bold;cursor:pointer;transition:all 0.2s;text-transform:uppercase;font-size:0.8rem;margin-left:0.5rem}
+.summon-btn:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(212,175,55,0.6)}
+.summon-btn.disabled{background:#333;color:#666;cursor:not-allowed;transform:none;box-shadow:none}
+.clear-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(10,10,16,0.98);display:none;justify-content:center;align-items:center;z-index:3000;flex-direction:column}
+.clear-modal.show{display:flex}
+.clear-title{font-size:3rem;color:var(--gold);text-shadow:0 0 30px var(--gold),0 0 60px var(--gold);margin-bottom:1rem;animation:pulse 1s infinite;text-transform:uppercase;letter-spacing:0.2em}
+.clear-subtitle{font-size:1.2rem;color:#8b5cf6;margin-bottom:2rem}
+.clear-reward{font-size:1.5rem;color:var(--gold);display:flex;align-items:center;gap:0.5rem;margin-bottom:2rem}
+.clear-btn{padding:0.75rem 2rem;background:transparent;border:2px solid var(--gold);color:var(--gold);border-radius:6px;font-size:1rem;font-weight:bold;cursor:pointer;transition:all 0.2s;text-transform:uppercase}
+.clear-btn:hover{background:var(--gold);color:var(--bg);box-shadow:var(--glow)}
+.gacha-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);display:none;justify-content:center;align-items:center;z-index:3000}
+.gacha-modal.show{display:flex}
+.gacha-container{position:relative;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.gacha-array{position:absolute;width:400px;height:400px;border:3px solid var(--gold);border-radius:50%;animation:arrayRotate 20s linear infinite;opacity:0.3}
+.gacha-array::before{content:'';position:absolute;top:50%;left:50%;width:350px;height:350px;border:2px solid #8b5cf6;border-radius:50%;transform:translate(-50%,-50%);animation:arrayRotate 15s linear infinite reverse}
+.gacha-array::after{content:'';position:absolute;top:50%;left:50%;width:300px;height:300px;border:1px solid var(--gold);border-radius:50%;transform:translate(-50%,-50%);animation:arrayRotate 10s linear infinite}
+.gacha-runes{position:absolute;width:100%;height:100%}
+.gacha-rune{position:absolute;font-size:1.5rem;color:var(--gold);text-shadow:var(--glow)}
+.gacha-light{position:absolute;width:100px;height:300px;background:linear-gradient(180deg,transparent,rgba(212,175,55,0.8),transparent);transform:rotateX(70deg);opacity:0;z-index:10}
+.gacha-light.active{animation:lightBeam 2s ease-out}
+.gacha-card{width:200px;height:300px;perspective:1000px;z-index:20;position:relative}
+.gacha-card-inner{position:relative;width:100%;height:100%;transition:transform 0.8s;transform-style:preserve-3d}
+.gacha-card.flipped .gacha-card-inner{transform:rotateY(180deg)}
+.gacha-card-front,.gacha-card-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:12px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.gacha-card-front{background:linear-gradient(135deg,#1a1a2e,#16213e);border:2px solid var(--gold);box-shadow:0 0 30px rgba(212,175,55,0.3)}
+.gacha-card-front::before{content:'✧';font-size:4rem;color:var(--gold);text-shadow:var(--glow)}
+.gacha-card-back{background:linear-gradient(135deg,var(--card),#1a1a2e);border:2px solid var(--gold);transform:rotateY(180deg);padding:1rem;text-align:center}
+.gacha-card-rare{font-size:0.8rem;padding:0.3rem 0.8rem;border-radius:4px;margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.1em}
+.gacha-card-rare.N{background:rgba(100,100,100,0.3);color:#aaa;border:1px solid #aaa}
+.gacha-card-rare.R{background:rgba(30,144,255,0.3);color:#1e90ff;border:1px solid #1e90ff;box-shadow:0 0 15px rgba(30,144,255,0.5)}
+.gacha-card-rare.SR{background:rgba(148,0,211,0.3);color:#9400d3;border:1px solid #9400d3;box-shadow:0 0 20px rgba(148,0,211,0.6)}
+.gacha-card-rare.SSR{background:linear-gradient(135deg,rgba(255,215,0,0.3),rgba(139,0,0,0.3));color:#ffd700;border:1px solid #ffd700;box-shadow:0 0 30px rgba(255,215,0,0.8),0 0 60px rgba(139,0,0,0.4);animation:pulse 0.5s infinite}
+.gacha-card-icon{font-size:3rem;margin-bottom:1rem}
+.gacha-card-name{font-size:1.2rem;color:#fff;margin-bottom:0.5rem}
+.gacha-card-desc{font-size:0.9rem;color:var(--sub)}
+.gacha-summon-btn{margin-top:3rem;padding:0.75rem 3rem;background:linear-gradient(135deg,var(--gold),#b8860b);border:none;color:var(--bg);border-radius:6px;font-size:1.1rem;font-weight:bold;cursor:pointer;transition:all 0.2s;text-transform:uppercase;letter-spacing:0.1em;z-index:20}
+.gacha-summon-btn:hover{transform:scale(1.05);box-shadow:0 0 30px rgba(212,175,55,0.6)}
+.gacha-summon-btn:disabled{background:#333;color:#666;cursor:not-allowed;transform:none;box-shadow:none}
+.gacha-close{position:absolute;top:20px;right:20px;width:40px;height:40px;background:none;border:1px solid var(--gold);color:var(--gold);border-radius:50%;cursor:pointer;transition:all 0.2s;font-size:1.2rem}
+.gacha-close:hover{background:var(--gold);color:var(--bg)}
+
+.clearance-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.98);display:none;justify-content:center;align-items:center;z-index:4000;overflow:hidden}
+.clearance-modal.show{display:flex;animation:clearanceFadeIn 0.5s ease-out}
+@keyframes clearanceFadeIn{from{opacity:0}to{opacity:1}}
+.clearance-container{position:relative;width:100%;height:100%;display:flex;justify-content:center;align-items:center}
+.clearance-bg{position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at center,rgba(20,0,30,0.9) 0%,rgba(0,0,0,0.98) 70%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cpath d='M50 0 L100 50 L50 100 L0 50 Z' fill='none' stroke='%23330033' stroke-width='0.5'/%3E%3C/svg%3E");background-size:100px 100px}
+.clearance-bg::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,transparent 0%,rgba(139,0,0,0.1) 50%,transparent 100%);animation:clearancePulse 3s ease-in-out infinite}
+@keyframes clearancePulse{0%,100%{opacity:0.3}50%{opacity:0.6}}
+.clearance-particles{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden}
+.clearance-particle{position:absolute;width:2px;height:2px;background:var(--gold);border-radius:50%;opacity:0;animation:particleFloatUp 4s infinite ease-out}
+@keyframes particleFloatUp{0%{transform:translateY(100vh) translateX(0);opacity:0}10%{opacity:0.8}90%{opacity:0.3}100%{transform:translateY(-10vh) translateX(50px);opacity:0}}
+.clearance-content{position:relative;z-index:10;text-align:center;padding:3rem;background:linear-gradient(135deg,rgba(20,10,30,0.9),rgba(10,5,20,0.95));border:1px solid rgba(212,175,55,0.3);border-radius:16px;box-shadow:0 0 60px rgba(139,0,0,0.3),inset 0 0 60px rgba(0,0,0,0.5);max-width:500px;width:90%}
+.clearance-header{margin-bottom:2rem}
+.clearance-title{font-size:2.5rem;font-weight:bold;color:var(--gold);text-transform:uppercase;letter-spacing:0.2em;text-shadow:0 0 30px rgba(212,175,55,0.6)}
+.clearance-subtitle{font-size:0.8rem;color:var(--sub);text-transform:uppercase;letter-spacing:0.3em;margin-top:0.5rem}
+.clearance-rating{font-size:5rem;font-weight:bold;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;text-shadow:0 0 40px currentColor;animation:ratingGlow 2s ease-in-out infinite}
+@keyframes ratingGlow{0%,100%{text-shadow:0 0 40px currentColor}50%{text-shadow:0 0 60px currentColor,0 0 100px currentColor}}
+.clearance-rating.SSS{color:#ffd700;background:linear-gradient(135deg,#ffd700,#ff8c00,#ffd700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.clearance-rating.A{color:#4ade80}
+.clearance-rating.B{color:#60a5fa}
+.clearance-rating.C{color:#a78bfa}
+.clearance-rating.D{color:#fb923c}
+.clearance-rating.E{color:#f87171}
+.clearance-stars{font-size:1.5rem;color:#666;margin-bottom:2rem;transition:color 0.5s}
+.clearance-stars.sss{color:#ffd700;animation:starPulse 1s ease-in-out infinite}
+@keyframes starPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+.clearance-stats{display:flex;justify-content:center;gap:3rem;margin-bottom:2rem}
+.clearance-stat{text-align:center}
+.stat-label{font-size:0.75rem;color:var(--sub);text-transform:uppercase;letter-spacing:0.1em;display:block;margin-bottom:0.5rem}
+.stat-value{font-size:1.5rem;font-weight:bold;color:#fff}
+.clearance-rewards{display:flex;justify-content:center;gap:1.5rem;margin-bottom:2rem;flex-wrap:wrap}
+.clearance-reward{background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.3);border-radius:8px;padding:1rem 1.5rem;text-align:center;animation:rewardAppear 0.5s ease-out backwards}
+@keyframes rewardAppear{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
+.clearance-reward-icon{font-size:2rem;margin-bottom:0.5rem}
+.clearance-reward-text{font-size:0.875rem;color:#fff}
+.clearance-message{font-size:0.9rem;color:var(--sub);margin-bottom:2rem;line-height:1.6}
+.clearance-close-btn{padding:0.75rem 3rem;background:linear-gradient(135deg,var(--gold),#b8860b);border:none;color:var(--bg);border-radius:8px;font-size:1rem;font-weight:bold;cursor:pointer;transition:all 0.2s;text-transform:uppercase;letter-spacing:0.1em}
+.clearance-close-btn:hover{transform:scale(1.05);box-shadow:0 0 30px rgba(212,175,55,0.6)}
+.inventory-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:2rem;box-shadow:0 0 30px rgba(0,0,0,0.5);position:relative}
+.inventory-title{font-size:1.1rem;color:var(--gold);margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.05em}
+.inventory-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.75rem}
+.inventory-item{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px;padding:0.75rem;text-align:center;position:relative;transition:all 0.2s}
+.inventory-item:hover{border-color:var(--gold);transform:translateY(-2px)}
+.inventory-item.used{opacity:0.4;filter:grayscale(1)}
+.inventory-item-icon{font-size:1.5rem;margin-bottom:0.25rem}
+.inventory-item-name{font-size:0.8rem;color:#fff;margin-bottom:0.25rem}
+.inventory-item-rare{font-size:0.6rem;padding:0.1rem 0.3rem;border-radius:3px;margin-bottom:0.25rem;display:inline-block}
+.inventory-item-rare.N{background:rgba(100,100,100,0.3);color:#aaa}
+.inventory-item-rare.R{background:rgba(30,144,255,0.3);color:#1e90ff}
+.inventory-item-rare.SR{background:rgba(148,0,211,0.3);color:#9400d3}
+.inventory-item-rare.SSR{background:rgba(255,215,0,0.3);color:#ffd700}
+.inventory-item-btn{font-size:0.7rem;padding:0.25rem 0.5rem;border:1px solid var(--gold);color:var(--gold);background:transparent;border-radius:4px;cursor:pointer;transition:all 0.2s}
+.inventory-item-btn:hover{background:var(--gold);color:var(--bg)}
+.inventory-item-btn:disabled{border-color:#666;color:#666;cursor:not-allowed}
+.continue-btn{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);padding:0.75rem 3rem;background:transparent;border:2px solid var(--gold);color:var(--gold);border-radius:6px;font-size:1rem;font-weight:bold;cursor:pointer;transition:all 0.2s;text-transform:uppercase;z-index:30}
+.continue-btn:hover{background:var(--gold);color:var(--bg);box-shadow:var(--glow)}
+.collapse-btn{background:linear-gradient(135deg,var(--red),#660000);border:none;color:#fff;padding:0.5rem 1.5rem;border-radius:6px;font-weight:bold;cursor:pointer;transition:all 0.2s;text-transform:uppercase;font-size:0.85rem}
+.collapse-btn:hover{transform:scale(1.05);box-shadow:0 0 20px rgba(139,0,0,0.6)}
+.pollution-filter{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:400;opacity:0;transition:opacity 0.5s}
+.pollution-filter.active{opacity:1}
+.pollution-filter::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at center,transparent 30%,rgba(139,0,0,0.4) 60%,rgba(0,0,0,0.8) 100%)}
+.pollution-filter::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:0.1}
+.pollution-warning{position:fixed;top:100px;left:50%;transform:translateX(-50%);background:rgba(139,0,0,0.95);color:#ffcccc;padding:1rem 2rem;border-radius:8px;font-size:1rem;z-index:1002;opacity:0;transition:all 0.3s ease;pointer-events:auto;text-transform:uppercase;letter-spacing:0.1em;display:flex;align-items:center;gap:1rem;border:1px solid rgba(255,0,0,0.5);box-shadow:0 0 30px rgba(139,0,0,0.5)}
+.pollution-warning.show{opacity:1}
+.pollution-warning.hide{opacity:0;transform:translateX(-50%) translateY(-20px)}
+.pollution-close{width:30px;height:30px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);border-radius:50%;color:#ffcccc;font-size:1.2rem;cursor:pointer;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center;line-height:1}
+.pollution-close:hover{background:rgba(255,0,0,0.5);border-color:#ff6666;color:#fff;transform:scale(1.1)}
+.pollution-close:focus{outline:none;box-shadow:0 0 0 2px rgba(255,0,0,0.8)}
+.pollution-particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:350;overflow:hidden}
+.pollution-particle{position:absolute;width:40px;height:40px;background:radial-gradient(circle,rgba(0,0,0,0.8) 0%,rgba(50,0,0,0.4) 50%,transparent 70%);border-radius:50%;opacity:0;animation:particleFloat 8s infinite ease-in-out}
+@keyframes particleFloat{0%{transform:translateY(-100px) translateX(0) scale(0.5);opacity:0}10%{opacity:0.6}50%{opacity:0.8}90%{opacity:0.3}100%{transform:translateY(100vh) translateX(50px) scale(1.5);opacity:0}}
+.scroll-fly{position:fixed;font-size:1.5rem;pointer-events:none;z-index:1001;animation:scrollFly 1s ease-out forwards}
+.card-manager-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:2rem;box-shadow:0 0 30px rgba(0,0,0,0.5)}
+.card-manager-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.card-manager-title{font-size:1.1rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.05em}
+.card-manager-actions{display:flex;gap:0.5rem}
+.card-list{max-height:400px;overflow-y:auto}
+.card-item{display:flex;justify-content:space-between;align-items:center;padding:0.75rem;border-bottom:1px solid var(--border);transition:background 0.2s}
+.card-item:hover{background:rgba(212,175,55,0.05)}
+.card-item-info{flex:1}
+.card-item-icon{font-size:1.2rem;margin-right:0.5rem}
+.card-item-name{font-size:0.9rem;color:#fff}
+.card-item-rare{font-size:0.7rem;padding:0.1rem 0.4rem;border-radius:3px;margin-left:0.5rem}
+.card-item-desc{font-size:0.75rem;color:var(--sub);margin-top:0.25rem}
+.card-item-actions{display:flex;gap:0.3rem}
+.pool-selector{display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.pool-tab{padding:0.5rem 1rem;background:transparent;border:1px solid var(--border);color:#fff;border-radius:6px;cursor:pointer;transition:all 0.2s}
+.pool-tab.active{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+.pool-tab:hover{border-color:var(--gold)}
+.probability-panel{display:flex;gap:1rem;margin-bottom:1rem;padding:1rem;background:rgba(0,0,0,0.3);border-radius:8px}
+.prob-item{text-align:center}
+.prob-label{font-size:0.75rem;color:var(--sub)}
+.prob-value{font-size:1.2rem;font-weight:bold;color:var(--gold)}
+@media(max-width:480px){.stats-grid{grid-template-columns:1fr}.stat-card,.dungeon-card{padding:1rem}h1{font-size:1.5rem}.level-title{font-size:2rem}.shop-items{justify-content:center}.modal-content{padding:1rem}.gacha-array{width:250px;height:250px}.gacha-card{width:150px;height:220px}.clear-title{font-size:2rem}.summon-scroll{flex-direction:column;gap:0.25rem}.summon-btn{margin-left:0;margin-top:0.25rem}}
+</style>
+</head>
+<body>
+<div class="loading" id="loading">
+  <h1>轮回试炼 · 高维枢纽</h1>
+  <p>正在连接高维枢纽...</p>
+  <div class="hint">点击屏幕进入试炼</div>
+</div>
+
+<div class="mental-filter" id="mentalFilter">
+  <div class="glitch" data-text=""></div>
+</div>
+<div class="sanity-warning" id="sanityWarning">精神侵蚀严重！请执行意识深潜或高维解析恢复神性</div>
+<div class="pollution-filter" id="pollutionFilter"></div>
+<div class="pollution-particles" id="pollutionParticles"></div>
+<div class="pollution-warning" id="pollutionWarning">
+  <span>精神污染状态！HP已归零，无法进行献祭抽卡</span>
+  <button class="pollution-close" id="pollutionCloseBtn" onclick="closePollutionWarning()" aria-label="关闭精神污染提示">×</button>
+</div>
+<div class="summon-scroll" id="summonScroll">
+  <span class="summon-scroll-icon">📜</span>
+  <span class="summon-scroll-count" id="scrollCount">0</span>
+  <button class="summon-btn" id="summonBtn" onclick="openGacha()">献祭抽卡</button>
+</div>
+
+<div class="container" id="container">
+  <header>
+    <h1>轮回试炼 · 高维枢纽</h1>
+    <p class="subtitle">对抗深度侵蚀，于虚无中铸造神性。</p>
+    <div class="last-update" id="lastUpdate"></div>
+  </header>
+
+  <div class="soul-section">
+    <div class="soul-header">
+      <span class="soul-label">灵魂碎片</span>
+      <div style="display:flex;align-items:center;gap:0.5rem">
+        <span class="soul-icon">💎</span>
+        <span class="soul-value" id="soulVal">0</span>
+      </div>
+    </div>
+    <div class="soul-shop">
+      <div class="shop-title">
+        <span>虚空禁忌交易 (Void Altar)</span>
+        <button class="btn add" onclick="openShopEditor()">自定义商品</button>
+      </div>
+      <div class="shop-items" id="shopItems"></div>
+    </div>
+  </div>
+
+  <div class="rank-badge" id="rankBadge" onclick="openRankTree()">
+    <div class="rank-icon" id="rankIcon">🌱</div>
+    <div class="rank-info">
+      <div class="rank-title" id="rankTitle">序列 8 · 觉醒者</div>
+      <div class="rank-progress-bar">
+        <div class="rank-progress-fill" id="rankProgressFill"></div>
+      </div>
+      <div class="rank-progress-text" id="rankProgressText">0 / 0 EXP</div>
+    </div>
+    <div class="rank-breakthrough" id="rankBreakthrough" style="display:none">
+      <span>突破</span>
+    </div>
+  </div>
+
+  <div class="sanity-section">
+    <div class="sanity-header">
+      <span class="sanity-label">SAN值</span>
+      <span class="sanity-value" id="sanityVal">100</span>
+    </div>
+    <div class="sanity-bar">
+      <div class="sanity-fill" id="sanityFill"></div>
+    </div>
+    <div class="sanity-text">SAN: <span id="sanityVal2">100</span>/100</div>
+    <div class="health-bar">
+      <div class="health-fill" id="healthFill"></div>
+    </div>
+    <div class="health-text">HP: <span id="healthVal">100</span>/100</div>
+    <button class="collapse-btn" onclick="collapseToday()">结算今日 / 过夜</button>
+  </div>
+
+  <div class="radar-section">
+    <div class="radar-container">
+      <canvas id="radar" width="320" height="320"></canvas>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-title">
+      <span>!</span><span>属性面板</span>
+      <button class="btn add" onclick="openAttrManager()">管理属性</button>
+    </div>
+    <div class="stats-grid" id="stats"></div>
+  </div>
+
+  <div>
+    <div class="section-title">
+      <span>!</span><span>试炼副本</span>
+      <button class="btn add" onclick="openDungeonEditor()">添加副本</button>
+    </div>
+    <div class="dungeons" id="dungeons"></div>
+  </div>
+
+  <div class="aberrations-section">
+    <div class="section-title">
+      <span>⚠️</span><span>异化降临 · 污染副本</span>
+      <button class="btn add" onclick="openAberrationEditor()">记录新污染</button>
+    </div>
+    <div class="aberrations" id="aberrations"></div>
+  </div>
+
+  <footer class="footer">
+    <p>于深渊之上，凝视永恒的虚妄</p>
+    <div class="footer-actions">
+      <button class="btn export" onclick="exportSaveData()">📥 导出存档</button>
+      <button class="btn import" onclick="triggerImportFile()">📤 导入存档</button>
+      <button class="btn copy" onclick="copySaveData()">📋 复制存档</button>
+      <input type="file" id="importFileInput" accept=".json" style="display:none" onchange="importSaveData(event)">
+      <button class="reset" onclick="resetAll()">世界线坍缩</button>
+    </div>
+  </footer>
+</div>
+
+<div class="feedback" id="feedback"></div>
+<div class="level-modal" id="levelModal">
+  <div class="level-content">
+    <div class="level-title">LEVEL UP!</div>
+    <div class="level-attr" id="levelAttr">神性</div>
+    <div class="level-lv" id="levelLv">LV.1</div>
+    <button class="level-btn" onclick="closeLevel()">继续试炼</button>
+  </div>
+</div>
+<div class="particles" id="particles"></div>
+
+<div class="level-modal" id="attrModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeAttrModal()">X</button>
+    <h2 class="modal-title">属性管理</h2>
+    <input type="hidden" id="attrEditId">
+    <div class="form-group">
+      <label>属性名称</label>
+      <input type="text" id="attrName" placeholder="输入属性名称">
+    </div>
+    <div class="form-group">
+      <label>属性图标</label>
+      <input type="text" id="attrIcon" placeholder="输入emoji图标" value="*">
+    </div>
+    <div class="form-group">
+      <label>代表颜色</label>
+      <div class="color-picker" id="colorPicker"></div>
+      <input type="text" id="attrColor" placeholder="#ffffff" value="#d4af37">
+    </div>
+    <div class="form-group">
+      <label>升级所需EXP基数</label>
+      <input type="number" id="attrExpBase" value="100" min="10">
+    </div>
+    <div class="form-group">
+      <label>现有属性列表</label>
+      <div class="attr-list" id="attrList"></div>
+    </div>
+    <div class="form-actions">
+      <button class="btn delete" onclick="deleteAttribute()" id="attrDeleteBtn" style="display:none">毁灭属性</button>
+      <button class="btn challenge" onclick="saveAttribute()">保存属性</button>
+    </div>
+  </div>
+</div>
+
+<div class="level-modal" id="dungeonModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeDungeonModal()">X</button>
+    <h2 class="modal-title" id="dungeonModalTitle">添加副本</h2>
+    <input type="hidden" id="dungeonId">
+    <div class="form-group">
+      <label>副本名称</label>
+      <input type="text" id="dungeonName" placeholder="输入副本名称">
+    </div>
+    <div class="form-group">
+      <label>副本描述</label>
+      <input type="text" id="dungeonDesc" placeholder="输入副本描述">
+    </div>
+    <div class="form-group">
+      <label>副本图标</label>
+      <input type="text" id="dungeonIcon" placeholder="输入emoji图标" value="!">
+    </div>
+    <div class="form-group">
+      <label>难度等级</label>
+      <select id="dungeonDiff">
+        <option value="1">F/D - 普通</option>
+        <option value="2">C/B - 精英</option>
+        <option value="3">A/S - 噩梦</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>等级门槛</label>
+      <input type="number" id="dungeonLv" value="1" min="0">
+    </div>
+    <div class="form-group">
+      <label>灵魂碎片收益</label>
+      <input type="number" id="dungeonSoulReward" value="10" min="0">
+    </div>
+    <div class="form-group">
+      <label>SAN值消耗</label>
+      <input type="number" id="dungeonSanityCost" value="-5" placeholder="负数表示消耗，正数表示恢复">
+    </div>
+    <div class="form-group">
+      <label>HP消耗</label>
+      <input type="number" id="dungeonHealthCost" value="0" placeholder="负数表示消耗，正数表示恢复">
+    </div>
+    <div class="form-group">
+      <label>属性奖励（可多选，设置数值）</label>
+      <div class="attr-list" id="dungeonAttrRewards"></div>
+    </div>
+    <div class="form-group">
+      <label style="display:flex;align-items:center;gap:0.5rem">
+        <input type="checkbox" id="dungeonCoreContract">
+        <span>📌 标记为每日必做契约</span>
+      </label>
+    </div>
+    <div class="form-actions">
+      <button class="btn delete" onclick="deleteDungeon()" id="dungeonDeleteBtn" style="display:none">毁灭副本</button>
+      <button class="btn challenge" onclick="saveDungeon()">保存副本</button>
+    </div>
+  </div>
+</div>
+
+<div class="level-modal" id="rankTreeModal">
+  <div class="modal-content" style="max-width:600px">
+    <button class="modal-close" onclick="closeRankTree()">X</button>
+    <h2 class="modal-title">高维位阶树</h2>
+    <div class="rank-tree" id="rankTree"></div>
+  </div>
+</div>
+
+<div class="level-modal" id="breakthroughModal">
+  <div class="modal-content breakthrough-content">
+    <button class="modal-close" onclick="closeBreakthrough()">X</button>
+    <div class="breakthrough-header">
+      <div class="breakthrough-icon" id="breakthroughIcon">⚔️</div>
+      <div class="breakthrough-title" id="breakthroughTitle">晋升契约</div>
+    </div>
+    <div class="breakthrough-info">
+      <div class="breakthrough-current" id="breakthroughCurrent">当前：序列 8 · 觉醒者</div>
+      <div class="breakthrough-arrow">→</div>
+      <div class="breakthrough-next" id="breakthroughNext">下一位阶：序列 7 · 破壁者</div>
+    </div>
+    <div class="breakthrough-trial">
+      <div class="trial-title">晋升试炼目标</div>
+      <div class="trial-content" id="breakthroughTrial">完成任意1个试炼副本</div>
+    </div>
+    <div class="breakthrough-privilege">
+      <div class="privilege-title">解锁特权</div>
+      <div class="privilege-content" id="breakthroughPrivilege">初始状态，无特殊特权</div>
+    </div>
+    <div class="breakthrough-checkbox">
+      <input type="checkbox" id="breakthroughConfirm">
+      <label for="breakthroughConfirm">我已完成晋升试炼</label>
+    </div>
+    <button class="breakthrough-btn" id="breakthroughBtn" onclick="performBreakthrough()">打破基因锁/升阶</button>
+  </div>
+</div>
+
+<div class="level-modal" id="failureModal">
+  <div class="modal-content failure-content">
+    <button class="modal-close" onclick="closeFailureModal()">X</button>
+    <div class="failure-header">
+      <div class="failure-icon" id="failureIcon">💔</div>
+      <div class="failure-title" id="failureTitle">晋升失败</div>
+    </div>
+    <div class="failure-message" id="failureMessage">精神力微弱震荡</div>
+    <div class="failure-penalties" id="failurePenalties"></div>
+    <div class="failure-stats">
+      <div class="failure-stat-item">
+        <span class="stat-label">累计失败次数</span>
+        <span class="stat-value" id="failureCount">0</span>
+      </div>
+      <div class="failure-stat-item" id="cooldownDisplay" style="display:none">
+        <span class="stat-label">突破冷却</span>
+        <span class="stat-value cooldown">0 天</span>
+      </div>
+    </div>
+    <button class="failure-btn" onclick="closeFailureModal()">接受惩罚</button>
+  </div>
+</div>
+
+<div class="level-modal" id="aberrationModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeAberrationModal()">X</button>
+    <h2 class="modal-title" id="aberrationModalTitle">记录新污染</h2>
+    <input type="hidden" id="aberrationId">
+    <div class="form-group">
+      <label>异化名称</label>
+      <input type="text" id="aberrationName" placeholder="输入异化名称">
+    </div>
+    <div class="form-group">
+      <label>现实行为描述</label>
+      <textarea id="aberrationDesc" placeholder="描述现实中的行为..." rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label>扣除 HP</label>
+      <input type="number" id="aberrationHpCost" value="10" min="0" max="100">
+    </div>
+    <div class="form-group">
+      <label>扣除 SAN</label>
+      <input type="number" id="aberrationSanCost" value="10" min="0" max="100">
+    </div>
+    <div class="form-actions">
+      <button class="btn delete" onclick="deleteAberration()" id="aberrationDeleteBtn" style="display:none">删除异化</button>
+      <button class="btn challenge" onclick="saveAberration()">保存异化</button>
+    </div>
+  </div>
+</div>
+
+<div class="level-modal" id="shopModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeShopModal()">X</button>
+    <h2 class="modal-title" id="shopModalTitle">自定义商品</h2>
+    <input type="hidden" id="shopItemId">
+    <div class="form-group">
+      <label>商品名称</label>
+      <input type="text" id="shopItemName" placeholder="输入商品名称">
+    </div>
+    <div class="form-group">
+      <label>商品图标</label>
+      <input type="text" id="shopItemIcon" placeholder="输入emoji图标" value="*">
+    </div>
+    <div class="form-group">
+      <label>消耗碎片数</label>
+      <input type="number" id="shopItemPrice" value="20" min="1">
+    </div>
+    <div class="form-group">
+      <label>稀有度</label>
+      <select id="shopItemRare">
+        <option value="N">N - 普通</option>
+        <option value="R">R - 稀有</option>
+        <option value="SR">SR - 超稀有</option>
+        <option value="SSR">SSR - 传说</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>商品描述</label>
+      <input type="text" id="shopItemDesc" placeholder="输入商品描述">
+    </div>
+    <div class="form-group">
+      <label>奖励类型</label>
+      <select id="shopItemType" onchange="toggleShopRewardOptions()">
+        <option value="sanity">SAN值恢复</option>
+        <option value="health">HP恢复</option>
+        <option value="attribute">属性EXP</option>
+      </select>
+    </div>
+    <div class="form-group" id="shopItemAttrGroup" style="display:none">
+      <label>奖励属性</label>
+      <select id="shopItemAttr"></select>
+    </div>
+    <div class="form-group">
+      <label>奖励数值</label>
+      <input type="number" id="shopItemValue" value="10" min="1">
+    </div>
+    <div class="form-actions">
+      <button class="btn delete" onclick="deleteShopItem()" id="shopItemDeleteBtn" style="display:none">毁灭商品</button>
+      <button class="btn challenge" onclick="saveShopItem()">保存商品</button>
+    </div>
+  </div>
+</div>
+
+<div class="clear-modal" id="clearModal">
+  <div class="clear-title">DUNGEON CLEARED</div>
+  <div class="clear-subtitle">副本清空 / 今日试炼完成</div>
+  <div class="clear-reward">📜 高维抽卡券 +1</div>
+  <div style="color:var(--gold);margin-bottom:2rem">HP & SAN 值已完全恢复</div>
+  <button class="clear-btn" onclick="closeClearModal()">继续试炼</button>
+</div>
+
+<div class="gacha-modal" id="gachaModal">
+  <div class="gacha-container">
+    <button class="gacha-close" onclick="closeGacha()">X</button>
+    <div class="gacha-array"></div>
+    <div class="gacha-light" id="gachaLight"></div>
+    <div class="gacha-card" id="gachaCard">
+      <div class="gacha-card-inner">
+        <div class="gacha-card-front"></div>
+        <div class="gacha-card-back">
+          <div class="gacha-card-rare" id="gachaCardRare">SSR</div>
+          <div class="gacha-card-icon" id="gachaCardIcon">✨</div>
+          <div class="gacha-card-name" id="gachaCardName">测试卡片</div>
+          <div class="gacha-card-desc" id="gachaCardDesc">测试描述</div>
+        </div>
+      </div>
+    </div>
+    <button class="gacha-summon-btn" id="gachaSummonBtn" onclick="performSummon()">献祭抽卡 (1张)</button>
+    <button class="continue-btn" id="gachaContinueBtn" style="display:none" onclick="closeGacha()">收入背包</button>
+  </div>
+</div>
+
+<div class="inventory-section" id="inventorySection" style="display:none">
+  <div class="inventory-title">奖励背包 (Inventory)</div>
+  <div class="inventory-grid" id="inventoryGrid"></div>
+</div>
+
+<div class="clearance-modal" id="clearanceModal">
+  <div class="clearance-container">
+    <div class="clearance-bg"></div>
+    <div class="clearance-particles"></div>
+    <div class="clearance-content">
+      <div class="clearance-header">
+        <div class="clearance-title">副本结算</div>
+        <div class="clearance-subtitle">Dungeon Clearance</div>
+      </div>
+      <div class="clearance-rating" id="clearanceRating">SSS</div>
+      <div class="clearance-stars" id="clearanceStars">★★★</div>
+      <div class="clearance-stats">
+        <div class="clearance-stat">
+          <span class="stat-label">完成率</span>
+          <span class="stat-value" id="clearanceCompletion">100%</span>
+        </div>
+        <div class="clearance-stat">
+          <span class="stat-label">完成数</span>
+          <span class="stat-value" id="clearanceCount">0/0</span>
+        </div>
+      </div>
+      <div class="clearance-rewards" id="clearanceRewards"></div>
+      <div class="clearance-message" id="clearanceMessage"></div>
+      <button class="clearance-close-btn" onclick="closeClearanceModal()">确认结算</button>
+    </div>
+  </div>
+</div>
+
+<div class="card-manager-section" id="cardManagerSection">
+  <div class="card-manager-header">
+    <div class="card-manager-title">📜 卡池管理 (Card Pool Manager)</div>
+    <div class="card-manager-actions">
+      <button class="btn add" onclick="openCardEditor()">添加卡牌</button>
+      <button class="btn edit" onclick="openPoolEditor()">编辑卡池</button>
+    </div>
+  </div>
+  <div class="pool-selector" id="poolSelector"></div>
+  <div class="probability-panel" id="probabilityPanel"></div>
+  <div class="card-list" id="cardList"></div>
+</div>
+
+<div class="level-modal" id="cardModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeCardModal()">X</button>
+    <h2 class="modal-title" id="cardModalTitle">添加卡牌</h2>
+    <input type="hidden" id="cardId" />
+    <input type="hidden" id="cardPoolId" />
+    <div class="form-group">
+      <label>卡牌名称</label>
+      <input type="text" id="cardName" placeholder="卡牌名称" />
+    </div>
+    <div class="form-group">
+      <label>卡牌图标</label>
+      <input type="text" id="cardIcon" placeholder="输入emoji图标" />
+    </div>
+    <div class="form-group">
+      <label>稀有度</label>
+      <select id="cardRarity">
+        <option value="N">N - 普通</option>
+        <option value="R">R - 稀有</option>
+        <option value="SR">SR - 超稀有</option>
+        <option value="SSR">SSR - 究极稀有</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>描述</label>
+      <textarea id="cardDesc" placeholder="卡牌描述"></textarea>
+    </div>
+    <div class="form-group">
+      <label>效果类型</label>
+      <select id="cardEffectType" onchange="toggleCardEffectOptions()">
+        <option value="health">恢复生命</option>
+        <option value="sanity">恢复精神</option>
+        <option value="rest">休息时间</option>
+        <option value="intelligence">神性经验</option>
+        <option value="attribute">属性经验</option>
+        <option value="random">随机属性</option>
+        <option value="wish">心愿</option>
+        <option value="scroll">抽卡券</option>
+        <option value="soul">灵魂碎片</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>效果数值</label>
+      <input type="number" id="cardEffectValue" value="10" min="1" />
+    </div>
+    <div class="form-group">
+      <label>兑换价格（灵魂碎片）</label>
+      <input type="number" id="cardPrice" value="0" min="0" />
+    </div>
+    <div class="form-actions">
+      <button class="btn delete" onclick="deleteCard()" id="cardDeleteBtn" style="display:none">删除卡牌</button>
+      <button class="btn challenge" onclick="saveCard()">保存卡牌</button>
+    </div>
+  </div>
+</div>
+
+<div class="level-modal" id="poolModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closePoolModal()">X</button>
+    <h2 class="modal-title" id="poolModalTitle">编辑卡池</h2>
+    <input type="hidden" id="poolId">
+    <div class="form-group">
+      <label>卡池名称</label>
+      <input type="text" id="poolName" placeholder="卡池名称">
+    </div>
+    <div class="form-group">
+      <label>卡池描述</label>
+      <textarea id="poolDesc" placeholder="卡池描述"></textarea>
+    </div>
+    <div class="form-group">
+      <label>N卡概率 (%)</label>
+      <input type="number" id="poolProbN" value="60" min="0" max="100">
+    </div>
+    <div class="form-group">
+      <label>R卡概率 (%)</label>
+      <input type="number" id="poolProbR" value="30" min="0" max="100">
+    </div>
+    <div class="form-group">
+      <label>SR卡概率 (%)</label>
+      <input type="number" id="poolProbSR" value="8" min="0" max="100">
+    </div>
+    <div class="form-group">
+      <label>SSR卡概率 (%)</label>
+      <input type="number" id="poolProbSSR" value="2" min="0" max="100">
+    </div>
+    <div class="form-actions">
+      <button class="btn delete" onclick="deletePool()" id="poolDeleteBtn" style="display:none">删除卡池</button>
+      <button class="btn challenge" onclick="savePool()">保存卡池</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var GAME_STATE={
+  soulShards:0,
+  sanity:100,health:100,dungeons:{},date:'',
+  attributes:[],
+  tasks:[],
+  shopItems:[],
+  aberrations:[],
+  erodedAberrations:{},
+  erodedDate:'',
+  summonScrolls:1,
+  inventory:{
+    cards:[],
+    shopItems:[]
+  },
+  currentRank:8,
+  totalEXP:0,
+  rankHistory:[],
+  breakthroughCooldown:0,
+  failureCount:0,
+  activePenaltyEffects:[],
+  gachaPools:[
+    {
+      id:'default',
+      name:'高维祭坛',
+      description:'默认卡池',
+      cards:[
+        {id:'card_n_1',name:'【低维】无罪放空契约',rarity:'N',type:'real_reward',description:'兑换30分钟无罪感发呆 / 躺平休息时间',icon:'☕'},
+        {id:'card_n_2',name:'【零号】精神锚定剂',rarity:'N',type:'real_reward',description:'兑换一杯咖啡 / 奶茶 / 喜欢的饮品',icon:'🥤'},
+        {id:'card_n_3',name:'【微光】灵魂碎片袋',rarity:'N',type:'resource',description:'使用后直接获得 +50 灵魂碎片',icon:'🪙'},
+        {id:'card_r_1',name:'【隐匿】虚空潜行符咒',rarity:'R',type:'real_reward',description:'无负罪感畅玩电脑/手机游戏 1 小时',icon:'🎮'},
+        {id:'card_r_2',name:'【美食】黑体物质盛宴',rarity:'R',type:'real_reward',description:'兑换一顿快乐美食（炸鸡 / 烧烤 / 汉堡）',icon:'🍗'},
+        {id:'card_r_3',name:'【庇护】理智锁链',rarity:'R',type:'protection',description:'保命卡：下一次未完成必做副本时，免除 SAN 值扣除惩罚',icon:'🛡️'},
+        {id:'card_sr_1',name:'【高维】光影仪式降临',rarity:'SR',type:'real_reward',description:'去电影院看一场电影 / 购买百元内心仪物品',icon:'🎬'},
+        {id:'card_sr_2',name:'【过载】双倍法则',rarity:'SR',type:'buff',description:'Buff卡：24 小时内完成所有副本获得的灵魂碎片收益 × 2',icon:'⚡'},
+        {id:'card_sr_3',name:'【重塑】生命高能血浆',rarity:'SR',type:'restore',description:'恢复卡：使 HP 与 SAN 值瞬间全满（100%）',icon:'🩸'},
+        {id:'card_ssr_1',name:'【终局】主神空间庇护日',rarity:'SSR',type:'real_reward',description:'兑换彻底摆脱所有任务、自由支配的一整天假期',icon:'👑'},
+        {id:'card_ssr_2',name:'【神级】高维装备重构',rarity:'SSR',type:'real_reward',description:'心愿卡：兑换大额心愿单物品（如新耳机、电子外设、大犒赏）',icon:'💎'}
+      ],
+      probabilities:{N:60,R:28,SR:10,SSR:2}
+    }
+  ]
+};
+var STORAGE_KEY='life_rpg_data_v10';
+
+var COLORS=['#d4af37','#8b0000','#6366f1','#8b5cf6','#22c55e','#f59e0b','#ec4899','#14b8a6','#f97316','#64748b'];
+
+var DEFAULT_ATTRIBUTES=[
+  {id:'divinity',name:'神性 / 智识',icon:'🔮',color:'#9333ea',expBase:100,lv:0,exp:0,
+    realWorldConcept:'学习力与知识积累',
+    howToIncrease:'通过阅读、学习新知识等副本提升',
+    gameEffect:'每提升 1 级，所有副本结算的灵魂碎片收益 +5%'},
+  {id:'physique',name:'体魄 / 基因',icon:'⚔️',color:'#dc2626',expBase:100,lv:0,exp:0,
+    realWorldConcept:'体能与运动抗疲劳',
+    howToIncrease:'通过健身、跑步、有氧训练、身体拉伸等副本提升',
+    gameEffect:'每提升 1 级，生命上限 (HP Max) 额外 +5 点'},
+  {id:'sanity',name:'理智 / 精神',icon:'🧠',color:'#2563eb',expBase:100,lv:0,exp:0,
+    realWorldConcept:'专注力与情绪稳定',
+    howToIncrease:'通过冥想、早睡、断绝无意义信息流、克服拖延等副本提升',
+    gameEffect:'每提升 1 级，精神上限 (SAN Max) 额外 +5 点'},
+  {id:'material',name:'物质 / 掌控',icon:'💎',color:'#d97706',expBase:100,lv:0,exp:0,
+    realWorldConcept:'工作产出与财富积累',
+    howToIncrease:'通过完成工作要事、理财记账、获得现实收入等副本提升',
+    gameEffect:'每提升 1 级，虚空商店所有商品购买价格 -2%'},
+  {id:'presence',name:'魅力 / 亲和',icon:'👑',color:'#ec4899',expBase:100,lv:0,exp:0,
+    realWorldConcept:'社交表达与个人形象',
+    howToIncrease:'通过形象管理、穿搭打理、高效沟通、护肤等副本提升',
+    gameEffect:'每提升 1 级，高维祭坛抽卡获得 SR/SSR 概率 +1%'},
+  {id:'perception',name:'感知 / 敏锐',icon:'👁️',color:'#16a34a',expBase:100,lv:0,exp:0,
+    realWorldConcept:'洞察力与计划执行',
+    howToIncrease:'通过制定计划、整理房间桌面、周度总结等副本提升',
+    gameEffect:'每提升 1 级，异化副本造成的 HP/SAN 侵蚀扣除 -3%'},
+  {id:'authority',name:'权能 / 规则',icon:'⚖️',color:'#e2e8f0',expBase:100,lv:0,exp:0,
+    realWorldConcept:'技能精进与实操技艺',
+    howToIncrease:'通过练习技能（如写代码实战、练琴、画画、视频剪辑、写作实操等）副本提升',
+    gameEffect:'每提升 1 级，异化副本造成的 HP/SAN 负面惩罚降低 2%，且提升全副本金币暴击率 +2%'}
+];
+
+var DEFAULT_TASKS=[
+  {id:'lib',name:'高维解析 真理残卷破译',desc:'解析禁忌知识残卷',icon:'📜',lv:1,diff:1,soulReward:5,cost:{sanity:-5},rewards:{divinity:15},isCoreContract:true},
+  {id:'arena',name:'异化试炼 基因锁第一阶开启',desc:'突破基因锁限制',icon:'🦾',lv:2,diff:2,soulReward:15,cost:{sanity:-10,health:-5},rewards:{physique:20},isCoreContract:true},
+  {id:'mine',name:'深渊探索 灵魂碎片开采',desc:'开采深渊中的灵魂碎片',icon:'⛏️',lv:1,diff:1,soulReward:25,cost:{sanity:-3},rewards:{material:10},isCoreContract:false},
+  {id:'train',name:'暗影特训 异化能力强化',desc:'强化异化战斗能力',icon:'🎯',lv:2,diff:1,soulReward:10,cost:{sanity:-8,health:-3},rewards:{physique:15,perception:5},isCoreContract:true},
+  {id:'forest',name:'迷雾回廊 规则裂隙穿越',desc:'穿越高维规则裂隙',icon:'🌫️',lv:3,diff:3,soulReward:30,cost:{sanity:-15,health:-10},rewards:{divinity:15,perception:10},isCoreContract:false},
+  {id:'tower',name:'无尽之塔 维度跃升',desc:'攀登无尽之塔',icon:'🏰',lv:4,diff:3,soulReward:50,cost:{sanity:-20,health:-15},rewards:{divinity:25,authority:15},isCoreContract:false},
+  {id:'meditate',name:'意识深潜 精神锚点稳固',desc:'稳固精神锚点',icon:'🧘',lv:0,diff:1,soulReward:2,cost:{sanity:20},rewards:{sanity:15},isCoreContract:true},
+  {id:'sleep',name:'规则副本 意识深潜与精神重塑',desc:'深度意识重塑',icon:'😴',lv:0,diff:1,soulReward:5,cost:{sanity:15,health:10},rewards:{sanity:10,physique:5},isCoreContract:true},
+  {id:'work',name:'物质积累 财富铸造',desc:'完成工作要事，积累物质资源',icon:'💼',lv:1,diff:2,soulReward:20,cost:{sanity:-10,health:-5},rewards:{material:25},isCoreContract:true},
+  {id:'social',name:'高维交往 魅力绽放',desc:'高效沟通与社交互动',icon:'💬',lv:2,diff:2,soulReward:15,cost:{sanity:-8},rewards:{presence:20},isCoreContract:false},
+  {id:'plan',name:'命运编织 计划制定',desc:'制定周度计划，洞察未来',icon:'📋',lv:1,diff:1,soulReward:10,cost:{sanity:-5},rewards:{perception:15},isCoreContract:true},
+  {id:'skill',name:'权能修行 技艺精进',desc:'练习技能，提升规则掌控',icon:'🎨',lv:3,diff:3,soulReward:35,cost:{sanity:-15,health:-8},rewards:{authority:30},isCoreContract:true},
+  {id:'quest_divinity_1',name:'【真理解析】高维残卷解码',desc:'阅读纸质书 / 听课 / 学习理论知识 30 分钟',icon:'🔮',lv:1,diff:1,soulReward:15,cost:{sanity:-10},rewards:{divinity:20},isCoreContract:true},
+  {id:'quest_authority_1',name:'【法则锻造】实战技艺磨炼',desc:'实操练习技能（写代码 / 练琴 / 练字 / 画画 / 剪辑）45 分钟',icon:'⚖️',lv:2,diff:2,soulReward:25,cost:{sanity:-15,health:-5},rewards:{authority:25},isCoreContract:true},
+  {id:'quest_physique_1',name:'【基因突破】肉体极限过载',desc:'健身 / 跑步 / 有氧运动 / 力量训练 30 分钟',icon:'⚔️',lv:1,diff:2,soulReward:20,cost:{sanity:-5,health:-8},rewards:{physique:20},isCoreContract:true},
+  {id:'quest_sanity_1',name:'【精神锚定】无序噪声屏蔽',desc:'冥想 / 远离电子屏幕 / 彻底冥想放空 15 分钟',icon:'🧠',lv:0,diff:1,soulReward:10,cost:{sanity:25},rewards:{sanity:15},isCoreContract:true},
+  {id:'quest_material_1',name:'【虚空掌控】高维资源结算',desc:'高效完成一项核心工作要事 / 进行理财记账与财务梳理',icon:'💎',lv:3,diff:3,soulReward:30,cost:{sanity:-15,health:-10},rewards:{material:20},isCoreContract:true},
+  {id:'quest_presence_1',name:'【感知扭曲】外在场域重塑',desc:'个人形象打理 / 护肤穿搭 / 进行一次高效无障碍社交沟通',icon:'👑',lv:1,diff:1,soulReward:15,cost:{sanity:-5},rewards:{presence:15},isCoreContract:false},
+  {id:'quest_perception_1',name:'【预判复盘】世界线轨迹整理',desc:'整理房间或桌面 / 制定本周规划 / 进行今日复盘日记',icon:'👁️',lv:1,diff:1,soulReward:15,cost:{sanity:-5},rewards:{perception:15},isCoreContract:true}
+];
+
+var DEFAULT_SHOP_ITEMS=[
+  {id:'shop_n1',name:'【低维】无罪放空契约',icon:'😌',price:100,rarity:'N',desc:'无罪感发呆躺平15分钟',rewardType:'rest',rewardValue:15},
+  {id:'shop_r1',name:'【隐匿】虚空潜行符咒',icon:'🌌',price:300,rarity:'R',desc:'娱乐1小时',rewardType:'rest',rewardValue:60},
+  {id:'shop_sr1',name:'【高维】光影仪式降临',icon:'🎬',price:800,rarity:'SR',desc:'看一场电影',rewardType:'rest',rewardValue:120},
+  {id:'shop_ssr1',name:'【终局】主神空间庇护日',icon:'👑',price:2500,rarity:'SSR',desc:'兑换彻底自由支配的一整天',rewardType:'rest',rewardValue:1440}
+];
+
+var DEFAULT_ABERRATIONS=[
+  {id:'ab1',name:'【高维噪声】精神无序沉溺',desc:'刷短视频/沉迷手机 > 1小时',icon:'📱',hpCost:5,sanCost:25},
+  {id:'ab2',name:'【虚无夜行】生理时钟崩解',desc:'熬夜/超过00:30入睡',icon:'🌙',hpCost:35,sanCost:20},
+  {id:'ab3',name:'【杂质注入】高糖毒素过载',desc:'吃垃圾食品/暴饮暴食',icon:'🍔',hpCost:25,sanCost:10},
+  {id:'ab4',name:'【深渊内耗】情绪场域失控',desc:'发脾气/极度焦虑/内耗',icon:'😤',hpCost:10,sanCost:35},
+  {id:'ab5',name:'【契约违背】违背计划',desc:'未能按照计划执行',icon:'✖️',hpCost:10,sanCost:20}
+];
+
+var RANK_CONFIG=[
+  {rank:8,name:'觉醒者',icon:'🌱',expRequired:0,privilege:'初始状态，无特殊特权',trial:'完成任意1个试炼副本',color:'#666',
+    failurePenalty:{type:'minor',expDeduct:100,message:'觉醒失败，精神力微弱震荡',effect:'none',cooldownDays:0}},
+  {rank:7,name:'破壁者',icon:'⚔️',expRequired:1000,privilege:'HP上限提升至120',trial:'连续2天完成全部试炼',color:'#1e90ff',
+    failurePenalty:{type:'light',expDeduct:500,hpDeduct:20,sanDeduct:10,message:'突破失败，壁垒反噬造成轻微创伤',effect:'minor_damage',cooldownDays:1}},
+  {rank:6,name:'执剑人',icon:'🛡️',expRequired:3000,privilege:'SAN值上限提升至120',trial:'完成1次异化侵蚀记录',color:'#9400d3',
+    failurePenalty:{type:'moderate',expDeduct:1000,hpDeduct:30,sanDeduct:20,shardDeduct:50,message:'守护誓言破碎，承担因果反噬',effect:'guardian_curse',cooldownDays:2}},
+  {rank:5,name:'降临者',icon:'🌟',expRequired:7000,privilege:'灵魂碎片获取+20%',trial:'累计完成10个试炼副本',color:'#ffd700',
+    failurePenalty:{type:'severe',expDeduct:3000,hpDeduct:50,sanDeduct:30,shardDeduct:100,message:'高维力量反噬，精神遭受侵蚀',effect:'high_dimensional_wound',cooldownDays:3}},
+  {rank:4,name:'支配者',icon:'👑',expRequired:15000,privilege:'每日额外获得1张抽卡券',trial:'完成SSS评级结算',color:'#ff8c00',
+    failurePenalty:{type:'critical',expDeduct:5000,hpDeduct:60,sanDeduct:40,shardDeduct:200,scrollDeduct:1,message:'权力崩塌，失去统治根基',effect:'dominance_break',cooldownDays:5}},
+  {rank:3,name:'织造者',icon:'🕸️',expRequired:30000,privilege:'所有属性EXP获取+30%',trial:'累计完成50个试炼副本',color:'#ff4500',
+    failurePenalty:{type:'catastrophic',expDeduct:10000,hpDeduct:70,sanDeduct:50,shardDeduct:500,scrollDeduct:3,message:'命运丝线断裂，因果紊乱',effect:'fate_disruption',cooldownDays:7}},
+  {rank:2,name:'神性者',icon:'✨',expRequired:60000,privilege:'HP和SAN值上限提升至150',trial:'完成一次世界线坍缩',color:'#ff00ff',
+    failurePenalty:{type:'apocalyptic',expDeduct:20000,hpDeduct:80,sanDeduct:60,shardDeduct:1000,scrollDeduct:5,message:'神性陨落，灵魂遭受重创',effect:'divinity_fall',cooldownDays:14}},
+  {rank:1,name:'高维主宰',icon:'👁️',expRequired:100000,privilege:'获得至高权限，所有功能解锁',trial:'累计完成100个试炼副本',color:'#ffffff',
+    failurePenalty:{type:'world_end',expDeduct:30000,hpDeduct:90,sanDeduct:70,shardDeduct:2000,scrollDeduct:10,message:'世界线崩塌，一切归零',effect:'world_collapse',cooldownDays:30}}
+];
+
+function getDateStr(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function getExpNeed(attr){return attr.lv*attr.expBase}
+function clampVal(v,min,max){return Math.max(min,Math.min(max,v))}
+function generateId(){return Math.random().toString(36).substr(2,9)}
+
+function saveGameData(){
+  try{
+    GAME_STATE.date=getDateStr();
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(GAME_STATE));
+    updateLastUpdate();
+  }catch(e){console.log('Save data error:',e)}
+}
+
+function exportSaveData(){
+  try{
+    var data=JSON.stringify(GAME_STATE,null,2);
+    var blob=new Blob([data],{type:'application/json'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    a.href=url;
+    a.download='life_rpg_save_'+getDateStr()+'.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showFeedback('存档导出成功！文件已下载',false);
+  }catch(e){
+    console.error('Export error:',e);
+    showFeedback('导出失败，请重试',true);
+  }
+}
+
+function triggerImportFile(){
+  document.getElementById('importFileInput').click();
+}
+
+function importSaveData(event){
+  var file=event.target.files[0];
+  if(!file){return}
+  
+  var reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      var data=JSON.parse(e.target.result);
+      if(!data || typeof data!=='object'){
+        showFeedback('无效的存档文件',true);
+        return;
+      }
+      
+      if(confirm('确定要导入此存档吗？当前数据将被覆盖！')){
+        localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
+        loadGameData();
+        updateSoulDisplay();
+        updateSanityDisplay();
+        updateRankBadge();
+        renderStatsPanel();
+        renderDungeonList();
+        renderAberrations();
+        renderShop();
+        drawRadarChart();
+        updateLastUpdate();
+        updateScrollDisplay();
+        renderInventory();
+        renderCardManager();
+        updatePollutionState();
+        showFeedback('存档导入成功！',false);
+      }
+    }catch(err){
+      console.error('Import error:',err);
+      showFeedback('存档文件格式错误',true);
+    }
+  };
+  reader.readAsText(file);
+  event.target.value='';
+}
+
+function copySaveData(){
+  try{
+    var data=JSON.stringify(GAME_STATE);
+    navigator.clipboard.writeText(data).then(function(){
+      showFeedback('存档已复制到剪贴板！',false);
+    }).catch(function(err){
+      console.error('Copy error:',err);
+      showFeedback('复制失败，请手动复制',true);
+    });
+  }catch(e){
+    console.error('Copy error:',e);
+    showFeedback('复制失败',true);
+  }
+}
+
+function loadGameData(){
+  try{
+    var data=JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if(data){
+      GAME_STATE.soulShards=data.soulShards||0;
+      GAME_STATE.sanity=data.sanity||100;
+      GAME_STATE.health=data.health||100;
+      GAME_STATE.attributes=data.attributes&&data.attributes.length>0?data.attributes:DEFAULT_ATTRIBUTES;
+      GAME_STATE.tasks=data.tasks&&data.tasks.length>0?data.tasks:DEFAULT_TASKS;
+      GAME_STATE.shopItems=data.shopItems&&data.shopItems.length>0?data.shopItems:DEFAULT_SHOP_ITEMS;
+      GAME_STATE.aberrations=data.aberrations&&data.aberrations.length>0?data.aberrations:DEFAULT_ABERRATIONS;
+      GAME_STATE.summonScrolls=data.summonScrolls||1;
+      GAME_STATE.inventory=data.inventory&&typeof data.inventory==='object'?data.inventory:{cards:[],shopItems:[]};
+      if(!GAME_STATE.inventory.cards)GAME_STATE.inventory.cards=[];
+      if(!GAME_STATE.inventory.shopItems)GAME_STATE.inventory.shopItems=[];
+      GAME_STATE.currentRank=data.currentRank||8;
+      GAME_STATE.totalEXP=data.totalEXP||0;
+      GAME_STATE.rankHistory=data.rankHistory||[];
+      GAME_STATE.breakthroughCooldown=data.breakthroughCooldown||0;
+      GAME_STATE.failureCount=data.failureCount||0;
+      GAME_STATE.activePenaltyEffects=data.activePenaltyEffects||[];
+      GAME_STATE.gachaPools=data.gachaPools&&data.gachaPools.length>0?data.gachaPools:[
+        {
+          id:'default',
+          name:'高维祭坛',
+          description:'默认卡池',
+          cards:[
+            {id:'n1',name:'无罪躺平',icon:'😌',rarity:'N',desc:'享受15分钟无罪躺平',effectType:'rest',effectValue:15,price:0},
+            {id:'n2',name:'放空时刻',icon:'🌌',rarity:'N',desc:'享受5分钟纯粹放空',effectType:'rest',effectValue:5,price:0},
+            {id:'n3',name:'深呼吸',icon:'💨',rarity:'N',desc:'三次深呼吸放松',effectType:'sanity',effectValue:5,price:0},
+            {id:'n4',name:'闭目养神',icon:'👁️',rarity:'N',desc:'闭目养神5分钟',effectType:'rest',effectValue:5,price:0},
+            {id:'n5',name:'冥想片刻',icon:'🧘',rarity:'N',desc:'冥想放松3分钟',effectType:'sanity',effectValue:3,price:0},
+            {id:'n6',name:'温水一杯',icon:'☕',rarity:'N',desc:'喝一杯温水',effectType:'health',effectValue:3,price:0},
+            {id:'r1',name:'奶茶兑换',icon:'🧋',rarity:'R',desc:'兑换一杯奶茶/咖啡',effectType:'health',effectValue:15,price:0},
+            {id:'r2',name:'音乐时光',icon:'🎵',rarity:'R',desc:'享受30分钟音乐',effectType:'sanity',effectValue:10,price:0},
+            {id:'r3',name:'甜点时光',icon:'🍰',rarity:'R',desc:'享用一份甜点',effectType:'health',effectValue:10,price:0},
+            {id:'r4',name:'散步放松',icon:'🚶',rarity:'R',desc:'散步20分钟',effectType:'sanity',effectValue:8,price:0},
+            {id:'r5',name:'泡个热水澡',icon:'🛁',rarity:'R',desc:'享受热水澡',effectType:'sanity',effectValue:12,price:0},
+            {id:'sr1',name:'电影之夜',icon:'🎬',rarity:'SR',desc:'看一部电影',effectType:'rest',effectValue:120,price:0},
+            {id:'sr2',name:'游戏时光',icon:'🎮',rarity:'SR',desc:'玩游戏2小时',effectType:'rest',effectValue:120,price:0},
+            {id:'sr3',name:'书籍阅读',icon:'📚',rarity:'SR',desc:'阅读书籍2小时',effectType:'intelligence',effectValue:30,price:0},
+            {id:'sr4',name:'小睡片刻',icon:'😴',rarity:'SR',desc:'小睡1小时',effectType:'health',effectValue:20,price:0},
+            {id:'ssr1',name:'心愿大奖',icon:'🎁',rarity:'SSR',desc:'解锁一项心愿单大奖',effectType:'wish',effectValue:1,price:0},
+            {id:'ssr2',name:'全天休息',icon:'🏖️',rarity:'SSR',desc:'享受一整天的自由时光',effectType:'rest',effectValue:1440,price:0},
+            {id:'ssr3',name:'高维馈赠',icon:'✨',rarity:'SSR',desc:'获得神秘高维馈赠',effectType:'random',effectValue:50,price:0},
+            {id:'ssr4',name:'灵魂升华',icon:'👑',rarity:'SSR',desc:'灵魂获得升华',effectType:'attribute',effectValue:100,price:0}
+          ],
+          probabilities:{N:60,R:30,SR:8,SSR:2}
+        }
+      ];
+      if(data.date!==getDateStr()){
+        GAME_STATE.dungeons={};
+        GAME_STATE.date=getDateStr();
+      }else{
+        GAME_STATE.dungeons=data.dungeons||{};
+        GAME_STATE.date=data.date||getDateStr();
+      }
+      
+      if(data.erodedDate!==getDateStr()){
+        GAME_STATE.erodedAberrations={};
+        GAME_STATE.erodedDate=getDateStr();
+      }else{
+        GAME_STATE.erodedAberrations=data.erodedAberrations||{};
+        GAME_STATE.erodedDate=data.erodedDate||getDateStr();
+      }
+    }else{
+      GAME_STATE.attributes=DEFAULT_ATTRIBUTES;
+      GAME_STATE.tasks=DEFAULT_TASKS;
+      GAME_STATE.shopItems=DEFAULT_SHOP_ITEMS;
+      GAME_STATE.aberrations=DEFAULT_ABERRATIONS;
+      GAME_STATE.summonScrolls=1;
+      GAME_STATE.inventory={cards:[],shopItems:[]};
+      GAME_STATE.erodedAberrations={};
+      GAME_STATE.erodedDate=getDateStr();
+    }
+  }catch(e){console.log('Load data error:',e);resetToDefaults()}
+}
+
+function resetToDefaults(){
+  GAME_STATE={
+    soulShards:0,sanity:100,health:100,dungeons:{},date:getDateStr(),
+    attributes:DEFAULT_ATTRIBUTES,tasks:DEFAULT_TASKS,shopItems:DEFAULT_SHOP_ITEMS,
+    aberrations:DEFAULT_ABERRATIONS,erodedAberrations:{},erodedDate:getDateStr(),
+    summonScrolls:1,inventory:{cards:[],shopItems:[]},
+    currentRank:8,totalEXP:0,rankHistory:[],
+    breakthroughCooldown:0,failureCount:0,activePenaltyEffects:[],
+    gachaPools:[
+      {
+        id:'default',
+        name:'高维祭坛',
+        description:'默认卡池',
+        cards:[
+          {id:'n1',name:'无罪躺平',icon:'😌',rarity:'N',desc:'享受15分钟无罪躺平',effectType:'rest',effectValue:15,price:0},
+          {id:'n2',name:'放空时刻',icon:'🌌',rarity:'N',desc:'享受5分钟纯粹放空',effectType:'rest',effectValue:5,price:0},
+          {id:'n3',name:'深呼吸',icon:'💨',rarity:'N',desc:'三次深呼吸放松',effectType:'sanity',effectValue:5,price:0},
+          {id:'n4',name:'闭目养神',icon:'👁️',rarity:'N',desc:'闭目养神5分钟',effectType:'rest',effectValue:5,price:0},
+          {id:'n5',name:'冥想片刻',icon:'🧘',rarity:'N',desc:'冥想放松3分钟',effectType:'sanity',effectValue:3,price:0},
+          {id:'n6',name:'温水一杯',icon:'☕',rarity:'N',desc:'喝一杯温水',effectType:'health',effectValue:3,price:0},
+          {id:'r1',name:'奶茶兑换',icon:'🧋',rarity:'R',desc:'兑换一杯奶茶/咖啡',effectType:'health',effectValue:15,price:0},
+          {id:'r2',name:'音乐时光',icon:'🎵',rarity:'R',desc:'享受30分钟音乐',effectType:'sanity',effectValue:10,price:0},
+          {id:'r3',name:'甜点时光',icon:'🍰',rarity:'R',desc:'享用一份甜点',effectType:'health',effectValue:10,price:0},
+          {id:'r4',name:'散步放松',icon:'🚶',rarity:'R',desc:'散步20分钟',effectType:'sanity',effectValue:8,price:0},
+          {id:'r5',name:'泡个热水澡',icon:'🛁',rarity:'R',desc:'享受热水澡',effectType:'sanity',effectValue:12,price:0},
+          {id:'sr1',name:'电影之夜',icon:'🎬',rarity:'SR',desc:'看一部电影',effectType:'rest',effectValue:120,price:0},
+          {id:'sr2',name:'游戏时光',icon:'🎮',rarity:'SR',desc:'玩游戏2小时',effectType:'rest',effectValue:120,price:0},
+          {id:'sr3',name:'书籍阅读',icon:'📚',rarity:'SR',desc:'阅读书籍2小时',effectType:'intelligence',effectValue:30,price:0},
+          {id:'sr4',name:'小睡片刻',icon:'😴',rarity:'SR',desc:'小睡1小时',effectType:'health',effectValue:20,price:0},
+          {id:'ssr1',name:'心愿大奖',icon:'🎁',rarity:'SSR',desc:'解锁一项心愿单大奖',effectType:'wish',effectValue:1,price:0},
+          {id:'ssr2',name:'全天休息',icon:'🏖️',rarity:'SSR',desc:'享受一整天的自由时光',effectType:'rest',effectValue:1440,price:0},
+          {id:'ssr3',name:'高维馈赠',icon:'✨',rarity:'SSR',desc:'获得神秘高维馈赠',effectType:'random',effectValue:50,price:0},
+          {id:'ssr4',name:'灵魂升华',icon:'👑',rarity:'SSR',desc:'灵魂获得升华',effectType:'attribute',effectValue:100,price:0}
+        ],
+        probabilities:{N:60,R:30,SR:8,SSR:2}
+      }
+    ]
+  };
+}
+
+function updateLastUpdate(){
+  var el=document.getElementById('lastUpdate');
+  if(el)el.textContent='最后更新: '+new Date().toLocaleString('zh-CN');
+}
+
+function updateSoulDisplay(){
+  var el=document.getElementById('soulVal');
+  if(el)el.textContent=GAME_STATE.soulShards;
+  renderShop();
+}
+
+function updateSanityDisplay(){
+  var sv=document.getElementById('sanityVal'),sv2=document.getElementById('sanityVal2'),sf=document.getElementById('sanityFill'),hv=document.getElementById('healthVal'),hf=document.getElementById('healthFill');
+  if(sv)sv.textContent=Math.round(GAME_STATE.sanity);
+  if(sv2)sv2.textContent=Math.round(GAME_STATE.sanity);
+  if(sf)sf.style.width=GAME_STATE.sanity+'%';
+  if(hv)hv.textContent=Math.round(GAME_STATE.health);
+  if(hf){
+    hf.style.width=GAME_STATE.health+'%';
+    if(GAME_STATE.health<30){hf.classList.add('low');setTimeout(function(){hf.classList.remove('low')},500)}
+  }
+  var mf=document.getElementById('mentalFilter'),sw=document.getElementById('sanityWarning');
+  if(mf && sw){
+    if(GAME_STATE.sanity<30){mf.classList.add('active');sw.classList.add('show')}
+    else{mf.classList.remove('active');sw.classList.remove('show')}
+  }
+  if(GAME_STATE.health<=0){
+    activatePollutionState();
+  }
+}
+
+function drawRadarChart(){
+  var c=document.getElementById('radar');
+  if(!c)return;
+  var ctx=c.getContext('2d');
+  var cx=c.width/2,cy=c.height/2,r=100;
+  var attrs=GAME_STATE.attributes,n=attrs.length;
+  if(n===0)return;
+  var step=Math.PI*2/n;
+  
+  ctx.clearRect(0,0,c.width,c.height);
+  ctx.imageSmoothingEnabled=false;
+  
+  ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='rgba(212,175,55,0.3)';ctx.lineWidth=2;ctx.stroke();
+  
+  for(var i=1;i<=5;i++){ctx.beginPath();ctx.arc(cx,cy,r*i/5,0,Math.PI*2);ctx.strokeStyle='rgba(212,175,55,0.15)';ctx.lineWidth=1;ctx.stroke()}
+  
+  for(var i=0;i<n;i++){var a=i*step-Math.PI/2;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a));ctx.strokeStyle='rgba(212,175,55,0.2)';ctx.lineWidth=1;ctx.stroke()}
+  
+  ctx.beginPath();
+  for(var i=0;i<n;i++){
+    var a=i*step-Math.PI/2;
+    var attr=attrs[i];
+    var v=(attr.lv*100+attr.exp)/(attr.lv*100+getExpNeed(attr)||100);
+    var nv=Math.min(v,1);
+    var x=cx+r*nv*Math.cos(a),y=cy+r*nv*Math.sin(a);
+    if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+  }
+  ctx.closePath();
+  
+  var g=ctx.createRadialGradient(cx,cy,0,cx,cy,r);
+  g.addColorStop(0,'rgba(212,175,55,0.4)');g.addColorStop(1,'rgba(212,175,55,0.08)');
+  ctx.fillStyle=g;ctx.fill();
+  
+  ctx.strokeStyle='#d4af37';ctx.lineWidth=3;ctx.shadowColor='#d4af37';ctx.shadowBlur=8;ctx.stroke();ctx.shadowBlur=0;
+  
+  for(var i=0;i<n;i++){
+    var a=i*step-Math.PI/2;
+    var attr=attrs[i];
+    var lr=r+35,ix=cx+lr*Math.cos(a),iy=cy+lr*Math.sin(a);
+    
+    ctx.font='bold 14px Arial, sans-serif';
+    ctx.fillStyle='#ffffff';ctx.strokeStyle='#000000';ctx.lineWidth=3;
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.strokeText(attr.name,ix,iy);ctx.fillText(attr.name,ix,iy);
+    
+    var ir=r+20,icx=cx+ir*Math.cos(a),icy=cy+ir*Math.sin(a);
+    ctx.font='18px Arial';ctx.fillText(attr.icon,icx,icy);
+    
+    var vr=r*0.5,vx=cx+vr*Math.cos(a),vy=cy+vr*Math.sin(a);
+    ctx.font='bold 12px Arial';
+    ctx.fillStyle=attr.color;ctx.strokeStyle='#000000';ctx.lineWidth=2;
+    ctx.strokeText('LV.'+attr.lv,vx,vy);ctx.fillText('LV.'+attr.lv,vx,vy);
+  }
+}
+
+function renderStatsPanel(){
+  var container=document.getElementById('stats');
+  if(!container)return;
+  var html='';
+  for(var i=0;i<GAME_STATE.attributes.length;i++){
+    var attr=GAME_STATE.attributes[i];
+    var need=getExpNeed(attr),pct=need>0?(attr.exp/need)*100:0;
+    var currentEffect='';
+    if(attr.lv>0 && attr.gameEffect){
+      var effectMatch=attr.gameEffect.match(/([+-]?\d+(?:\.\d+)?)\s*%?/);
+      if(effectMatch){
+        var baseValue=parseFloat(effectMatch[1]);
+        var currentValue=(baseValue*attr.lv).toFixed(baseValue%1===0?0:1);
+        currentEffect='【当前生效】'+attr.gameEffect.replace(/([+-]?\d+(?:\.\d+)?)\s*%?/,currentValue+'%');
+      }
+    }
+    
+    html+='<div class="stat-card">';
+    html+='<div class="stat-header"><span class="stat-icon">'+attr.icon+'</span><span class="stat-level">LV.'+attr.lv+'</span></div>';
+    html+='<div class="stat-label">'+attr.name+'</div>';
+    html+='<div class="stat-value">'+(attr.lv*100+attr.exp)+'</div>';
+    html+='<div class="exp-bar"><div class="exp-fill" style="width:'+pct+'%;background:'+attr.color+'"></div></div>';
+    html+='<div class="exp-text">'+attr.exp+'/'+need+' EXP</div>';
+    
+    html+='<div class="stat-tooltip">';
+    html+='<div class="stat-tooltip-title">'+attr.icon+' '+attr.name+'</div>';
+    html+='<div class="stat-tooltip-section"><div class="stat-tooltip-label">对应现实能力</div><div class="stat-tooltip-content">'+(attr.realWorldConcept||'暂无描述')+'</div></div>';
+    html+='<div class="stat-tooltip-section"><div class="stat-tooltip-label">提升途径</div><div class="stat-tooltip-content">'+(attr.howToIncrease||'暂无描述')+'</div></div>';
+    if(attr.gameEffect){
+      html+='<div class="stat-tooltip-effect"><div class="stat-tooltip-label">游戏被动效果</div><div class="stat-tooltip-content">'+attr.gameEffect+'</div></div>';
+      if(currentEffect){
+        html+='<div class="stat-tooltip-effect" style="border-color:#22c55e"><div class="stat-tooltip-label">当前生效</div><div class="stat-tooltip-content" style="color:#22c55e">'+currentEffect+'</div></div>';
+      }
+    }
+    html+='</div>';
+    
+    html+='</div>';
+  }
+  container.innerHTML=html;
+}
+
+function renderDungeonList(){
+  var container=document.getElementById('dungeons');
+  if(!container)return;
+  
+  var coreTasks=GAME_STATE.tasks.filter(function(t){return t.isCoreContract});
+  var optionalTasks=GAME_STATE.tasks.filter(function(t){return !t.isCoreContract});
+  
+  var html='';
+  
+  if(coreTasks.length>0){
+    html+='<div class="dungeon-section-header"><span class="section-icon">📌</span><span>每日必做契约</span><span class="section-count">'+coreTasks.length+'项</span></div>';
+    html+=renderTaskGroup(coreTasks,true);
+  }
+  
+  if(optionalTasks.length>0){
+    html+='<div class="dungeon-section-header optional"><span class="section-icon">✨</span><span>可选试炼</span><span class="section-count">'+optionalTasks.length+'项</span></div>';
+    html+=renderTaskGroup(optionalTasks,false);
+  }
+  
+  container.innerHTML=html;
+}
+
+function renderTaskGroup(tasks,isCore){
+  var html='';
+  for(var i=0;i<tasks.length;i++){
+    var d=tasks[i];
+    var done=GAME_STATE.dungeons[d.id];
+    var stars='';
+    for(var j=0;j<5;j++)stars+='<span class="star '+(j<d.diff?'active':'')+'">*</span>';
+    var costs='';
+    if(d.cost){
+      if(d.cost.sanity)costs+='<span class="reward sanity">S '+(d.cost.sanity>=0?'+':'')+d.cost.sanity+'</span>';
+      if(d.cost.health)costs+='<span class="reward '+(d.cost.health>=0?'':'neg')+'">H '+(d.cost.health>=0?'+':'')+d.cost.health+'</span>';
+    }
+    var rewards='';
+    if(d.rewards){
+      for(var k in d.rewards){
+        var attr=GAME_STATE.attributes.find(function(a){return a.id===k});
+        var icon=attr?attr.icon:'?';
+        rewards+='<span class="reward">'+icon+' +'+d.rewards[k]+'</span>';
+      }
+    }
+    if(d.soulReward){
+      rewards+='<span class="reward soul">💎 +'+d.soulReward+'</span>';
+    }
+    
+    var coreBadge=isCore?'<span class="core-contract-badge">⚠️ 强制契约</span>':'';
+    var optionalHint=!isCore?'<div class="optional-hint">💡 提示：未完成不计入惩罚</div>':'';
+    
+    html+='<div class="dungeon-card '+(done?'completed':'')+' '+(isCore?'core-contract':'optional')+'">';
+    html+='<div class="dungeon-header">';
+    html+='<div>';
+    html+='<div class="dungeon-name">'+d.icon+' '+d.name+' <span class="dungeon-lv">Lv.'+d.lv+'</span>'+coreBadge+'</div>';
+    html+='<div class="difficulty">'+stars+'</div>';
+    html+='</div>';
+    html+='<div style="display:flex;gap:0.3rem">';
+    html+='<button class="btn '+(!isCore?'promote':'demote')+'" onclick="toggleCoreContract(\''+d.id+'\')" title="'+(isCore?'取消必做标记':'标记为必做')+'">';
+    html+=isCore?'📌':'📍';
+    html+='</button>';
+    html+='<button class="btn edit" onclick="editDungeon(\''+d.id+'\')">编辑</button>';
+    html+='<button class="btn delete" onclick="confirmDeleteDungeon(\''+d.id+'\')">毁灭</button>';
+    html+='</div></div>';
+    html+='<div style="font-size:0.8rem;color:var(--sub);margin-bottom:0.75rem">'+(d.desc||'')+'</div>';
+    html+='<div class="rewards">'+rewards+costs+'</div>';
+    html+=optionalHint;
+    html+='<button class="btn '+(done?'completed':d.cost&&d.cost.sanity&&d.cost.sanity>0?'recovery':'challenge')+'" onclick="challengeDungeon(\''+d.id+'\')">'+(done?'已完成':'解封执行契约')+'</button></div>';
+  }
+  return html;
+}
+
+function toggleCoreContract(taskId){
+  var task=GAME_STATE.tasks.find(function(t){return t.id===taskId});
+  if(!task)return;
+  
+  task.isCoreContract=!task.isCoreContract;
+  saveGameData();
+  renderDungeonList();
+  
+  if(task.isCoreContract){
+    showFeedback('✅ "'+task.name+'" 已设为每日必做契约',false);
+  }else{
+    showFeedback('✅ "'+task.name+'" 已设为可选试炼',false);
+  }
+}
+
+function getShopPrice(basePrice){
+  if(GAME_STATE.sanity<30){
+    return Math.floor(basePrice*1.5);
+  }
+  return basePrice;
+}
+
+function renderShop(){
+  var container=document.getElementById('shopItems');
+  if(!container)return;
+  
+  var isSealed=GAME_STATE.health<=0;
+  var hasHallucination=GAME_STATE.sanity<30;
+  
+  var html='';
+  for(var i=0;i<GAME_STATE.shopItems.length;i++){
+    var item=GAME_STATE.shopItems[i];
+    var actualPrice=getShopPrice(item.price);
+    var canBuy=!isSealed && GAME_STATE.soulShards>=actualPrice;
+    
+    var priceDisplay='💎 '+actualPrice;
+    if(hasHallucination){
+      priceDisplay='💎 '+actualPrice+' <span style="color:#ff6b6b;font-size:0.7rem">(+50%)</span>';
+    }
+    
+    html+='<div class="shop-item '+(canBuy?'':'disabled')+(isSealed?' sealed':'')+'" onclick="buyItem(\''+item.id+'\')"><button class="delete-btn" onclick="event.stopPropagation();confirmDeleteShopItem(\''+item.id+'\')">X</button><button class="edit-btn" onclick="event.stopPropagation();editShopItem(\''+item.id+'\')">E</button><div class="shop-item-name">'+item.icon+' '+item.name+'</div><div class="shop-item-price">'+priceDisplay+'</div><div class="shop-item-rare '+item.rarity+'">'+item.rarity+'</div><div class="shop-item-reward">'+item.desc+'</div></div>';
+  }
+  
+  container.innerHTML=html;
+  
+  var shopSection=document.querySelector('.shop');
+  if(shopSection){
+    if(isSealed){
+      shopSection.classList.add('sealed');
+      if(!shopSection.querySelector('.seal-overlay')){
+        var overlay=document.createElement('div');
+        overlay.className='seal-overlay';
+        overlay.innerHTML='<div class="seal-icon">🔒</div><div class="seal-text">躯体崩溃 · 商店已封印</div><div class="seal-hint">完成副本挑战恢复HP至50以上可解除封印</div>';
+        shopSection.appendChild(overlay);
+      }
+    }else{
+      shopSection.classList.remove('sealed');
+      var overlay=shopSection.querySelector('.seal-overlay');
+      if(overlay)overlay.remove();
+    }
+  }
+  
+  if(hasHallucination){
+    var shopTitle=document.querySelector('.shop-title');
+    if(shopTitle && !shopTitle.querySelector('.hallucination-badge')){
+      var badge=document.createElement('span');
+      badge.className='hallucination-badge';
+      badge.textContent='⚠️ 高维幻觉';
+      shopTitle.appendChild(badge);
+    }
+  }else{
+    var badge=document.querySelector('.hallucination-badge');
+    if(badge)badge.remove();
+  }
+}
+
+function addExperience(attrId,v){
+  var attr=GAME_STATE.attributes.find(function(a){return a.id===attrId});
+  if(!attr)return;
+  attr.exp+=v;
+  while(attr.exp>=getExpNeed(attr)){
+    attr.exp-=getExpNeed(attr);
+    attr.lv++;
+    showLevelUpModal(attr);
+    createLevelUpParticles();
+  }
+  updateTotalEXP();
+}
+
+function updateTotalEXP(){
+  var total=0;
+  GAME_STATE.attributes.forEach(function(attr){
+    total+=attr.exp;
+    var lvExp=0;
+    for(var i=1;i<=attr.lv;i++){
+      lvExp+=getExpNeedByLevel(i);
+    }
+    total+=lvExp;
+  });
+  GAME_STATE.totalEXP=total;
+  updateRankBadge();
+}
+
+function getExpNeedByLevel(lv){
+  return Math.floor(100*Math.pow(1.5,lv-1));
+}
+
+function updateRankBadge(){
+  var currentRank=RANK_CONFIG.find(function(r){return r.rank===GAME_STATE.currentRank});
+  var nextRank=RANK_CONFIG.find(function(r){return r.rank===GAME_STATE.currentRank-1});
+  
+  if(!currentRank)return;
+  
+  document.getElementById('rankIcon').textContent=currentRank.icon;
+  document.getElementById('rankTitle').textContent='序列 '+currentRank.rank+' · '+currentRank.name;
+  
+  var badge=document.getElementById('rankBadge');
+  var breakthrough=document.getElementById('rankBreakthrough');
+  
+  var cooldownIndicator=document.getElementById('cooldownIndicator');
+  if(!cooldownIndicator){
+    cooldownIndicator=document.createElement('div');
+    cooldownIndicator.id='cooldownIndicator';
+    cooldownIndicator.className='rank-cooldown';
+    badge.appendChild(cooldownIndicator);
+  }
+  
+  if(GAME_STATE.breakthroughCooldown>0){
+    cooldownIndicator.style.display='block';
+    cooldownIndicator.textContent='冷却中 ('+GAME_STATE.breakthroughCooldown+'天)';
+  }else{
+    cooldownIndicator.style.display='none';
+  }
+  
+  if(nextRank){
+    var prevRank=RANK_CONFIG.find(function(r){return r.rank===GAME_STATE.currentRank+1});
+    var prevExp=prevRank?prevRank.expRequired:0;
+    var expNeeded=nextRank.expRequired-prevExp;
+    var expCurrent=GAME_STATE.totalEXP-prevExp;
+    var progress=Math.min(100,Math.max(0,(expCurrent/expNeeded)*100));
+    
+    document.getElementById('rankProgressFill').style.width=progress+'%';
+    document.getElementById('rankProgressText').textContent=GAME_STATE.totalEXP.toLocaleString()+' / '+nextRank.expRequired.toLocaleString()+' EXP';
+    
+    if(GAME_STATE.totalEXP>=nextRank.expRequired && GAME_STATE.breakthroughCooldown<=0){
+      badge.classList.add('can-breakthrough');
+      breakthrough.style.display='block';
+      document.getElementById('rankProgressText').textContent='100% (可突破)';
+    }else{
+      badge.classList.remove('can-breakthrough');
+      breakthrough.style.display='none';
+    }
+  }else{
+    document.getElementById('rankProgressFill').style.width='100%';
+    document.getElementById('rankProgressText').textContent='已达最高位阶';
+    badge.classList.remove('can-breakthrough');
+    breakthrough.style.display='none';
+  }
+}
+
+function openRankTree(){
+  var tree=document.getElementById('rankTree');
+  tree.innerHTML='';
+  
+  RANK_CONFIG.slice().reverse().forEach(function(rank){
+    var item=document.createElement('div');
+    var status='locked';
+    if(rank.rank>GAME_STATE.currentRank){
+      status='unlocked';
+    }else if(rank.rank===GAME_STATE.currentRank){
+      status='current';
+    }
+    
+    item.className='rank-tree-item '+status;
+    
+    var prevRank=RANK_CONFIG.find(function(r){return r.rank===rank.rank+1});
+    var expText='';
+    if(prevRank){
+      expText=prevRank.expRequired.toLocaleString()+' → '+rank.expRequired.toLocaleString()+' EXP';
+    }else{
+      expText=rank.expRequired.toLocaleString()+' EXP';
+    }
+    
+    item.innerHTML='<div class="rank-tree-icon">'+rank.icon+'</div>'+
+      '<div class="rank-tree-info">'+
+        '<div class="rank-tree-name" style="color:'+rank.color+'">序列 '+rank.rank+' · '+rank.name+'</div>'+
+        '<div class="rank-tree-exp">'+expText+'</div>'+
+        '<div class="rank-tree-privilege">'+rank.privilege+'</div>'+
+      '</div>';
+    
+    if(rank.rank===GAME_STATE.currentRank-1 && GAME_STATE.totalEXP>=rank.expRequired){
+      item.onclick=function(){openBreakthrough(rank)};
+      item.style.cursor='pointer';
+      item.title='点击突破';
+    }
+    
+    tree.appendChild(item);
+  });
+  
+  document.getElementById('rankTreeModal').style.display='flex';
+}
+
+function closeRankTree(){
+  document.getElementById('rankTreeModal').style.display='none';
+}
+
+function openBreakthrough(nextRank){
+  var currentRank=RANK_CONFIG.find(function(r){return r.rank===GAME_STATE.currentRank});
+  
+  document.getElementById('breakthroughIcon').textContent=nextRank.icon;
+  document.getElementById('breakthroughCurrent').textContent='当前：序列 '+currentRank.rank+' · '+currentRank.name;
+  document.getElementById('breakthroughNext').textContent='下一位阶：序列 '+nextRank.rank+' · '+nextRank.name;
+  document.getElementById('breakthroughTrial').textContent=nextRank.trial;
+  document.getElementById('breakthroughPrivilege').textContent=nextRank.privilege;
+  document.getElementById('breakthroughConfirm').checked=false;
+  
+  document.getElementById('rankTreeModal').style.display='none';
+  document.getElementById('breakthroughModal').style.display='flex';
+}
+
+function closeBreakthrough(){
+  document.getElementById('breakthroughModal').style.display='none';
+}
+
+function performBreakthrough(){
+  var confirm=document.getElementById('breakthroughConfirm');
+  if(!confirm.checked){
+    addLog('请先确认完成晋升试炼！','warning');
+    return;
+  }
+  
+  var nextRank=RANK_CONFIG.find(function(r){return r.rank===GAME_STATE.currentRank-1});
+  if(!nextRank || GAME_STATE.totalEXP<nextRank.expRequired){
+    addLog('经验不足，无法突破！','warning');
+    return;
+  }
+  
+  if(GAME_STATE.breakthroughCooldown>0){
+    addLog('突破冷却中，还需等待 '+GAME_STATE.breakthroughCooldown+' 天','warning');
+    return;
+  }
+  
+  var failureRate=getBreakthroughFailureRate(nextRank.rank);
+  var isSuccess=Math.random()>failureRate;
+  
+  if(isSuccess){
+    createBreakthroughParticles();
+    
+    setTimeout(function(){
+      GAME_STATE.currentRank=nextRank.rank;
+      GAME_STATE.rankHistory.push({
+        rank:nextRank.rank,
+        name:nextRank.name,
+        date:new Date().toISOString(),
+        exp:GAME_STATE.totalEXP
+      });
+      
+      if(nextRank.privilege.includes('HP上限')){
+        GAME_STATE.health=Math.min(GAME_STATE.health+20,100+20*(8-nextRank.rank));
+      }
+      
+      addLog('【位阶突破史诗事件】成功晋升为序列 '+nextRank.rank+' · '+nextRank.name+'！','epic');
+      
+      closeBreakthrough();
+      updateRankBadge();
+      updateUI();
+      saveGame();
+    },2000);
+  }else{
+    applyBreakthroughFailure(nextRank);
+  }
+}
+
+function getBreakthroughFailureRate(targetRank){
+  var rates={
+    7:0.10,
+    6:0.15,
+    5:0.20,
+    4:0.25,
+    3:0.30,
+    2:0.35,
+    1:0.40
+  };
+  return rates[targetRank]||0.10;
+}
+
+function applyBreakthroughFailure(nextRank){
+  var currentRank=RANK_CONFIG.find(function(r){return r.rank===GAME_STATE.currentRank});
+  var penalty=nextRank.failurePenalty;
+  
+  GAME_STATE.failureCount++;
+  
+  if(penalty.expDeduct){
+    GAME_STATE.totalEXP=Math.max(0,GAME_STATE.totalEXP-penalty.expDeduct);
+  }
+  
+  if(penalty.hpDeduct){
+    GAME_STATE.health=Math.max(0,GAME_STATE.health-penalty.hpDeduct);
+  }
+  
+  if(penalty.sanDeduct){
+    GAME_STATE.sanity=Math.max(0,GAME_STATE.sanity-penalty.sanDeduct);
+  }
+  
+  if(penalty.shardDeduct){
+    GAME_STATE.soulShards=Math.max(0,GAME_STATE.soulShards-penalty.shardDeduct);
+  }
+  
+  if(penalty.scrollDeduct){
+    GAME_STATE.summonScrolls=Math.max(0,GAME_STATE.summonScrolls-penalty.scrollDeduct);
+  }
+  
+  if(penalty.cooldownDays>0){
+    GAME_STATE.breakthroughCooldown=penalty.cooldownDays;
+  }
+  
+  if(penalty.effect!=='none'){
+    GAME_STATE.activePenaltyEffects.push({
+      effect:penalty.effect,
+      duration:penalty.cooldownDays,
+      appliedAt:new Date().toISOString()
+    });
+  }
+  
+  addLog('【晋升失败】'+penalty.message+'，失败次数：'+GAME_STATE.failureCount,'danger');
+  
+  closeBreakthrough();
+  showFailureModal(currentRank,nextRank,penalty);
+  
+  updateRankBadge();
+  updateUI();
+  saveGame();
+}
+
+function showFailureModal(currentRank,nextRank,penalty){
+  document.getElementById('failureIcon').textContent=getFailureIcon(penalty.type);
+  document.getElementById('failureTitle').textContent='晋升失败';
+  document.getElementById('failureMessage').textContent=penalty.message;
+  
+  var penaltiesHTML='';
+  if(penalty.expDeduct)penaltiesHTML+='<div class="failure-penalty-item"><span class="failure-penalty-label">经验值</span><span class="failure-penalty-value">-'+penalty.expDeduct+'</span></div>';
+  if(penalty.hpDeduct)penaltiesHTML+='<div class="failure-penalty-item"><span class="failure-penalty-label">HP</span><span class="failure-penalty-value">-'+penalty.hpDeduct+'</span></div>';
+  if(penalty.sanDeduct)penaltiesHTML+='<div class="failure-penalty-item"><span class="failure-penalty-label">SAN值</span><span class="failure-penalty-value">-'+penalty.sanDeduct+'</span></div>';
+  if(penalty.shardDeduct)penaltiesHTML+='<div class="failure-penalty-item"><span class="failure-penalty-label">灵魂碎片</span><span class="failure-penalty-value">-'+penalty.shardDeduct+'</span></div>';
+  if(penalty.scrollDeduct)penaltiesHTML+='<div class="failure-penalty-item"><span class="failure-penalty-label">抽卡券</span><span class="failure-penalty-value">-'+penalty.scrollDeduct+'</span></div>';
+  
+  document.getElementById('failurePenalties').innerHTML=penaltiesHTML;
+  document.getElementById('failureCount').textContent=GAME_STATE.failureCount;
+  
+  var cooldownDisplay=document.getElementById('cooldownDisplay');
+  if(penalty.cooldownDays>0){
+    cooldownDisplay.style.display='block';
+    cooldownDisplay.querySelector('.stat-value').textContent=penalty.cooldownDays+' 天';
+  }else{
+    cooldownDisplay.style.display='none';
+  }
+  
+  document.getElementById('failureModal').style.display='flex';
+}
+
+function closeFailureModal(){
+  document.getElementById('failureModal').style.display='none';
+}
+
+function getFailureIcon(type){
+  var icons={
+    'minor':'💔',
+    'light':'💀',
+    'moderate':'⚡',
+    'severe':'🔥',
+    'critical':'🌀',
+    'catastrophic':'🌑',
+    'apocalyptic':'💥',
+    'world_end':'🗡️'
+  };
+  return icons[type]||'💔';
+}
+
+function createBreakthroughParticles(){
+  var container=document.createElement('div');
+  container.style.position='fixed';
+  container.style.top='0';
+  container.style.left='0';
+  container.style.width='100%';
+  container.style.height='100%';
+  container.style.pointerEvents='none';
+  container.style.zIndex='9999';
+  document.body.appendChild(container);
+  
+  for(var i=0;i<100;i++){
+    var particle=document.createElement('div');
+    particle.style.position='absolute';
+    particle.style.left='50%';
+    particle.style.top='50%';
+    particle.style.width='10px';
+    particle.style.height='10px';
+    particle.style.borderRadius='50%';
+    particle.style.background=Math.random()>0.5?'#ffd700':'#ff8c00';
+    particle.style.boxShadow='0 0 20px rgba(212,175,55,0.8)';
+    
+    var angle=Math.random()*Math.PI*2;
+    var velocity=5+Math.random()*10;
+    var distance=100+Math.random()*300;
+    
+    particle.style.transform='translate(-50%,-50%)';
+    container.appendChild(particle);
+    
+    setTimeout(function(p,a,v,d){
+      p.style.transition='all 1.5s ease-out';
+      p.style.left='calc(50% + '+Math.cos(a)*d+'px)';
+      p.style.top='calc(50% + '+Math.sin(a)*d+'px)';
+      p.style.opacity='0';
+      p.style.transform='translate(-50%,-50%) scale(2)';
+    },10,i,angle,velocity,distance);
+  }
+  
+  var flash=document.createElement('div');
+  flash.style.position='fixed';
+  flash.style.top='0';
+  flash.style.left='0';
+  flash.style.width='100%';
+  flash.style.height='100%';
+  flash.style.background='rgba(255,215,0,0.8)';
+  flash.style.zIndex='9998';
+  flash.style.opacity='0';
+  document.body.appendChild(flash);
+  
+  flash.style.transition='opacity 0.3s';
+  setTimeout(function(){flash.style.opacity='1'},10);
+  setTimeout(function(){flash.style.opacity='0'},400);
+  setTimeout(function(){flash.remove()},700);
+  
+  setTimeout(function(){container.remove()},2000);
+}
+
+function createParticles(cfg){
+  var pc=document.getElementById('particles');
+  if(!pc)return;
+  for(var i=0;i<cfg.count;i++){
+    var p=document.createElement('div');
+    p.style.position='absolute';p.style.left=cfg.x+'px';p.style.top=cfg.y+'px';
+    p.style.width=cfg.size+'px';p.style.height=cfg.size+'px';
+    p.style.backgroundColor=cfg.color;p.style.borderRadius=cfg.round?'50%':'2px';
+    p.style.boxShadow=cfg.glow?p.style.backgroundColor+' 0 0 10px':'';p.style.pointerEvents='none';
+    var a=Math.PI*2*i/cfg.count,d=cfg.distance+Math.random()*100;
+    var tx=Math.cos(a)*d+cfg.spread*(Math.random()-0.5),ty=Math.sin(a)*d+cfg.spread*(Math.random()-0.5);
+    p.style.setProperty('--tx',tx+'px');p.style.setProperty('--ty',ty+'px');
+    p.style.animation=cfg.anim+' '+cfg.duration+'s ease-out forwards';
+    pc.appendChild(p);
+    setTimeout(function(){p.remove()},cfg.duration*1000);
+  }
+}
+
+function challengeDungeon(id){
+  var d=GAME_STATE.tasks.find(function(t){return t.id===id});
+  if(!d)return;
+  if(GAME_STATE.dungeons[id]){showFeedback('此试炼今日已完成',true);return}
+  GAME_STATE.dungeons[id]=true;
+  
+  if(d.cost){
+    if(d.cost.sanity){
+      GAME_STATE.sanity=clampVal(GAME_STATE.sanity+d.cost.sanity,0,100);
+      if(d.cost.sanity<0 && GAME_STATE.sanity<=30)showFeedback('精神侵蚀严重！',true);
+    }
+    if(d.cost.health){
+      GAME_STATE.health=clampVal(GAME_STATE.health+d.cost.health,0,100);
+      if(d.cost.health<0){
+        createParticles({count:20,x:window.innerWidth/2,y:window.innerHeight/2,color:'rgba(139,0,0,0.6)',size:6,round:true,distance:150,spread:50,duration:0.8,anim:'explode',glow:true});
+        if(GAME_STATE.health<=30)showFeedback('生命垂危！',true);
+      }
+    }
+  }
+  
+  if(d.rewards){
+    for(var k in d.rewards){
+      var expGain=d.rewards[k];
+      addExperience(k,expGain);
+      createFlyingNumber(expGain,k);
+      highlightAttrCard(k);
+    }
+  }
+  
+  if(d.soulReward){
+    var multiplier=1;
+    if(GAME_STATE.soulMultiplier&&GAME_STATE.soulMultiplierExpire&&Date.now()<GAME_STATE.soulMultiplierExpire){
+      multiplier=GAME_STATE.soulMultiplier;
+    }
+    var actualReward=Math.floor(d.soulReward*multiplier);
+    GAME_STATE.soulShards+=actualReward;
+    createFlyingNumber(actualReward,'soul');
+    if(multiplier>1){
+      showFeedback('⚡ 双倍法则生效！灵魂碎片收益×'+multiplier,false);
+    }
+  }
+  
+  if(d.cost&&d.cost.sanity&&d.cost.sanity>0)showFeedback('意识深潜完成，精神已稳固');
+  else{showFeedback('试炼完成：'+d.name);createAshParticles()}
+  
+  updateSoulDisplay();updateSanityDisplay();renderStatsPanel();renderDungeonList();drawRadarChart();
+  renderShop();
+  updateGachaButtonState();
+  updatePollutionState();
+  saveGameData();
+  
+  checkDungeonClear();
+  
+  if(GAME_STATE.health>0 && GAME_STATE.health<=50){
+    showFeedback('躯体崩溃状态解除！HP已恢复至安全水平',false);
+  }
+}
+
+function highlightAttrCard(attrId){
+  setTimeout(function(){
+    var cards=document.querySelectorAll('.stat-card');
+    var attr=GAME_STATE.attributes.find(function(a){return a.id===attrId});
+    if(!attr)return;
+    
+    cards.forEach(function(card){
+      if(card.querySelector('.stat-label').textContent===attr.name){
+        card.classList.add('highlight');
+        setTimeout(function(){
+          card.classList.remove('highlight');
+        },1500);
+      }
+    });
+  },100);
+}
+
+function createAshParticles(){
+  var pc=document.getElementById('particles');
+  if(!pc)return;
+  for(var i=0;i<30;i++){
+    var p=document.createElement('div');
+    p.style.position='absolute';p.style.left=Math.random()*100+'%';p.style.top=Math.random()*100+'%';
+    p.style.width=(3+Math.random()*5)+'px';p.style.height=(3+Math.random()*5)+'px';
+    p.style.backgroundColor='rgba(212,175,55,0.6)';p.style.borderRadius='50%';p.style.pointerEvents='none';
+    p.style.animation='ash 2s ease-out forwards';p.style.animationDelay=(Math.random()*0.5)+'s';
+    pc.appendChild(p);
+    setTimeout(function(){p.remove()},2000);
+  }
+}
+
+function showLevelUpModal(attr){
+  document.getElementById('levelAttr').textContent=attr.icon+' '+attr.name;
+  document.getElementById('levelLv').textContent='LV.'+attr.lv;
+  document.getElementById('levelModal').classList.add('show');
+}
+
+function closeLevel(){
+  document.getElementById('levelModal').classList.remove('show');
+}
+
+function createLevelUpParticles(){
+  createParticles({count:50,x:window.innerWidth/2,y:window.innerHeight/2,color:'#d4af37',size:6,round:true,distance:200,spread:50,duration:1,anim:'explode',glow:true});
+}
+
+function createFlyingNumber(v,k){
+  var el=document.createElement('div');
+  var cls=k==='soul'?'soul':(v>=0?'pos':'neg');
+  el.className='fly-num '+cls;
+  el.textContent='+'+v;
+  el.style.left='calc(50% + '+(Math.random()*200-100)+'px)';el.style.top='50%';
+  document.body.appendChild(el);
+  setTimeout(function(){el.remove()},1000);
+}
+
+function buyItem(id){
+  var item=GAME_STATE.shopItems.find(function(s){return s.id===id});
+  if(!item)return;
+  
+  if(GAME_STATE.health<=0){
+    showFeedback('躯体崩溃状态下无法进行交易！',true);
+    return;
+  }
+  
+  var actualPrice=getShopPrice(item.price);
+  if(GAME_STATE.soulShards<actualPrice){showFeedback('灵魂碎片不足！',true);return}
+  
+  GAME_STATE.soulShards-=actualPrice;
+  
+  var rewardMsg='';
+  
+  if(item.rewardType==='sanity'){
+    GAME_STATE.sanity=clampVal(GAME_STATE.sanity+item.rewardValue,0,100);
+    rewardMsg='SAN +'+item.rewardValue;
+  }else if(item.rewardType==='health'){
+    GAME_STATE.health=clampVal(GAME_STATE.health+item.rewardValue,0,100);
+    rewardMsg='HP +'+item.rewardValue;
+  }else if(item.rewardType==='attribute'){
+    addExperience(item.rewardAttr,item.rewardValue);
+    rewardMsg='属性经验 +'+item.rewardValue;
+  }else if(item.rewardType==='rest'){
+    rewardMsg='获得 '+item.rewardValue+' 分钟休息时间';
+  }
+  
+  showFeedback('购买成功：'+item.name+(rewardMsg?' | '+rewardMsg:''));
+  updateSoulDisplay();updateSanityDisplay();renderStatsPanel();saveGameData();
+}
+
+function showFeedback(msg,neg){
+  var el=document.getElementById('feedback');
+  if(!el)return;
+  el.textContent=msg;
+  el.className='feedback '+(neg?'neg':'');
+  el.classList.add('show');
+  setTimeout(function(){el.classList.remove('show')},2000);
+}
+
+function resetAll(){
+  if(confirm('确定触发世界线坍缩？所有数据将被清除！')){
+    localStorage.removeItem(STORAGE_KEY);
+    loadGameData();
+    updateSoulDisplay();updateSanityDisplay();renderStatsPanel();renderDungeonList();renderShop();drawRadarChart();updateLastUpdate();
+    showFeedback('世界线已坍缩，重新开始');
+  }
+}
+
+function enterGame(){
+  var loading=document.getElementById('loading');
+  var container=document.getElementById('container');
+  
+  if(!loading || !container)return;
+  
+  loading.style.opacity='0';
+  
+  setTimeout(function(){
+    loading.style.display='none';
+    container.classList.add('visible');
+    
+    loadGameData();
+    updateSoulDisplay();
+    updateSanityDisplay();
+    updateRankBadge();
+    renderStatsPanel();
+    renderDungeonList();
+    renderAberrations();
+    renderShop();
+    drawRadarChart();
+    updateLastUpdate();
+    updateScrollDisplay();
+    renderInventory();
+    renderCardManager();
+    updatePollutionState();
+  },500);
+}
+
+function openAttrManager(){
+  renderColorPicker();
+  renderAttrList();
+  document.getElementById('attrEditId').value='';
+  document.getElementById('attrName').value='';
+  document.getElementById('attrIcon').value='*';
+  document.getElementById('attrColor').value='#d4af37';
+  document.getElementById('attrExpBase').value='100';
+  document.getElementById('attrDeleteBtn').style.display='none';
+  document.getElementById('attrModal').classList.add('show');
+}
+
+function closeAttrModal(){
+  document.getElementById('attrModal').classList.remove('show');
+}
+
+function renderColorPicker(){
+  var cp=document.getElementById('colorPicker');
+  cp.innerHTML='';
+  for(var i=0;i<COLORS.length;i++){
+    var c=document.createElement('div');
+    c.className='color-option';
+    c.style.backgroundColor=COLORS[i];
+    c.onclick=function(){
+      document.querySelectorAll('.color-option').forEach(function(el){el.classList.remove('selected')});
+      this.classList.add('selected');
+      document.getElementById('attrColor').value=this.style.backgroundColor;
+    };
+    cp.appendChild(c);
+  }
+}
+
+function renderAttrList(){
+  var al=document.getElementById('attrList');
+  al.innerHTML='';
+  for(var i=0;i<GAME_STATE.attributes.length;i++){
+    var a=GAME_STATE.attributes[i];
+    var item=document.createElement('div');
+    item.className='attr-item';
+    item.innerHTML='<span class="attr-item-name">'+a.icon+' '+a.name+'</span><span class="attr-item-value">LV.'+a.lv+'</span><button class="btn edit" onclick="editAttribute(\''+a.id+'\')">编辑</button>';
+    al.appendChild(item);
+  }
+}
+
+function editAttribute(id){
+  var attr=GAME_STATE.attributes.find(function(a){return a.id===id});
+  if(!attr)return;
+  document.getElementById('attrEditId').value=attr.id;
+  document.getElementById('attrName').value=attr.name;
+  document.getElementById('attrIcon').value=attr.icon;
+  document.getElementById('attrColor').value=attr.color;
+  document.getElementById('attrExpBase').value=attr.expBase;
+  document.getElementById('attrDeleteBtn').style.display='inline-block';
+  document.querySelectorAll('.color-option').forEach(function(el){
+    el.classList.toggle('selected',el.style.backgroundColor===attr.color);
+  });
+}
+
+function saveAttribute(){
+  var id=document.getElementById('attrEditId').value;
+  var name=document.getElementById('attrName').value.trim();
+  var icon=document.getElementById('attrIcon').value.trim();
+  var color=document.getElementById('attrColor').value.trim();
+  var expBase=parseInt(document.getElementById('attrExpBase').value);
+  
+  if(!name){showFeedback('请输入属性名称',true);return}
+  if(!icon){icon='*'}
+  if(!color){color='#d4af37'}
+  if(isNaN(expBase)||expBase<10){expBase=100}
+  
+  if(id){
+    var attr=GAME_STATE.attributes.find(function(a){return a.id===id});
+    if(attr){
+      attr.name=name;attr.icon=icon;attr.color=color;attr.expBase=expBase;
+      showFeedback('属性已更新');
+    }
+  }else{
+    GAME_STATE.attributes.push({
+      id:generateId(),name:name,icon:icon,color:color,expBase:expBase,lv:0,exp:0
+    });
+    showFeedback('属性已创建');
+  }
+  
+  renderAttrList();saveGameData();updateSoulDisplay();renderStatsPanel();drawRadarChart();
+  updateDungeonAttrRewardsIfOpen();
+}
+
+function deleteAttribute(){
+  var id=document.getElementById('attrEditId').value;
+  if(!id){showFeedback('请先选择要删除的属性',true);return}
+  if(confirm('确定毁灭此属性？')){
+    GAME_STATE.attributes=GAME_STATE.attributes.filter(function(a){return a.id!==id});
+    showFeedback('属性已毁灭');
+    closeAttrModal();
+    saveGameData();updateSoulDisplay();renderStatsPanel();drawRadarChart();
+    updateDungeonAttrRewardsIfOpen();
+  }
+}
+
+function updateDungeonAttrRewardsIfOpen(){
+  var dm=document.getElementById('dungeonModal');
+  if(dm&&dm.classList.contains('show')){
+    renderDungeonAttrRewards();
+  }
+}
+
+function openDungeonEditor(){
+  document.getElementById('dungeonId').value='';
+  document.getElementById('dungeonName').value='';
+  document.getElementById('dungeonDesc').value='';
+  document.getElementById('dungeonIcon').value='!';
+  document.getElementById('dungeonDiff').value='1';
+  document.getElementById('dungeonLv').value='1';
+  document.getElementById('dungeonSoulReward').value='10';
+  document.getElementById('dungeonSanityCost').value='-5';
+  document.getElementById('dungeonHealthCost').value='0';
+  document.getElementById('dungeonModalTitle').textContent='添加副本';
+  document.getElementById('dungeonDeleteBtn').style.display='none';
+  renderDungeonAttrRewards();
+  document.getElementById('dungeonModal').classList.add('show');
+}
+
+function closeDungeonModal(){
+  document.getElementById('dungeonModal').classList.remove('show');
+}
+
+function renderDungeonAttrRewards(){
+  var dr=document.getElementById('dungeonAttrRewards');
+  if(!dr)return;
+  
+  var currentValues={};
+  var inputs=dr.querySelectorAll('input[type="number"]');
+  inputs.forEach(function(input){
+    var attrId=input.id.replace('dungeonReward_','');
+    currentValues[attrId]=input.value;
+  });
+  
+  dr.innerHTML='';
+  for(var i=0;i<GAME_STATE.attributes.length;i++){
+    var a=GAME_STATE.attributes[i];
+    var item=document.createElement('div');
+    item.className='attr-reward-item';
+    var val=currentValues[a.id]||0;
+    item.innerHTML='<span>'+a.icon+' '+a.name+'</span><input type="number" id="dungeonReward_'+a.id+'" value="'+val+'" min="0" placeholder="0">';
+    dr.appendChild(item);
+  }
+}
+
+function editDungeon(id){
+  var d=GAME_STATE.tasks.find(function(t){return t.id===id});
+  if(!d)return;
+  document.getElementById('dungeonId').value=d.id;
+  document.getElementById('dungeonName').value=d.name;
+  document.getElementById('dungeonDesc').value=d.desc||'';
+  document.getElementById('dungeonIcon').value=d.icon;
+  document.getElementById('dungeonDiff').value=d.diff||1;
+  document.getElementById('dungeonLv').value=d.lv||0;
+  document.getElementById('dungeonSoulReward').value=d.soulReward||0;
+  document.getElementById('dungeonSanityCost').value=d.cost&&d.cost.sanity?d.cost.sanity:-5;
+  document.getElementById('dungeonHealthCost').value=d.cost&&d.cost.health?d.cost.health:0;
+  document.getElementById('dungeonCoreContract').checked=d.isCoreContract||false;
+  document.getElementById('dungeonModalTitle').textContent='编辑副本';
+  document.getElementById('dungeonDeleteBtn').style.display='inline-block';
+  renderDungeonAttrRewards();
+  if(d.rewards){
+    for(var k in d.rewards){
+      var el=document.getElementById('dungeonReward_'+k);
+      if(el)el.value=d.rewards[k];
+    }
+  }
+  document.getElementById('dungeonModal').classList.add('show');
+}
+
+function saveDungeon(){
+  var id=document.getElementById('dungeonId').value;
+  var name=document.getElementById('dungeonName').value.trim();
+  var desc=document.getElementById('dungeonDesc').value.trim();
+  var icon=document.getElementById('dungeonIcon').value.trim();
+  var diff=parseInt(document.getElementById('dungeonDiff').value);
+  var lv=parseInt(document.getElementById('dungeonLv').value);
+  var soulReward=parseInt(document.getElementById('dungeonSoulReward').value);
+  var sanityCost=parseInt(document.getElementById('dungeonSanityCost').value);
+  var healthCost=parseInt(document.getElementById('dungeonHealthCost').value);
+  var isCoreContract=document.getElementById('dungeonCoreContract').checked;
+  
+  if(!name){showFeedback('请输入副本名称',true);return}
+  if(!icon){icon='!'}
+  if(isNaN(diff))diff=1;
+  if(isNaN(lv))lv=1;
+  if(isNaN(soulReward))soulReward=0;
+  if(isNaN(sanityCost))sanityCost=0;
+  if(isNaN(healthCost))healthCost=0;
+  
+  var rewards={};
+  for(var i=0;i<GAME_STATE.attributes.length;i++){
+    var a=GAME_STATE.attributes[i];
+    var val=parseInt(document.getElementById('dungeonReward_'+a.id).value);
+    if(val>0)rewards[a.id]=val;
+  }
+  
+  if(id){
+    var d=GAME_STATE.tasks.find(function(t){return t.id===id});
+    if(d){
+      d.name=name;d.desc=desc;d.icon=icon;d.diff=diff;d.lv=lv;
+      d.soulReward=soulReward;d.rewards=rewards;
+      d.cost={sanity:sanityCost,health:healthCost};
+      d.isCoreContract=isCoreContract;
+      showFeedback('副本已更新');
+    }
+  }else{
+    GAME_STATE.tasks.push({
+      id:generateId(),name:name,desc:desc,icon:icon,diff:diff,lv:lv,
+      soulReward:soulReward,cost:{sanity:sanityCost,health:healthCost},rewards:rewards,
+      isCoreContract:isCoreContract
+    });
+    showFeedback('副本已创建');
+  }
+  
+  closeDungeonModal();saveGameData();renderDungeonList();
+}
+
+function confirmDeleteDungeon(id){
+  if(confirm('确定毁灭此副本？')){
+    GAME_STATE.tasks=GAME_STATE.tasks.filter(function(t){return t.id!==id});
+    showFeedback('副本已毁灭');
+    saveGameData();renderDungeonList();
+  }
+}
+
+function deleteDungeon(){
+  var id=document.getElementById('dungeonId').value;
+  if(!id){showFeedback('请先选择要删除的副本',true);return}
+  confirmDeleteDungeon(id);
+  closeDungeonModal();
+}
+
+function openShopEditor(){
+  document.getElementById('shopItemId').value='';
+  document.getElementById('shopItemName').value='';
+  document.getElementById('shopItemIcon').value='*';
+  document.getElementById('shopItemPrice').value='20';
+  document.getElementById('shopItemRare').value='R';
+  document.getElementById('shopItemDesc').value='';
+  document.getElementById('shopItemType').value='sanity';
+  document.getElementById('shopItemValue').value='10';
+  document.getElementById('shopModalTitle').textContent='自定义商品';
+  document.getElementById('shopItemDeleteBtn').style.display='none';
+  populateShopAttrSelect();
+  toggleShopRewardOptions();
+  document.getElementById('shopModal').classList.add('show');
+}
+
+function closeShopModal(){
+  document.getElementById('shopModal').classList.remove('show');
+}
+
+function populateShopAttrSelect(){
+  var sel=document.getElementById('shopItemAttr');
+  sel.innerHTML='';
+  for(var i=0;i<GAME_STATE.attributes.length;i++){
+    var a=GAME_STATE.attributes[i];
+    var opt=document.createElement('option');
+    opt.value=a.id;
+    opt.textContent=a.icon+' '+a.name;
+    sel.appendChild(opt);
+  }
+}
+
+function toggleShopRewardOptions(){
+  var type=document.getElementById('shopItemType').value;
+  var group=document.getElementById('shopItemAttrGroup');
+  group.style.display=type==='attribute'?'block':'none';
+}
+
+function editShopItem(id){
+  var item=GAME_STATE.shopItems.find(function(s){return s.id===id});
+  if(!item)return;
+  document.getElementById('shopItemId').value=item.id;
+  document.getElementById('shopItemName').value=item.name;
+  document.getElementById('shopItemIcon').value=item.icon;
+  document.getElementById('shopItemPrice').value=item.price;
+  document.getElementById('shopItemRare').value=item.rarity;
+  document.getElementById('shopItemDesc').value=item.desc||'';
+  document.getElementById('shopItemType').value=item.rewardType||'sanity';
+  document.getElementById('shopItemValue').value=item.rewardValue||10;
+  document.getElementById('shopModalTitle').textContent='编辑商品';
+  document.getElementById('shopItemDeleteBtn').style.display='inline-block';
+  populateShopAttrSelect();
+  if(item.rewardAttr){
+    document.getElementById('shopItemAttr').value=item.rewardAttr;
+  }
+  toggleShopRewardOptions();
+  document.getElementById('shopModal').classList.add('show');
+}
+
+function saveShopItem(){
+  var id=document.getElementById('shopItemId').value;
+  var name=document.getElementById('shopItemName').value.trim();
+  var icon=document.getElementById('shopItemIcon').value.trim();
+  var price=parseInt(document.getElementById('shopItemPrice').value);
+  var rarity=document.getElementById('shopItemRare').value;
+  var desc=document.getElementById('shopItemDesc').value.trim();
+  var rewardType=document.getElementById('shopItemType').value;
+  var rewardValue=parseInt(document.getElementById('shopItemValue').value);
+  var rewardAttr=document.getElementById('shopItemAttr').value;
+  
+  if(!name){showFeedback('请输入商品名称',true);return}
+  if(!icon){icon='*'}
+  if(isNaN(price)||price<1){price=20}
+  if(isNaN(rewardValue)||rewardValue<1){rewardValue=10}
+  
+  var shopItem={
+    name:name,icon:icon,price:price,rarity:rarity,desc:desc,
+    rewardType:rewardType,rewardValue:rewardValue
+  };
+  if(rewardType==='attribute'){
+    shopItem.rewardAttr=rewardAttr;
+  }
+  
+  if(id){
+    var item=GAME_STATE.shopItems.find(function(s){return s.id===id});
+    if(item){
+      for(var k in shopItem)item[k]=shopItem[k];
+      showFeedback('商品已更新');
+    }
+  }else{
+    shopItem.id=generateId();
+    GAME_STATE.shopItems.push(shopItem);
+    showFeedback('商品已创建');
+  }
+  
+  closeShopModal();saveGameData();renderShop();updateSoulDisplay();
+}
+
+function confirmDeleteShopItem(id){
+  if(confirm('确定毁灭此商品？')){
+    GAME_STATE.shopItems=GAME_STATE.shopItems.filter(function(s){return s.id!==id});
+    showFeedback('商品已毁灭');
+    saveGameData();renderShop();
+  }
+}
+
+function deleteShopItem(){
+  var id=document.getElementById('shopItemId').value;
+  if(!id){showFeedback('请先选择要删除的商品',true);return}
+  confirmDeleteShopItem(id);
+  closeShopModal();
+}
+
+function initGame(){
+  try {
+    var loading=document.getElementById('loading');
+    if(loading){
+      loading.onclick=enterGame;
+      loading.ontouchstart=enterGame;
+      loading.addEventListener('click',enterGame);
+      loading.addEventListener('touchstart',enterGame);
+    }
+  } catch(e) {
+    console.log('initGame error:',e.message);
+  }
+}
+
+function tryInitGame(){
+  initGame();
+  var loading=document.getElementById('loading');
+  if(loading && typeof enterGame==='function'){
+    loading.style.cursor='pointer';
+  }
+}
+
+function updateScrollDisplay(){
+  var el=document.getElementById('scrollCount');
+  if(el)el.textContent=GAME_STATE.summonScrolls||0;
+  var btn=document.getElementById('summonBtn');
+  if(btn){
+    if(GAME_STATE.summonScrolls>0 && GAME_STATE.health>0){
+      btn.classList.remove('disabled');
+    }else{
+      btn.classList.add('disabled');
+    }
+  }
+}
+
+function checkDungeonClear(){
+  var allDone=true;
+  for(var i=0;i<GAME_STATE.tasks.length;i++){
+    if(!GAME_STATE.dungeons[GAME_STATE.tasks[i].id]){
+      allDone=false;
+      break;
+    }
+  }
+  if(allDone){
+    showClearModal();
+  }
+}
+
+function showClearModal(){
+  GAME_STATE.health=100;
+  GAME_STATE.sanity=100;
+  GAME_STATE.summonScrolls=(GAME_STATE.summonScrolls||0)+1;
+  
+  var hf=document.getElementById('healthFill');
+  var sf=document.getElementById('sanityFill');
+  if(hf){
+    hf.style.width='100%';
+    hf.classList.add('pulse');
+    setTimeout(function(){hf.classList.remove('pulse')},1000);
+  }
+  if(sf){
+    sf.style.width='100%';
+    sf.classList.add('pulse');
+    setTimeout(function(){sf.classList.remove('pulse')},1000);
+  }
+  
+  createScrollFlyAnimation();
+  updateScrollDisplay();
+  updateSanityDisplay();
+  
+  document.getElementById('clearModal').classList.add('show');
+}
+
+function closeClearModal(){
+  document.getElementById('clearModal').classList.remove('show');
+  saveGameData();
+}
+
+function createScrollFlyAnimation(){
+  for(var i=0;i<5;i++){
+    var fly=document.createElement('div');
+    fly.className='scroll-fly';
+    fly.textContent='📜';
+    var startX=Math.random()*window.innerWidth;
+    var startY=Math.random()*window.innerHeight;
+    var scrollEl=document.getElementById('summonScroll');
+    var endX=scrollEl?scrollEl.getBoundingClientRect().left+scrollEl.offsetWidth/2:window.innerWidth-50;
+    var endY=scrollEl?scrollEl.getBoundingClientRect().top+scrollEl.offsetHeight/2:50;
+    fly.style.left=startX+'px';
+    fly.style.top=startY+'px';
+    fly.style.setProperty('--sx',(endX-startX)+'px');
+    fly.style.setProperty('--sy',(endY-startY)+'px');
+    fly.style.animationDelay=(i*0.15)+'s';
+    document.body.appendChild(fly);
+    setTimeout(function(){fly.remove()},1500);
+  }
+}
+
+function collapseToday(){
+  var coreTasks=GAME_STATE.tasks.filter(function(t){return t.isCoreContract});
+  var optionalTasks=GAME_STATE.tasks.filter(function(t){return !t.isCoreContract});
+  
+  var coreTotal=coreTasks.length;
+  var coreCompleted=0;
+  for(var i=0;i<coreTotal;i++){
+    if(GAME_STATE.dungeons[coreTasks[i].id]){
+      coreCompleted++;
+    }
+  }
+  
+  var optionalTotal=optionalTasks.length;
+  var optionalCompleted=0;
+  for(var i=0;i<optionalTotal;i++){
+    if(GAME_STATE.dungeons[optionalTasks[i].id]){
+      optionalCompleted++;
+    }
+  }
+  
+  var total=coreTotal+optionalTotal;
+  var completed=coreCompleted+optionalCompleted;
+  
+  var coreCompletionRate=coreTotal>0?(coreCompleted/coreTotal)*100:0;
+  var rating=calculateRating(coreCompletionRate);
+  
+  var isCoreClear=coreTotal>0 && coreCompleted===coreTotal;
+  var isGrandClear=total>0 && completed===total;
+  
+  openClearanceModal({
+    total:total,
+    completed:completed,
+    coreTotal:coreTotal,
+    coreCompleted:coreCompleted,
+    optionalTotal:optionalTotal,
+    optionalCompleted:optionalCompleted,
+    completionRate:total>0?(completed/total)*100:0,
+    coreCompletionRate:coreCompletionRate,
+    rating:rating,
+    isCoreClear:isCoreClear,
+    isGrandClear:isGrandClear
+  });
+}
+
+function calculateRating(completionRate){
+  if(completionRate>=100)return 'SSS';
+  if(completionRate>=80)return 'A';
+  if(completionRate>=60)return 'B';
+  if(completionRate>=40)return 'C';
+  if(completionRate>=20)return 'D';
+  return 'E';
+}
+
+var _clearanceResult=null;
+
+function openClearanceModal(result){
+  _clearanceResult=result;
+  
+  var modal=document.getElementById('clearanceModal');
+  var ratingEl=document.getElementById('clearanceRating');
+  var starsEl=document.getElementById('clearanceStars');
+  var completionEl=document.getElementById('clearanceCompletion');
+  var countEl=document.getElementById('clearanceCount');
+  var rewardsEl=document.getElementById('clearanceRewards');
+  var messageEl=document.getElementById('clearanceMessage');
+  var particlesEl=document.querySelector('.clearance-particles');
+  
+  ratingEl.textContent=result.rating;
+  ratingEl.className='clearance-rating '+result.rating;
+  
+  starsEl.textContent=getStars(result.rating);
+  starsEl.className='clearance-stars '+(result.rating==='SSS'?'sss':'');
+  
+  completionEl.textContent=Math.round(result.completionRate)+'%';
+  countEl.textContent=result.completed+'/'+result.total;
+  
+  rewardsEl.innerHTML=generateRewardHTML(result);
+  messageEl.textContent=generateMessage(result);
+  
+  createClearanceParticles(particlesEl, result.rating);
+  
+  modal.classList.add('show');
+}
+
+function getStars(rating){
+  switch(rating){
+    case 'SSS':return '★★★';
+    case 'A':return '★★☆';
+    case 'B':return '★☆☆';
+    case 'C':return '☆☆☆';
+    case 'D':return '☆☆☆';
+    case 'E':return '☆☆☆';
+    default:return '☆☆☆';
+  }
+}
+
+function generateRewardHTML(result){
+  var rewards=[];
+  
+  if(result.isGrandClear){
+    rewards.push({icon:'👑',text:'完美全通！',color:'#ffd700'});
+    rewards.push({icon:'❤️',text:'HP 回满'});
+    rewards.push({icon:'🧠',text:'SAN 回满'});
+    rewards.push({icon:'📜',text:'抽卡券 +1'});
+    rewards.push({icon:'💎',text:'灵魂碎片 +100'});
+    rewards.push({icon:'👁️',text:'高维抽卡券 +1'});
+    rewards.push({icon:'💎',text:'额外奖励 +200'});
+  }else if(result.isCoreClear){
+    rewards.push({icon:'✅',text:'契约履行成功！'});
+    rewards.push({icon:'❤️',text:'HP 回满'});
+    rewards.push({icon:'🧠',text:'SAN 回满'});
+    rewards.push({icon:'📜',text:'抽卡券 +1'});
+    rewards.push({icon:'💎',text:'灵魂碎片 +100'});
+  }else{
+    var uncompletedCore=result.coreTotal-result.coreCompleted;
+    var penalty=uncompletedCore*20;
+    if(penalty>0){
+      rewards.push({icon:'⚠️',text:'未完成必做契约 '+uncompletedCore+' 项'});
+      rewards.push({icon:'💔',text:'HP -'+penalty});
+      rewards.push({icon:'😵',text:'SAN -'+penalty});
+    }else{
+      rewards.push({icon:'⚠️',text:'未完成全部试炼'});
+      rewards.push({icon:'💔',text:'HP -20'});
+      rewards.push({icon:'😵',text:'SAN -20'});
+    }
+  }
+  
+  return rewards.map(function(r,i){
+    var colorStyle=r.color?'style="color:'+r.color+'"':'';
+    return '<div class="clearance-reward" style="animation-delay:'+(i*0.15)+'s"><div class="clearance-reward-icon" '+colorStyle+'>'+r.icon+'</div><div class="clearance-reward-text" '+colorStyle+'>'+r.text+'</div></div>';
+  }).join('');
+}
+
+function generateMessage(result){
+  if(result.isGrandClear){
+    return '✨ 完美全通！你已完成所有试炼，获得至高荣耀与额外奖励！';
+  }
+  if(result.isCoreClear){
+    return '✅ 契约履行成功！所有必做任务已完成，状态已恢复！';
+  }
+  switch(result.rating){
+    case 'SSS':return '完美！你已完成所有必做契约！';
+    case 'A':return '优秀！必做契约完成度很高，继续努力！';
+    case 'B':return '良好！还有部分必做契约未完成。';
+    case 'C':return '及格！勉强完成一半必做契约，精神已受侵蚀。';
+    case 'D':return '危险！必做契约完成度不足，精神状态正在恶化！';
+    case 'E':return '警告！精神污染正在侵蚀你的灵魂，必做契约几乎未完成！';
+    default:return '';
+  }
+}
+
+function createClearanceParticles(container, rating){
+  while(container.firstChild){
+    container.removeChild(container.firstChild);
+  }
+  
+  var count=rating==='SSS'?30:10;
+  for(var i=0;i<count;i++){
+    var particle=document.createElement('div');
+    particle.className='clearance-particle';
+    particle.style.left=(Math.random()*100)+'%';
+    particle.style.animationDelay=(Math.random()*3)+'s';
+    particle.style.animationDuration=(3+Math.random()*3)+'s';
+    particle.style.width=rating==='SSS'?(2+Math.random()*3)+'px':'2px';
+    particle.style.height=particle.style.width;
+    particle.style.background=rating==='SSS'?'#ffd700':'#666';
+    container.appendChild(particle);
+  }
+}
+
+function createGoldenExplosion(){
+  var overlay=document.createElement('div');
+  overlay.className='golden-explosion';
+  document.body.appendChild(overlay);
+  
+  for(var i=0;i<50;i++){
+    var particle=document.createElement('div');
+    particle.className='golden-particle';
+    var angle=(Math.random()*360)*Math.PI/180;
+    var distance=100+Math.random()*200;
+    particle.style.left='50%';
+    particle.style.top='50%';
+    particle.style.transform='translate(-50%, -50%) rotate('+angle+'deg)';
+    particle.style.setProperty('--distance', distance+'px');
+    particle.style.setProperty('--delay', (Math.random()*0.3)+'s');
+    particle.style.setProperty('--duration', (0.5+Math.random()*0.5)+'s');
+    particle.style.setProperty('--size', (4+Math.random()*8)+'px');
+    overlay.appendChild(particle);
+  }
+  
+  setTimeout(function(){
+    overlay.remove();
+  },2000);
+}
+
+function closeClearanceModal(){
+  var modal=document.getElementById('clearanceModal');
+  modal.classList.remove('show');
+  
+  if(!_clearanceResult)return;
+  
+  var result=_clearanceResult;
+  
+  if(result.isGrandClear){
+    GAME_STATE.health=100;
+    GAME_STATE.sanity=100;
+    GAME_STATE.summonScrolls=(GAME_STATE.summonScrolls||0)+1;
+    GAME_STATE.soulShards=(GAME_STATE.soulShards||0)+300;
+    GAME_STATE.highDimensionalScrolls=(GAME_STATE.highDimensionalScrolls||0)+1;
+    createGoldenExplosion();
+    showFeedback('👑 完美全通！获得抽卡券+1、高维抽卡券+1、灵魂碎片+300，状态回满！',false);
+    addLog('完美全通！完成所有必做契约与可选试炼','epic');
+  }else if(result.isCoreClear){
+    GAME_STATE.health=100;
+    GAME_STATE.sanity=100;
+    GAME_STATE.summonScrolls=(GAME_STATE.summonScrolls||0)+1;
+    GAME_STATE.soulShards=(GAME_STATE.soulShards||0)+100;
+    showFeedback('✅ 契约履行成功！获得抽卡券+1、灵魂碎片+100，状态回满！',false);
+    addLog('契约履行成功！完成所有必做契约','success');
+  }else{
+    var uncompletedCore=result.coreTotal-result.coreCompleted;
+    var penalty=uncompletedCore*20;
+    var hasProtection=GAME_STATE.protectionCards&&GAME_STATE.protectionCards>0;
+    
+    if(penalty>0){
+      GAME_STATE.health=Math.max(0,GAME_STATE.health-penalty);
+      
+      if(hasProtection){
+        GAME_STATE.protectionCards--;
+        showFeedback('🛡️ 理智锁链生效！免除SAN扣除！未完成'+uncompletedCore+'项必做契约：-'+penalty+' HP',true);
+      }else{
+        GAME_STATE.sanity=Math.max(0,GAME_STATE.sanity-penalty);
+        
+        if(GAME_STATE.health<=0){
+          GAME_STATE.health=0;
+          showFeedback('💀 精神污染已侵蚀灵魂！未完成'+uncompletedCore+'项必做契约！',true);
+        }else{
+          showFeedback('未完成'+uncompletedCore+'项必做契约：-'+penalty+' HP, -'+penalty+' SAN',true);
+        }
+      }
+    }else{
+      GAME_STATE.health=Math.max(0,GAME_STATE.health-20);
+      GAME_STATE.sanity=Math.max(0,GAME_STATE.sanity-20);
+      showFeedback('未完成全部试炼：-20 HP, -20 SAN',true);
+    }
+  }
+  
+  resetDailyDungeons();
+  
+  if(GAME_STATE.breakthroughCooldown>0){
+    GAME_STATE.breakthroughCooldown--;
+    addLog('突破冷却时间减少1天','info');
+  }
+  
+  GAME_STATE.activePenaltyEffects=GAME_STATE.activePenaltyEffects.filter(function(e){
+    var applied=new Date(e.appliedAt);
+    var now=new Date();
+    var daysDiff=Math.floor((now-applied)/(1000*60*60*24));
+    return daysDiff<e.duration;
+  });
+  
+  updateSanityDisplay();
+  updateSoulDisplay();
+  updateScrollDisplay();
+  updateRankBadge();
+  renderDungeonList();
+  updatePollutionState();
+  saveGameData();
+  
+  _clearanceResult=null;
+}
+
+function resetDailyDungeons(){
+  GAME_STATE.dungeons={};
+  GAME_STATE.date=getDateStr();
+  
+  showFeedback('试炼已重置，新的轮回开始',false);
+}
+
+function activatePollutionState(){
+  var filter=document.getElementById('pollutionFilter');
+  var warning=document.getElementById('pollutionWarning');
+  var btn=document.getElementById('summonBtn');
+  var particles=document.getElementById('pollutionParticles');
+  
+  if(filter)filter.classList.add('active');
+  if(warning){
+    warning.classList.remove('hide');
+    warning.classList.add('show');
+  }
+  if(btn)btn.classList.add('disabled');
+  
+  if(particles){
+    createPollutionParticles(particles);
+  }
+}
+
+function deactivatePollutionState(){
+  var filter=document.getElementById('pollutionFilter');
+  var warning=document.getElementById('pollutionWarning');
+  var btn=document.getElementById('summonBtn');
+  var particles=document.getElementById('pollutionParticles');
+  
+  if(filter)filter.classList.remove('active');
+  if(warning){
+    warning.classList.remove('show');
+    warning.classList.add('hide');
+  }
+  if(btn && GAME_STATE.summonScrolls>0)btn.classList.remove('disabled');
+  
+  if(particles){
+    clearPollutionParticles(particles);
+  }
+}
+
+function createPollutionParticles(container){
+  clearPollutionParticles(container);
+  
+  var particleCount=15;
+  for(var i=0;i<particleCount;i++){
+    var particle=document.createElement('div');
+    particle.className='pollution-particle';
+    particle.style.left=(Math.random()*100)+'%';
+    particle.style.animationDelay=(Math.random()*5)+'s';
+    particle.style.animationDuration=(6+Math.random()*4)+'s';
+    particle.style.width=(20+Math.random()*40)+'px';
+    particle.style.height=particle.style.width;
+    container.appendChild(particle);
+  }
+}
+
+function clearPollutionParticles(container){
+  while(container.firstChild){
+    container.removeChild(container.firstChild);
+  }
+}
+
+function closePollutionWarning(){
+  var warning=document.getElementById('pollutionWarning');
+  if(warning){
+    warning.classList.remove('show');
+    warning.classList.add('hide');
+  }
+}
+
+var _pollutionState=false;
+function updatePollutionState(){
+  var shouldPollute=GAME_STATE.health<=0;
+  
+  if(shouldPollute && !_pollutionState){
+    _pollutionState=true;
+    activatePollutionState();
+  }else if(!shouldPollute && _pollutionState){
+    _pollutionState=false;
+    deactivatePollutionState();
+  }
+  
+  updateGachaButtonState();
+}
+
+function updateGachaButtonState(){
+  var btn=document.getElementById('summonBtn');
+  if(!btn)return;
+  
+  if(GAME_STATE.health<=0){
+    btn.classList.add('disabled');
+    btn.classList.add('sealed');
+  }else if(GAME_STATE.summonScrolls>0){
+    btn.classList.remove('disabled');
+    btn.classList.remove('sealed');
+  }else{
+    btn.classList.add('disabled');
+    btn.classList.remove('sealed');
+  }
+}
+
+function openGacha(){
+  if(GAME_STATE.summonScrolls<=0){
+    showFeedback('抽卡券不足！',true);
+    return;
+  }
+  if(GAME_STATE.health<=0){
+    showFeedback('躯体崩溃状态下无法进行献祭抽卡！',true);
+    return;
+  }
+  
+  var card=document.getElementById('gachaCard');
+  var light=document.getElementById('gachaLight');
+  var summonBtn=document.getElementById('gachaSummonBtn');
+  var continueBtn=document.getElementById('gachaContinueBtn');
+  
+  card.classList.remove('flipped');
+  light.classList.remove('active');
+  summonBtn.style.display='block';
+  continueBtn.style.display='none';
+  
+  document.getElementById('gachaModal').classList.add('show');
+}
+
+function closeGacha(){
+  document.getElementById('gachaModal').classList.remove('show');
+  renderInventory();
+}
+
+function performSummon(){
+  if(GAME_STATE.summonScrolls<=0)return;
+  
+  GAME_STATE.summonScrolls--;
+  updateScrollDisplay();
+  
+  var card=document.getElementById('gachaCard');
+  var light=document.getElementById('gachaLight');
+  var summonBtn=document.getElementById('gachaSummonBtn');
+  var continueBtn=document.getElementById('gachaContinueBtn');
+  
+  summonBtn.style.display='none';
+  card.classList.remove('flipped');
+  light.classList.add('active');
+  
+  setTimeout(function(){
+    var result=drawGachaCard();
+    var rareEl=document.getElementById('gachaCardRare');
+    var iconEl=document.getElementById('gachaCardIcon');
+    var nameEl=document.getElementById('gachaCardName');
+    var descEl=document.getElementById('gachaCardDesc');
+    
+    rareEl.textContent=result.rarity;
+    rareEl.className='gacha-card-rare '+result.rarity;
+    iconEl.textContent=result.icon;
+    nameEl.textContent=result.name;
+    descEl.textContent=result.description||result.desc;
+    
+    GAME_STATE.inventory.cards.push({
+      id:generateId(),
+      cardId:result.id,
+      name:result.name,
+      icon:result.icon,
+      rarity:result.rarity,
+      desc:result.description||result.desc,
+      type:result.type||result.effectType,
+      used:false,
+      source:'gacha',
+      poolId:'default'
+    });
+    
+    setTimeout(function(){
+      card.classList.add('flipped');
+      continueBtn.style.display='block';
+      saveGameData();
+    },1000);
+  },1500);
+}
+
+function drawGachaCard(poolId){
+  poolId=poolId||'default';
+  var pool=GAME_STATE.gachaPools.find(function(p){return p.id===poolId});
+  if(!pool || !pool.cards || pool.cards.length===0){
+    pool=GAME_STATE.gachaPools[0];
+    if(!pool || !pool.cards || pool.cards.length===0)return null;
+  }
+  
+  var rand=Math.random()*100;
+  var probs=pool.probabilities||{N:60,R:30,SR:8,SSR:2};
+  
+  if(rand<probs.SSR){
+    var ssrPool=pool.cards.filter(function(c){return c.rarity==='SSR'});
+    return ssrPool.length>0?ssrPool[Math.floor(Math.random()*ssrPool.length)]:pool.cards[0];
+  }else if(rand<probs.SSR+probs.SR){
+    var srPool=pool.cards.filter(function(c){return c.rarity==='SR'});
+    return srPool.length>0?srPool[Math.floor(Math.random()*srPool.length)]:pool.cards[0];
+  }else if(rand<probs.SSR+probs.SR+probs.R){
+    var rPool=pool.cards.filter(function(c){return c.rarity==='R'});
+    return rPool.length>0?rPool[Math.floor(Math.random()*rPool.length)]:pool.cards[0];
+  }else{
+    var nPool=pool.cards.filter(function(c){return c.rarity==='N'});
+    return nPool.length>0?nPool[Math.floor(Math.random()*nPool.length)]:pool.cards[0];
+  }
+}
+
+function renderInventory(){
+  var section=document.getElementById('inventorySection');
+  var grid=document.getElementById('inventoryGrid');
+  
+  var cards=GAME_STATE.inventory&&GAME_STATE.inventory.cards?GAME_STATE.inventory.cards:[];
+  var shopItems=GAME_STATE.inventory&&GAME_STATE.inventory.shopItems?GAME_STATE.inventory.shopItems:[];
+  var allItems=cards.concat(shopItems);
+  
+  if(allItems.length===0){
+    section.style.display='none';
+    return;
+  }
+  
+  section.style.display='block';
+  grid.innerHTML='';
+  
+  for(var i=0;i<allItems.length;i++){
+    var item=allItems[i];
+    var div=document.createElement('div');
+    div.className='inventory-item '+(item.used?'used':'')+' '+(item.source||'card');
+    var rareClass=item.rarity||'';
+    var sourceBadge=item.source==='shop'?'<span style="font-size:0.5rem;color:#6366f1">商店</span>':(item.source==='gacha'?'<span style="font-size:0.5rem;color:#d4af37">抽卡</span>':'');
+    div.innerHTML='<div class="inventory-item-icon">'+item.icon+'</div><div class="inventory-item-name">'+item.name+'</div><div class="inventory-item-rare '+rareClass+'">'+(rareClass?rareClass:'普通')+'</div>'+sourceBadge+'<button class="inventory-item-btn" onclick="useInventoryItem(\''+item.id+'\')" '+(item.used?'disabled':'')+'>'+(item.used?'已使用':'使用')+'</button>';
+    grid.appendChild(div);
+  }
+}
+
+function useInventoryItem(id){
+  var cards=GAME_STATE.inventory&&GAME_STATE.inventory.cards?GAME_STATE.inventory.cards:[];
+  var shopItems=GAME_STATE.inventory&&GAME_STATE.inventory.shopItems?GAME_STATE.inventory.shopItems:[];
+  var item=cards.find(function(i){return i.id===id})||shopItems.find(function(i){return i.id===id});
+  if(!item || item.used)return;
+  
+  item.used=true;
+  
+  var effectMsg='';
+  var cardType=item.type||item.effectType;
+  
+  switch(cardType){
+    case 'restore':
+      GAME_STATE.health=100;
+      GAME_STATE.sanity=100;
+      effectMsg='❤️ HP全满！🧠 SAN全满！';
+      break;
+    case 'resource':
+      GAME_STATE.soulShards=(GAME_STATE.soulShards||0)+50;
+      effectMsg='💎 灵魂碎片+50';
+      updateSoulDisplay();
+      break;
+    case 'protection':
+      GAME_STATE.protectionCards=(GAME_STATE.protectionCards||0)+1;
+      effectMsg='🛡️ 获得1张理智锁链保护卡！下次未完成必做时免除SAN扣除';
+      break;
+    case 'buff':
+      GAME_STATE.soulMultiplier=2;
+      GAME_STATE.soulMultiplierExpire=Date.now()+24*60*60*1000;
+      effectMsg='⚡ 双倍法则生效！24小时内灵魂碎片收益×2';
+      break;
+    case 'real_reward':
+      effectMsg='✨ '+item.desc;
+      break;
+    case 'sanity':
+      GAME_STATE.sanity=clampVal(GAME_STATE.sanity+(item.effectValue||10),0,100);
+      effectMsg='🧠 精神+'+(item.effectValue||10);
+      break;
+    case 'health':
+      GAME_STATE.health=clampVal(GAME_STATE.health+(item.effectValue||10),0,100);
+      effectMsg='❤️ 生命+'+(item.effectValue||10);
+      break;
+    case 'intelligence':
+      addExperience('divinity',item.effectValue||10);
+      effectMsg='🔮 神性+'+(item.effectValue||10)+' EXP';
+      break;
+    case 'rest':
+      effectMsg='😌 享受'+(item.effectValue||15)+'分钟休息时光';
+      break;
+    case 'wish':
+      effectMsg='🎁 心愿已解锁！';
+      break;
+    case 'random':
+      var attrs=GAME_STATE.attributes;
+      if(attrs.length>0){
+        var randAttr=attrs[Math.floor(Math.random()*attrs.length)];
+        addExperience(randAttr.id,item.effectValue||20);
+        effectMsg='获得随机馈赠：'+randAttr.icon+' '+randAttr.name+' +'+(item.effectValue||20)+' EXP';
+      }
+      break;
+    case 'attribute':
+      var attrs=GAME_STATE.attributes;
+      if(attrs.length>0){
+        addExperience(attrs[0].id,item.effectValue||20);
+        effectMsg='属性升华：'+attrs[0].icon+' +'+(item.effectValue||20)+' EXP';
+      }
+      break;
+    case 'scroll':
+      GAME_STATE.summonScrolls+=(item.effectValue||1);
+      effectMsg='📜 抽卡券+'+(item.effectValue||1);
+      updateScrollDisplay();
+      break;
+    case 'soul':
+      GAME_STATE.soulShards+=(item.effectValue||50);
+      effectMsg='💎 灵魂碎片+'+(item.effectValue||50);
+      updateSoulDisplay();
+      break;
+    default:
+      effectMsg='✨ 已使用：'+item.name;
+  }
+  
+  showFeedback(effectMsg,false);
+  
+  updateSanityDisplay();
+  updateScrollDisplay();
+  renderStatsPanel();
+  renderInventory();
+  updatePollutionState();
+  saveGameData();
+}
+
+var currentPoolId='default';
+
+function renderCardManager(){
+  renderPoolSelector();
+  renderProbabilityPanel();
+  renderCardList();
+}
+
+function renderPoolSelector(){
+  var selector=document.getElementById('poolSelector');
+  if(!selector)return;
+  
+  selector.innerHTML='';
+  for(var i=0;i<GAME_STATE.gachaPools.length;i++){
+    var pool=GAME_STATE.gachaPools[i];
+    var btn=document.createElement('button');
+    btn.className='pool-tab '+(pool.id===currentPoolId?'active':'');
+    btn.textContent=pool.name;
+    btn.onclick=function(pid){
+      return function(){currentPoolId=pid;renderCardManager()}
+    }(pool.id);
+    selector.appendChild(btn);
+  }
+  
+  var addBtn=document.createElement('button');
+  addBtn.className='pool-tab';
+  addBtn.textContent='+ 添加卡池';
+  addBtn.onclick=openPoolEditor;
+  selector.appendChild(addBtn);
+}
+
+function renderProbabilityPanel(){
+  var panel=document.getElementById('probabilityPanel');
+  if(!panel)return;
+  
+  var pool=GAME_STATE.gachaPools.find(function(p){return p.id===currentPoolId});
+  var probs=pool?pool.probabilities:{N:60,R:30,SR:8,SSR:2};
+  
+  panel.innerHTML='';
+  
+  var total=probs.N+probs.R+probs.SR+probs.SSR;
+  
+  var items=[
+    {label:'N',value:probs.N,color:'#aaa'},
+    {label:'R',value:probs.R,color:'#1e90ff'},
+    {label:'SR',value:probs.SR,color:'#9400d3'},
+    {label:'SSR',value:probs.SSR,color:'#ffd700'}
+  ];
+  
+  for(var i=0;i<items.length;i++){
+    var item=document.createElement('div');
+    item.className='prob-item';
+    item.innerHTML='<div class="prob-value" style="color:'+items[i].color+'">'+items[i].value+'%</div><div class="prob-label">'+items[i].label+'</div>';
+    panel.appendChild(item);
+  }
+  
+  var totalItem=document.createElement('div');
+  totalItem.className='prob-item';
+  totalItem.innerHTML='<div class="prob-value" style="color:'+(total===100?'#22c55e':'#ff0000')+'">'+total+'%</div><div class="prob-label">总计</div>';
+  panel.appendChild(totalItem);
+}
+
+function renderCardList(){
+  var list=document.getElementById('cardList');
+  if(!list)return;
+  
+  var pool=GAME_STATE.gachaPools.find(function(p){return p.id===currentPoolId});
+  var cards=pool?pool.cards:[];
+  
+  list.innerHTML='';
+  
+  if(cards.length===0){
+    list.innerHTML='<div style="text-align:center;color:var(--sub);padding:2rem">此卡池暂无卡牌</div>';
+    return;
+  }
+  
+  for(var i=0;i<cards.length;i++){
+    var card=cards[i];
+    var item=document.createElement('div');
+    item.className='card-item';
+    
+    var rareClass={N:'N',R:'R',SR:'SR',SSR:'SSR'}[card.rarity]||'N';
+    var priceBadge=card.price>0?'<span style="font-size:0.7rem;color:#9b59b6;margin-left:0.5rem">💎 '+card.price+'</span>':'';
+    
+    item.innerHTML='<div class="card-item-info"><span class="card-item-icon">'+card.icon+'</span><span class="card-item-name">'+card.name+'<span class="card-item-rare '+rareClass+'">'+card.rarity+'</span>'+priceBadge+'</span><div class="card-item-desc">'+card.desc+'</div></div><div class="card-item-actions"><button class="btn edit" onclick="editCard(\''+card.id+'\')">编辑</button><button class="btn delete" onclick="confirmDeleteCard(\''+card.id+'\')">删除</button>'+(card.price>0?'<button class="btn challenge" onclick="buyCard(\''+card.id+'\')">兑换</button>':'')+'</div>';
+    list.appendChild(item);
+  }
+}
+
+function openCardEditor(){
+  document.getElementById('cardId').value='';
+  document.getElementById('cardPoolId').value=currentPoolId;
+  document.getElementById('cardName').value='';
+  document.getElementById('cardIcon').value='✨';
+  document.getElementById('cardRarity').value='N';
+  document.getElementById('cardDesc').value='';
+  document.getElementById('cardEffectType').value='health';
+  document.getElementById('cardEffectValue').value='10';
+  document.getElementById('cardPrice').value='0';
+  document.getElementById('cardModalTitle').textContent='添加卡牌';
+  document.getElementById('cardDeleteBtn').style.display='none';
+  document.getElementById('cardModal').classList.add('show');
+}
+
+function editCard(cardId){
+  var pool=GAME_STATE.gachaPools.find(function(p){return p.id===currentPoolId});
+  if(!pool)return;
+  var card=pool.cards.find(function(c){return c.id===cardId});
+  if(!card)return;
+  
+  document.getElementById('cardId').value=card.id;
+  document.getElementById('cardPoolId').value=currentPoolId;
+  document.getElementById('cardName').value=card.name;
+  document.getElementById('cardIcon').value=card.icon;
+  document.getElementById('cardRarity').value=card.rarity;
+  document.getElementById('cardDesc').value=card.desc;
+  document.getElementById('cardEffectType').value=card.effectType||'health';
+  document.getElementById('cardEffectValue').value=card.effectValue||10;
+  document.getElementById('cardPrice').value=card.price||0;
+  document.getElementById('cardModalTitle').textContent='编辑卡牌';
+  document.getElementById('cardDeleteBtn').style.display='inline-block';
+  document.getElementById('cardModal').classList.add('show');
+}
+
+function closeCardModal(){
+  document.getElementById('cardModal').classList.remove('show');
+}
+
+function saveCard(){
+  var id=document.getElementById('cardId').value;
+  var poolId=document.getElementById('cardPoolId').value;
+  var name=document.getElementById('cardName').value.trim();
+  var icon=document.getElementById('cardIcon').value.trim();
+  var rarity=document.getElementById('cardRarity').value;
+  var desc=document.getElementById('cardDesc').value.trim();
+  var effectType=document.getElementById('cardEffectType').value;
+  var effectValue=parseInt(document.getElementById('cardEffectValue').value);
+  var price=parseInt(document.getElementById('cardPrice').value);
+  
+  if(!name){showFeedback('请输入卡牌名称',true);return}
+  if(!icon){icon='✨'}
+  if(isNaN(effectValue))effectValue=10;
+  if(isNaN(price))price=0;
+  
+  var pool=GAME_STATE.gachaPools.find(function(p){return p.id===poolId});
+  if(!pool){showFeedback('卡池不存在',true);return}
+  
+  var cardData={
+    id:id||generateId(),
+    name:name,
+    icon:icon,
+    rarity:rarity,
+    desc:desc,
+    effectType:effectType,
+    effectValue:effectValue,
+    price:price
+  };
+  
+  if(id){
+    var existing=pool.cards.find(function(c){return c.id===id});
+    if(existing){
+      for(var k in cardData)existing[k]=cardData[k];
+      showFeedback('卡牌已更新');
+    }
+  }else{
+    pool.cards.push(cardData);
+    showFeedback('卡牌已添加');
+  }
+  
+  closeCardModal();
+  saveGameData();
+  renderCardManager();
+}
+
+function confirmDeleteCard(cardId){
+  if(confirm('确定删除此卡牌？')){
+    deleteCard(cardId);
+  }
+}
+
+function deleteCard(){
+  var id=document.getElementById('cardId').value;
+  if(!id){showFeedback('请先选择要删除的卡牌',true);return}
+  
+  var pool=GAME_STATE.gachaPools.find(function(p){return p.id===currentPoolId});
+  if(!pool)return;
+  
+  pool.cards=pool.cards.filter(function(c){return c.id!==id});
+  
+  showFeedback('卡牌已删除');
+  closeCardModal();
+  saveGameData();
+  renderCardManager();
+}
+
+function openPoolEditor(){
+  document.getElementById('poolId').value='';
+  document.getElementById('poolName').value='';
+  document.getElementById('poolDesc').value='';
+  document.getElementById('poolProbN').value='60';
+  document.getElementById('poolProbR').value='30';
+  document.getElementById('poolProbSR').value='8';
+  document.getElementById('poolProbSSR').value='2';
+  document.getElementById('poolModalTitle').textContent='添加卡池';
+  document.getElementById('poolDeleteBtn').style.display='none';
+  document.getElementById('poolModal').classList.add('show');
+}
+
+function editPool(poolId){
+  var pool=GAME_STATE.gachaPools.find(function(p){return p.id===poolId});
+  if(!pool)return;
+  
+  document.getElementById('poolId').value=pool.id;
+  document.getElementById('poolName').value=pool.name;
+  document.getElementById('poolDesc').value=pool.description||'';
+  document.getElementById('poolProbN').value=pool.probabilities.N||60;
+  document.getElementById('poolProbR').value=pool.probabilities.R||30;
+  document.getElementById('poolProbSR').value=pool.probabilities.SR||8;
+  document.getElementById('poolProbSSR').value=pool.probabilities.SSR||2;
+  document.getElementById('poolModalTitle').textContent='编辑卡池';
+  document.getElementById('poolDeleteBtn').style.display='inline-block';
+  document.getElementById('poolModal').classList.add('show');
+}
+
+function closePoolModal(){
+  document.getElementById('poolModal').classList.remove('show');
+}
+
+function savePool(){
+  var id=document.getElementById('poolId').value;
+  var name=document.getElementById('poolName').value.trim();
+  var desc=document.getElementById('poolDesc').value.trim();
+  var probN=parseInt(document.getElementById('poolProbN').value);
+  var probR=parseInt(document.getElementById('poolProbR').value);
+  var probSR=parseInt(document.getElementById('poolProbSR').value);
+  var probSSR=parseInt(document.getElementById('poolProbSSR').value);
+  
+  if(!name){showFeedback('请输入卡池名称',true);return}
+  if(isNaN(probN))probN=60;
+  if(isNaN(probR))probR=30;
+  if(isNaN(probSR))probSR=8;
+  if(isNaN(probSSR))probSSR=2;
+  
+  var total=probN+probR+probSR+probSSR;
+  if(total!==100){showFeedback('概率总和必须为100%，当前为'+total+'%',true);return}
+  
+  var poolData={
+    id:id||generateId(),
+    name:name,
+    description:desc,
+    probabilities:{N:probN,R:probR,SR:probSR,SSR:probSSR},
+    cards:[]
+  };
+  
+  if(id){
+    var existing=GAME_STATE.gachaPools.find(function(p){return p.id===id});
+    if(existing){
+      existing.name=poolData.name;
+      existing.description=poolData.description;
+      existing.probabilities=poolData.probabilities;
+      showFeedback('卡池已更新');
+    }
+  }else{
+    GAME_STATE.gachaPools.push(poolData);
+    currentPoolId=poolData.id;
+    showFeedback('卡池已创建');
+  }
+  
+  closePoolModal();
+  saveGameData();
+  renderCardManager();
+}
+
+function deletePool(){
+  var id=document.getElementById('poolId').value;
+  if(!id){showFeedback('请先选择要删除的卡池',true);return}
+  if(GAME_STATE.gachaPools.length<=1){showFeedback('至少保留一个卡池',true);return}
+  
+  GAME_STATE.gachaPools=GAME_STATE.gachaPools.filter(function(p){return p.id!==id});
+  
+  if(currentPoolId===id){
+    currentPoolId=GAME_STATE.gachaPools[0].id;
+  }
+  
+  showFeedback('卡池已删除');
+  closePoolModal();
+  saveGameData();
+  renderCardManager();
+}
+
+function toggleCardEffectOptions(){
+}
+
+function buyCard(cardId){
+  var pool=GAME_STATE.gachaPools.find(function(p){return p.id===currentPoolId});
+  if(!pool)return;
+  var card=pool.cards.find(function(c){return c.id===cardId});
+  if(!card)return;
+  
+  if(GAME_STATE.soulShards<card.price){
+    showFeedback('灵魂碎片不足！',true);
+    return;
+  }
+  
+  GAME_STATE.soulShards-=card.price;
+  
+  GAME_STATE.inventory.cards.push({
+    id:generateId(),
+    cardId:card.id,
+    name:card.name,
+    icon:card.icon,
+    rarity:card.rarity,
+    desc:card.desc,
+    effectType:card.effectType,
+    effectValue:card.effectValue,
+    price:card.price,
+    used:false,
+    source:'shop',
+    poolId:currentPoolId
+  });
+  
+  showFeedback('兑换成功：'+card.name);
+  
+  updateSoulDisplay();
+  renderInventory();
+  saveGameData();
+}
+
+function renderAberrations(){
+  var container=document.getElementById('aberrations');
+  if(!container)return;
+  
+  var html='';
+  for(var i=0;i<GAME_STATE.aberrations.length;i++){
+    var ab=GAME_STATE.aberrations[i];
+    var eroded=GAME_STATE.erodedAberrations[ab.id];
+    
+    html+='<div class="aberration-card '+(eroded?'eroded':'')+'">';
+    html+='<div class="warning-badge">⚠️ 侵蚀</div>';
+    html+='<div class="aberration-card-header">';
+    html+='<span class="aberration-card-icon">'+(ab.icon||'🧟')+'</span>';
+    html+='<span class="aberration-card-name">'+ab.name+'</span>';
+    html+='</div>';
+    html+='<div class="aberration-card-desc">'+ab.desc+'</div>';
+    html+='<div class="aberration-card-cost">';
+    html+='<div class="aberration-cost-item health">❤️ '+ab.hpCost+'</div>';
+    html+='<div class="aberration-cost-item sanity">🧠 '+ab.sanCost+'</div>';
+    html+='</div>';
+    html+='<div class="aberration-card-actions">';
+    if(!eroded){
+      html+='<button class="aberration-btn-erode" onclick="recordErosion(\''+ab.id+'\')">记录侵蚀</button>';
+    }else{
+      html+='<span style="color:#ff6b6b;font-size:0.85rem">今日已侵蚀</span>';
+    }
+    html+='<button class="aberration-btn-edit" onclick="editAberration(\''+ab.id+'\')">编辑</button>';
+    html+='<button class="aberration-btn-delete" onclick="confirmDeleteAberration(\''+ab.id+'\')">删除</button>';
+    html+='</div></div>';
+  }
+  
+  container.innerHTML=html;
+}
+
+function recordErosion(id){
+  var ab=GAME_STATE.aberrations.find(function(a){return a.id===id});
+  if(!ab)return;
+  if(GAME_STATE.erodedAberrations[id]){
+    showFeedback('今日已记录此侵蚀',true);
+    return;
+  }
+  
+  GAME_STATE.erodedAberrations[id]=true;
+  GAME_STATE.erodedDate=getDateStr();
+  
+  GAME_STATE.health=Math.max(0,GAME_STATE.health-ab.hpCost);
+  GAME_STATE.sanity=Math.max(0,GAME_STATE.sanity-ab.sanCost);
+  
+  GAME_STATE.totalEXP=Math.max(0,GAME_STATE.totalEXP-20);
+  updateRankBadge();
+  
+  showErosionModal(ab);
+  
+  addLog('【异化侵蚀】触发污染，经验值 -20！','danger');
+  
+  updateSanityDisplay();
+  updateSoulDisplay();
+  renderAberrations();
+  updatePollutionState();
+  saveGameData();
+}
+
+var _erosionModalTimeout=null;
+
+function showErosionModal(ab){
+  var modal=document.createElement('div');
+  modal.className='erosion-modal';
+  modal.innerHTML='<div class="erosion-content"><div class="erosion-icon">🧟</div><div class="erosion-title">受高维污染侵蚀！</div><div class="erosion-message">SAN -'+ab.sanCost+' / HP -'+ab.hpCost+'</div><div class="erosion-close" onclick="this.parentElement.parentElement.remove()">确认</div></div>';
+  
+  document.body.appendChild(modal);
+  
+  setTimeout(function(){
+    modal.classList.add('show');
+  },10);
+  
+  if(_erosionModalTimeout)clearTimeout(_erosionModalTimeout);
+  _erosionModalTimeout=setTimeout(function(){
+    var m=document.querySelector('.erosion-modal');
+    if(m)m.remove();
+  },4000);
+}
+
+function openAberrationEditor(id){
+  var modal=document.getElementById('aberrationModal');
+  var title=document.getElementById('aberrationModalTitle');
+  var deleteBtn=document.getElementById('aberrationDeleteBtn');
+  
+  document.getElementById('aberrationId').value='';
+  document.getElementById('aberrationName').value='';
+  document.getElementById('aberrationDesc').value='';
+  document.getElementById('aberrationHpCost').value='10';
+  document.getElementById('aberrationSanCost').value='10';
+  
+  if(id){
+    var ab=GAME_STATE.aberrations.find(function(a){return a.id===id});
+    if(ab){
+      document.getElementById('aberrationId').value=ab.id;
+      document.getElementById('aberrationName').value=ab.name;
+      document.getElementById('aberrationDesc').value=ab.desc||'';
+      document.getElementById('aberrationHpCost').value=ab.hpCost||0;
+      document.getElementById('aberrationSanCost').value=ab.sanCost||0;
+      title.textContent='编辑异化';
+      deleteBtn.style.display='inline-block';
+    }
+  }else{
+    title.textContent='记录新污染';
+    deleteBtn.style.display='none';
+  }
+  
+  modal.classList.add('show');
+}
+
+function closeAberrationModal(){
+  document.getElementById('aberrationModal').classList.remove('show');
+}
+
+function saveAberration(){
+  var id=document.getElementById('aberrationId').value;
+  var name=document.getElementById('aberrationName').value.trim();
+  var desc=document.getElementById('aberrationDesc').value.trim();
+  var hpCost=parseInt(document.getElementById('aberrationHpCost').value);
+  var sanCost=parseInt(document.getElementById('aberrationSanCost').value);
+  
+  if(!name){showFeedback('请输入异化名称',true);return}
+  if(isNaN(hpCost))hpCost=0;
+  if(isNaN(sanCost))sanCost=0;
+  
+  if(id){
+    var existing=GAME_STATE.aberrations.find(function(a){return a.id===id});
+    if(existing){
+      existing.name=name;
+      existing.desc=desc;
+      existing.hpCost=hpCost;
+      existing.sanCost=sanCost;
+      showFeedback('异化已更新');
+    }
+  }else{
+    GAME_STATE.aberrations.push({
+      id:generateId(),
+      name:name,
+      desc:desc,
+      icon:getRandomAberrationIcon(),
+      hpCost:hpCost,
+      sanCost:sanCost
+    });
+    showFeedback('异化已记录');
+  }
+  
+  closeAberrationModal();
+  saveGameData();
+  renderAberrations();
+}
+
+function getRandomAberrationIcon(){
+  var icons=['🧟','☠️','💀','👻','👾','🤖','🎃','🦇','🐙','🕷️','🕸️','☠️','💉','🧪','🔮'];
+  return icons[Math.floor(Math.random()*icons.length)];
+}
+
+function confirmDeleteAberration(id){
+  if(confirm('确定删除此异化？')){
+    deleteAberration(id);
+  }
+}
+
+function deleteAberration(){
+  var id=document.getElementById('aberrationId').value;
+  if(!id){showFeedback('请先选择要删除的异化',true);return}
+  
+  GAME_STATE.aberrations=GAME_STATE.aberrations.filter(function(a){return a.id!==id});
+  delete GAME_STATE.erodedAberrations[id];
+  
+  showFeedback('异化已删除');
+  closeAberrationModal();
+  saveGameData();
+  renderAberrations();
+}
+
+function resetDailyEroded(){
+  GAME_STATE.erodedAberrations={};
+  GAME_STATE.erodedDate=getDateStr();
+  saveGameData();
+  renderAberrations();
+}
+
+document.addEventListener('DOMContentLoaded',tryInitGame);
+window.addEventListener('load',tryInitGame);
+tryInitGame();
+setTimeout(tryInitGame,100);
+setTimeout(tryInitGame,500);
+</script>
+</body>
+</html>

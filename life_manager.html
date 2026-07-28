@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>人生养成管理</title>
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --primary-light: #818cf8;
+            --success-color: #22c55e;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-top: 1rem;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.25rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-align: center;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .stat-icon {
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .progress-fill.knowledge {
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+        }
+
+        .progress-fill.wealth {
+            background: linear-gradient(90deg, #22c55e, #10b981);
+        }
+
+        .progress-fill.body {
+            background: linear-gradient(90deg, #f59e0b, #ef4444);
+        }
+
+        .tasks-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tasks-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.875rem;
+        }
+
+        .task-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.25rem;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .task-card:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .task-card.completed {
+            background: #f0fdf4;
+            border-color: var(--success-color);
+        }
+
+        .task-card.completed .task-title {
+            text-decoration: line-through;
+            color: var(--text-secondary);
+        }
+
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+
+        .task-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .task-icon {
+            font-size: 1.25rem;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: var(--bg-color);
+            transition: all 0.3s ease;
+        }
+
+        .task-card.completed .task-icon {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .task-effect {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .effect-tag {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .effect-tag.knowledge {
+            background: #eef2ff;
+            color: #6366f1;
+        }
+
+        .effect-tag.wealth {
+            background: #dcfce7;
+            color: #22c55e;
+        }
+
+        .effect-tag.body {
+            background: #fef3c7;
+            color: #f59e0b;
+        }
+
+        .effect-tag.negative {
+            opacity: 0.7;
+        }
+
+        .feedback {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success-color);
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feedback.show {
+            transform: translateX(0);
+        }
+
+        .feedback.negative {
+            background: var(--danger-color);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .reset-btn {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 0.5rem;
+        }
+
+        .reset-btn:hover {
+            background: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .last-update {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 0.75rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 0.875rem;
+            }
+
+            .stat-card {
+                padding: 1rem;
+            }
+
+            .stat-value {
+                font-size: 1.75rem;
+            }
+
+            .task-card {
+                padding: 1rem;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .pulse-animation {
+            animation: pulse 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 人生养成管理</h1>
+            <p class="subtitle">每天进步一点点，成就更好的自己</p>
+            <div class="last-update" id="lastUpdate"></div>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <div class="stat-label">学识</div>
+                <div class="stat-value" id="knowledgeValue">0</div>
+                <div class="progress-bar">
+                    <div class="progress-fill knowledge" id="knowledgeBar"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-label">财富</div>
+                <div class="stat-value" id="wealthValue">0</div>
+                <div class="progress-bar">
+                    <div class="progress-fill wealth" id="wealthBar"></div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💪</div>
+                <div class="stat-label">身材</div>
+                <div class="stat-value" id="bodyValue">0</div>
+                <div class="progress-bar">
+                    <div class="progress-fill body" id="bodyBar"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tasks-section">
+            <div class="section-title">
+                <span>📋</span>
+                <span>今日任务</span>
+            </div>
+            <div class="tasks-list" id="tasksList"></div>
+        </div>
+
+        <footer class="footer">
+            <p>坚持打卡，遇见更好的自己</p>
+            <button class="reset-btn" onclick="resetAll()">重置数据</button>
+        </footer>
+    </div>
+
+    <div class="feedback" id="feedback"></div>
+
+    <script>
+        const STORAGE_KEY = 'life_manager_data';
+        const ATTRIBUTES = {
+            knowledge: { name: '学识', icon: '📚', min: 0, max: 100 },
+            wealth: { name: '财富', icon: '💰', min: 0, max: 100 },
+            body: { name: '身材', icon: '💪', min: 0, max: 100 }
+        };
+        const TASKS = [
+            { id: 'study', title: '阅读学习1小时', icon: '📖', effects: { knowledge: 5 } },
+            { id: 'work', title: '专注工作4小时', icon: '💼', effects: { wealth: 8, body: -2 } },
+            { id: 'exercise', title: '健身运动30分钟', icon: '🏋️', effects: { body: 5, knowledge: -1 } },
+            { id: 'sleep', title: '早睡早起', icon: '😴', effects: { body: 3, knowledge: 2 } },
+            { id: 'invest', title: '理财投资研究', icon: '📈', effects: { wealth: 3, knowledge: 2 } },
+            { id: 'social', title: '社交拓展', icon: '🤝', effects: { wealth: 2, knowledge: 1 } },
+            { id: 'meditate', title: '冥想放松', icon: '🧘', effects: { body: 2, knowledge: 1 } },
+            { id: 'write', title: '写作记录', icon: '✍️', effects: { knowledge: 4 } }
+        ];
+
+        let state = {
+            attributes: {
+                knowledge: 30,
+                wealth: 20,
+                body: 40
+            },
+            tasks: {},
+            lastUpdateDate: getTodayString()
+        };
+
+        function getTodayString() {
+            const date = new Date();
+            return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+        }
+
+        function loadData() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    const today = getTodayString();
+                    
+                    if (data.lastUpdateDate !== today) {
+                        state.attributes = data.attributes || state.attributes;
+                        state.tasks = {};
+                        state.lastUpdateDate = today;
+                    } else {
+                        state = { ...state, ...data };
+                    }
+                }
+            } catch (e) {
+                console.error('Failed to load data:', e);
+            }
+        }
+
+        function saveData() {
+            try {
+                state.lastUpdateDate = getTodayString();
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                updateLastUpdateDisplay();
+            } catch (e) {
+                console.error('Failed to save data:', e);
+            }
+        }
+
+        function updateLastUpdateDisplay() {
+            const el = document.getElementById('lastUpdate');
+            if (el) {
+                el.textContent = `最后更新: ${new Date().toLocaleString('zh-CN')}`;
+            }
+        }
+
+        function clamp(value, min, max) {
+            return Math.max(min, Math.min(max, value));
+        }
+
+        function applyEffect(attribute, value) {
+            if (!state.attributes.hasOwnProperty(attribute)) return;
+            const attrConfig = ATTRIBUTES[attribute];
+            state.attributes[attribute] = clamp(
+                state.attributes[attribute] + value,
+                attrConfig.min,
+                attrConfig.max
+            );
+        }
+
+        function renderAttributes() {
+            Object.keys(ATTRIBUTES).forEach(key => {
+                const value = state.attributes[key];
+                const config = ATTRIBUTES[key];
+                
+                const valueEl = document.getElementById(`${key}Value`);
+                const barEl = document.getElementById(`${key}Bar`);
+                
+                if (valueEl) {
+                    valueEl.textContent = value;
+                    valueEl.classList.remove('pulse-animation');
+                    void valueEl.offsetWidth;
+                    valueEl.classList.add('pulse-animation');
+                }
+                
+                if (barEl) {
+                    const percentage = (value / config.max) * 100;
+                    barEl.style.width = `${percentage}%`;
+                }
+            });
+        }
+
+        function renderTasks() {
+            const container = document.getElementById('tasksList');
+            if (!container) return;
+            
+            container.innerHTML = TASKS.map(task => {
+                const isCompleted = state.tasks[task.id];
+                const effectTags = Object.entries(task.effects)
+                    .map(([attr, val]) => {
+                        const isNegative = val < 0;
+                        return `<span class="effect-tag ${attr} ${isNegative ? 'negative' : ''}">${ATTRIBUTES[attr].icon} ${isNegative ? '' : '+'}${val}</span>`;
+                    })
+                    .join('');
+                
+                return `
+                    <div class="task-card ${isCompleted ? 'completed' : ''}" onclick="toggleTask('${task.id}')">
+                        <div class="task-header">
+                            <div class="task-title">${task.title}</div>
+                            <div class="task-icon">${isCompleted ? '✅' : task.icon}</div>
+                        </div>
+                        <div class="task-effect">${effectTags}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleTask(taskId) {
+            const task = TASKS.find(t => t.id === taskId);
+            if (!task) return;
+            
+            const wasCompleted = state.tasks[taskId];
+            
+            if (wasCompleted) {
+                for (const [attr, val] of Object.entries(task.effects)) {
+                    applyEffect(attr, -val);
+                }
+                delete state.tasks[taskId];
+                showFeedback(`已取消：${task.title}`, true);
+            } else {
+                for (const [attr, val] of Object.entries(task.effects)) {
+                    applyEffect(attr, val);
+                }
+                state.tasks[taskId] = true;
+                showFeedback(`🎉 完成：${task.title}`);
+            }
+            
+            renderAttributes();
+            renderTasks();
+            saveData();
+        }
+
+        function showFeedback(message, isNegative = false) {
+            const el = document.getElementById('feedback');
+            if (!el) return;
+            
+            el.textContent = message;
+            el.className = `feedback ${isNegative ? 'negative' : ''}`;
+            el.classList.add('show');
+            
+            setTimeout(() => {
+                el.classList.remove('show');
+            }, 2000);
+        }
+
+        function resetAll() {
+            if (confirm('确定要重置所有数据吗？此操作无法撤销。')) {
+                state = {
+                    attributes: {
+                        knowledge: 30,
+                        wealth: 20,
+                        body: 40
+                    },
+                    tasks: {},
+                    lastUpdateDate: getTodayString()
+                };
+                localStorage.removeItem(STORAGE_KEY);
+                renderAttributes();
+                renderTasks();
+                updateLastUpdateDisplay();
+                showFeedback('数据已重置');
+            }
+        }
+
+        function init() {
+            loadData();
+            renderAttributes();
+            renderTasks();
+            updateLastUpdateDisplay();
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+</body>
+</html>

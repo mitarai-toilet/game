@@ -1,0 +1,22 @@
+{
+  "name": "life-rpg-high-dimensional-hub",
+  "version": "1.0.0",
+  "description": "对抗深度侵蚀，于虚无中铸造神性。一款将现实生活转化为游戏化体验的高维试炼系统。",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "build": "mkdir -p dist && cp -f *.html manifest.json vercel.json netlify.toml dist/ 2>/dev/null || mkdir -p dist && cp -f *.html manifest.json dist/",
+    "serve": "cd dist && python3 -m http.server 8000",
+    "deploy": "npm run build"
+  },
+  "keywords": [
+    "gothic",
+    "RPG",
+    "gamification",
+    "productivity",
+    "life game",
+    "PWA"
+  ],
+  "author": "",
+  "license": "MIT"
+}

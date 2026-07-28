@@ -1,0 +1,52 @@
+{
+  "name": "轮回试炼 · 高维枢纽",
+  "short_name": "高维枢纽",
+  "description": "对抗深度侵蚀，于虚无中铸造神性。一款将现实生活转化为游戏化体验的高维试炼系统。",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f0f11",
+  "theme_color": "#0f0f11",
+  "icons": [
+    {
+      "src": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=dark%20gothic%20game%20icon%20with%20golden%20rune%20and%20mysterious%20eye%20in%20dark%20purple%20background&image_size=square",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=dark%20gothic%20game%20icon%20with%20golden%20rune%20and%20mysterious%20eye%20in%20dark%20purple%20background&image_size=square_hd",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "lifestyle", "game"],
+  "shortcuts": [
+    {
+      "name": "今日试炼",
+      "short_name": "试炼",
+      "description": "开始今日的高维试炼",
+      "url": "./index.html",
+      "icons": [
+        {
+          "src": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=dark%20gothic%20sword%20icon%20golden%20glow&image_size=square",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "抽卡召唤",
+      "short_name": "抽卡",
+      "description": "进行高维祭坛献祭抽卡",
+      "url": "./index.html",
+      "icons": [
+        {
+          "src": "https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=dark%20gothic%20summoning%20circle%20golden%20runes&image_size=square",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
